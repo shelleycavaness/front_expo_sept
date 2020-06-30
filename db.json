@@ -1,0 +1,130 @@
+{
+  "players":[
+    {
+      "id": 1,
+      "name": "Leanne Graham",
+      "username": "Bret",
+      "email": "Sincere@april.biz",
+      "city": "Gwenborough",
+      "score": 200,
+      "thumbnailUrl": "https://via.placeholder.com/150/92c952",
+      "photo" : "https://www.bootdey.com/img/Content/avatar/avatar5.png"
+
+    },
+    {
+      "id": 2,
+      "name": "Ervin Howell",
+      "username": "Antonette",
+      "email": "Shanna@melissa.tv",
+      "city": "Wisokyburgh",
+      "score": 100,
+      "thumbnailUrl": "https://via.placeholder.com/150/771796",
+      "photo": "https://www.bootdey.com/img/Content/avatar/avatar1.png"
+
+    },
+    {
+      "id": 3,
+      "name": "Clementine Bauch",
+      "username": "Samantha",
+      "email": "Nathan@yesenia.net",
+      "city": "McKenziehaven",
+      "score": 111,
+      "thumbnailUrl":"https://via.placeholder.com/150/24f355",
+      "photo" : "https://www.bootdey.com/img/Content/avatar/avatar3.png"
+
+    },
+    {
+      "id": 4,
+      "name": "Patricia Lebsack",
+      "username": "Karianne",
+      "email": "Julianne.OConner@kory.org",
+      "city": "South Elvis",
+      "score": 111,
+      "thumbnailUrl": "https://via.placeholder.com/150/f66b97",
+      "photo": "https://www.bootdey.com/img/Content/avatar/avatar4.png"
+
+    }
+  ],
+  "actions": [
+    {
+      "userId": 1,
+      "id": 1,
+      "title": "Arrêter l’eau quand on se lave les mains",
+      "completed": false,
+      "thumbnailUrl": "http://placekitten.com/200/300"
+    },
+    {
+      "userId": 1,
+      "id": 2,
+      "title": "Arrêter l’eau quand on se lave les mains",
+      "completed": false,
+      "thumbnailUrl": "https://via.placeholder.com/150/d32776"
+    },
+    {
+      "userId": 1,
+      "id": 3,
+      "title": "Installer un mousseur sur les robinets",
+      "completed": false,
+      "thumbnailUrl": "https://via.placeholder.com/150/f66b97"
+    },
+    {
+      "userId": 1,
+      "id": 4,
+      "title": "Acheter des fruits et légumes de saison",
+      "completed": true,
+      "thumbnailUrl": "https://via.placeholder.com/150/56a8c2"
+    },
+    {
+      "userId": 1,
+      "id": 5,
+      "title": "Planifier ses menus pour éviter le gaspillage",
+      "completed": false,
+      "thumbnailUrl": "https://via.placeholder.com/150/b0f7cc"
+    },
+    {
+      "userId": 1,
+      "id": 6,
+      "title": "Faire tourner la machine à laver le linge pleine",
+      "completed": false,
+      "thumbnailUrl": "https://via.placeholder.com/150/810b14"  
+    },
+    {
+      "userId": 1,
+      "id": 7,
+      "title": "Arrêter d’utiliser assiettes, gobelets, couverts et serviettes jetables",
+      "completed": false,
+      "thumbnailUrl": "https://via.placeholder.com/150/51aa97"
+    },
+    {
+      "userId": 1,
+      "id": 8,
+      "title": "Mettre un filtre lavable dans la cafetière",
+      "completed": true
+    },
+    {
+      "userId": 1,
+      "id": 9,
+      "title": "Refuser les échantillons gratuits",
+      "completed": false,
+      "thumbnailUrl": "https://via.placeholder.com/150/54176f"
+    }
+  ],
+  "scores" : [
+    {
+      "userId": 1,
+      "id": 1,
+      "points" : 200
+    },
+    {
+      "userId": 4,
+      "id": 2,
+      "points" : 250
+    },
+    {
+      "userId": 2,
+      "id": 1,
+      "points" : 20
+    }
+  ]
+
+}

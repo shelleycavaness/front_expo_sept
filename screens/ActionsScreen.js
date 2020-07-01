@@ -6,8 +6,11 @@ import data from '../db.json'
 
 export default function ActionsScreen() {
   console.log('data.actions+++++++++++++++++++++++', data.actions)
-  let item = data.actions[1]
+  // console.log('actions=================', data.actions[0])
+  let id = Math.floor(Math.random() * 8) + 1 ;
+  let item = data.actions[id]
   return (
+
     <TouchableOpacity>
     <View style={styles.card}>
 
@@ -45,7 +48,9 @@ export default function ActionsScreen() {
       </View>
     </View>
   </TouchableOpacity>
+  
   );
+  
 }
 const styles = StyleSheet.create({
   container:{

@@ -4,6 +4,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import ActionsScreen from '../screens/ActionsScreen';
 import ProfileScreen from '../screens/ProfileScreen'
+import Cardlist from '../screens/Card-list'
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
@@ -26,7 +27,7 @@ export default function BottomTabNavigator({ navigation, route }) {
       />
       <BottomTab.Screen
         name="Actions"
-        component={ActionsScreen}
+        component={Cardlist}
         options={{
           title: 'Actions',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-menu" />,

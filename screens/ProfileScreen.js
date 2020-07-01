@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import data from '../db.json'
 
 
-export default function ProfileScreen (){
+export default function ProfileScreen(){
   console.log('data.players**********************', data.players)
   let id = Math.floor(Math.random() * 4) + 1;
   id = id - 1

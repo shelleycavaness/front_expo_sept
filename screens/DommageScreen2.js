@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#a4dbca',
+    backgroundColor: '#e0ec80',
   },
   photo:{
     width:200,

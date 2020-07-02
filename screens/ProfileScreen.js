@@ -5,10 +5,10 @@ import data from '../db.json'
 
 
 export default function ProfileScreen(){
-  console.log('data.players**********************', data.players)
+
   let id = Math.floor(Math.random() * 4) + 1;
   id = id - 1
-  console.log('id player :', id)
+  // console.log('id player :', id)
   return(
    <View  style={styles.container} >
      <ScrollView  style={styles.container} contentContainerStyle={styles.contentContainer} >

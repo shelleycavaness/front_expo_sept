@@ -4,7 +4,8 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import ActionsScreen from '../screens/ActionsScreen';
 import ProfileScreen from '../screens/ProfileScreen'
-import Cardlist from '../screens/Card-list'
+// import Cardlist from '../screens/Card-list'
+import Cardlist from '../screens/Card-list2'
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
@@ -56,7 +57,6 @@ function getHeaderTitle(route) {
       return 'Call to Actions';
     case 'Profile':
       return 'Player Profile'; 
-    case 'Dommage':
-      return 'too bad! how about tomorrow? '  
+
   }
 }

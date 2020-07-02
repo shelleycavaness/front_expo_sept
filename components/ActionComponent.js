@@ -1,9 +1,10 @@
 import {StyleSheet, Text, TouchableOpacity, View,  } from 'react-native';
 import * as React from 'react';
 import 'react-native-gesture-handler';
+import Dommage from '../screens/DommageScreen';
+import Feliciation from '../screens/FeliciationScreen';
 
-
-
+import { NavigationContainer } from '@react-navigation/native';
 
 
 
@@ -11,16 +12,17 @@ import 'react-native-gesture-handler';
 export default function ActionComponent () {
   return(        
     <View style={styles.buttonContainer}>
-              <TouchableOpacity 
-                onPress={() => console.log('Felicitation')} 
-                style={styles.button}>
-                <Text style={styles.buttonText}>Je l'ai fait</Text>
-              </TouchableOpacity>
+      <TouchableOpacity 
+          onPress={() => this.props.navigation.navigate('Felicitation')} 
+          style={styles.button}>
+        <Text style={styles.buttonText}>Je l'ai fait</Text>
+      </TouchableOpacity>
            
-              <TouchableOpacity onPress={() => console.log('Dommage!')} style={styles.button}>
-                <Text style={styles.buttonText}>Je refuse</Text>
-              </TouchableOpacity>
-           
+      <TouchableOpacity 
+        onPress={() => console.log('Dommage!')} 
+        style={styles.button}>
+        <Text style={styles.buttonText}>Je refuse</Text>
+      </TouchableOpacity>      
     </View> 
     
   )

@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, Image,
 import data from '../db.json'
 
 export default function ActionsScreen() {
-  console.log('data.actions+++++++++++++++++++++++', data.actions)
+  // console.log('data.actions+++++++++++++++++++++++', data.actions)
   // console.log('actions=================', data.actions[0])
   let id = Math.floor(Math.random() * 8) + 1 ;
   let item = data.actions[id]

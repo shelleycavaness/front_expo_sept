@@ -9,8 +9,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
 import useLinking from './navigation/useLinking';
 import { screensEnabled } from 'react-native-screens';
-import FeliciationScreen from './screens/FeliciationScreen';
-import DommageScreen from './screens/DommageScreen';
+import FeliciationScreen from './screens/FeliciationScreen2';
+import DommageScreen from './screens/DommageScreen2';
 import ActionComponent from './components/ActionComponent';
 
 const Stack = createStackNavigator();

@@ -51,62 +51,79 @@
       "id": 1,
       "title": "Arrêter l’eau quand on se lave les mains",
       "completed": false,
-      "thumbnailUrl": "http://placekitten.com/200/300"
+      "thumbnailUrl": "http://placekitten.com/200/300",
+      "image": "./assets/images/abeille.jpeg"
     },
     {
       "userId": 1,
       "id": 2,
       "title": "Arrêter l’eau quand on se lave les mains",
       "completed": false,
-      "thumbnailUrl": "https://via.placeholder.com/150/d32776"
+      "thumbnailUrl": "https://via.placeholder.com/150/d32776",
+      "image": "./assets/images/douche.jpeg"
+
     },
     {
       "userId": 1,
       "id": 3,
       "title": "Installer un mousseur sur les robinets",
       "completed": false,
-      "thumbnailUrl": "https://via.placeholder.com/150/f66b97"
+      "thumbnailUrl": "https://via.placeholder.com/150/f66b97",
+      "image": "./assets/images/vegetarien.jpeg"
+
     },
     {
       "userId": 1,
       "id": 4,
       "title": "Acheter des fruits et légumes de saison",
       "completed": true,
-      "thumbnailUrl": "https://via.placeholder.com/150/56a8c2"
+      "thumbnailUrl": "https://via.placeholder.com/150/56a8c2",
+      "image": "./assets/images/abeille.jpeg"
+
     },
     {
       "userId": 1,
       "id": 5,
       "title": "Planifier ses menus pour éviter le gaspillage",
       "completed": false,
-      "thumbnailUrl": "https://via.placeholder.com/150/b0f7cc"
+      "thumbnailUrl": "https://via.placeholder.com/150/b0f7cc",
+      "image": "./assets/images/vinigar.jpeg"
+
     },
     {
       "userId": 1,
       "id": 6,
       "title": "Faire tourner la machine à laver le linge pleine",
       "completed": false,
-      "thumbnailUrl": "https://via.placeholder.com/150/810b14"  
+      "thumbnailUrl": "https://via.placeholder.com/150/810b14",
+      "image": "./assets/images/art-stop.jpeg"
+  
     },
     {
       "userId": 1,
       "id": 7,
       "title": "Arrêter d’utiliser assiettes, gobelets, couverts et serviettes jetables",
       "completed": false,
-      "thumbnailUrl": "https://via.placeholder.com/150/51aa97"
+      "thumbnailUrl": "https://via.placeholder.com/150/51aa97",
+      "image": "./assets/images/dechets.jpeg"
+
     },
     {
       "userId": 1,
       "id": 8,
       "title": "Mettre un filtre lavable dans la cafetière",
-      "completed": true
+      "completed": true,
+      "thumbnailUrl": "https://via.placeholder.com/150/54176f",
+      "image": "./assets/images/vegetarien.jpeg"
     },
     {
       "userId": 1,
       "id": 9,
       "title": "Refuser les échantillons gratuits",
       "completed": false,
-      "thumbnailUrl": "https://via.placeholder.com/150/54176f"
+      "thumbnailUrl": "https://via.placeholder.com/150/54176f",
+      "image": "./assets/images/abeille.jpeg"
+
     }
   ],
   "scores" : [

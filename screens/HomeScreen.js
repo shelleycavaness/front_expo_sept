@@ -1,19 +1,14 @@
 import * as React from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import * as WebBrowser from 'expo-web-browser';
-import { StackNavigator, createStackNavigator } from '@react-navigation/stack'; 
-import { NavigationContainer } from '@react-navigation/native';
+// import * as WebBrowser from 'expo-web-browser';
 import { MonoText } from '../components/StyledText';
 import data from '../db.json'
-import  ActionComponent  from '../components/ActionComponent'
+// import  ActionComponent  from '../components/ActionComponent'
 
-const ModalStack = createStackNavigator()
 
 export default function HomeScreen({ navigation }) {
-  console.log('actions=================', data.actions[0])
   let id = Math.floor(Math.random() * 4) + 1 ;
-  console.log('id action : ', id)
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
@@ -37,16 +32,23 @@ export default function HomeScreen({ navigation }) {
             style={styles.welcomeImage2}
           />
           
-          <ActionComponent />
+          {/* <ActionComponent /> */}
 
-
+              <View style={styles.buttonContainer}>
+                  <TouchableOpacity 
+                      onPress={() => navigation.navigate('Felicitation')} 
+                      style={styles.button}>
+                    <Text style={styles.buttonText}>Je l'ai fait</Text>
+                  </TouchableOpacity>
+                      
+                  <TouchableOpacity 
+                    onPress={() => navigation.navigate('Dommage')} 
+                    style={styles.button}>
+                    <Text style={styles.buttonText}>Je refuse</Text>
+                  </TouchableOpacity>      
+              </View> 
         </View>
 
-        <View style={styles.helpContainer}>
-          <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-            <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
-          </TouchableOpacity>
-        </View>
       </ScrollView>
 
     </View>
@@ -57,15 +59,7 @@ HomeScreen.navigationOptions = {
   header: null,
 };
 
-function handleLearnMorePress() {
-  WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/workflow/development-mode/');
-}
 
-function handleHelpPress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/get-started/create-a-new-app/#making-your-first-change'
-  );
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -102,22 +96,22 @@ const styles = StyleSheet.create({
     marginLeft: -10,
   },
 
-  // buttonContainer: {
-  //   flex: 1,
-  //   flexDirection: 'row',
-  //   alignItems: 'center',
-  //  justifyContent: 'space-between',
-  // },
-  // button: {
-  //   backgroundColor: "#83d499",
-  //   padding: 10,
-  //   margin: 5,
-  //   borderRadius: 5,
-  // },
-  // buttonText: {
-  //   fontSize: 20,
-  //   color: '#fff',
-  // }, 
+  buttonContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+   justifyContent: 'space-between',
+  },
+  button: {
+    backgroundColor: "#83d499",
+    padding: 10,
+    margin: 5,
+    borderRadius: 5,
+  },
+  buttonText: {
+    fontSize: 20,
+    color: '#fff',
+  }, 
 
   getStartedContainer: {
     alignItems: 'center',

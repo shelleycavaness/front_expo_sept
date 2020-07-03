@@ -10,48 +10,42 @@ import data from '../db.json'
 export default function HomeScreen({ navigation }) {
   let id = Math.floor(Math.random() * 4) + 1 ;
   return (
-    <View style={styles.container}>
-      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-        <View style={styles.getStartedContainer}>
-          <Text style={styles.getStartedText}>Le defi du jour : </Text>
-          <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-            <MonoText>{data.actions[id].title}</MonoText>
+      <ScrollView style={styles.scrollContainer} >
+        <View style={styles.container}>
+          <Text style={styles.titleText}>Le defi du jour : </Text>
+          <View style={styles.container2}>
+            <Text style={styles.defiText}>{data.actions[id].title}</Text>
           </View>
-
-          <Text style={styles.getStartedText}>
-            Ceci est le description pour le defi. Ce texte sera un peu plus long que les autres textes 
+          <Text style={styles.description}>
+           {data.actions[id].description} 
           </Text>
-          <Text style={styles.getStartedText}>
-          points gagnes pour le defi
+          <Text style={styles.description}>
+          points gagnes : 
+          </Text>
+          <Text style={styles.points}>
+           {data.actions[id].points}
           </Text>
           <Image
-            source={
-            
-             {uri : data.actions[id].thumbnailUrl}
-            }
-            style={styles.welcomeImage2}
+            source={{uri : data.actions[id].thumbnailUrl}}
+            style={styles.Image}
           />
-          
           {/* <ActionComponent /> */}
-
-              <View style={styles.buttonContainer}>
-                  <TouchableOpacity 
-                      onPress={() => navigation.navigate('Felicitation')} 
-                      style={styles.button}>
-                    <Text style={styles.buttonText}>Je l'ai fait</Text>
-                  </TouchableOpacity>
+          <View style={styles.buttonContainer}>
+             <TouchableOpacity 
+                onPress={() => navigation.navigate('Felicitation')} 
+                style={styles.button}>
+                <Text style={styles.buttonText}>Je l'ai fait</Text>
+             </TouchableOpacity>
                       
-                  <TouchableOpacity 
-                    onPress={() => navigation.navigate('Dommage')} 
-                    style={styles.button}>
-                    <Text style={styles.buttonText}>Je refuse</Text>
-                  </TouchableOpacity>      
+             <TouchableOpacity 
+               onPress={() => navigation.navigate('Dommage')} 
+               style={styles.button2}>
+              <Text style={styles.buttonText}>Je refuse</Text>
+             </TouchableOpacity>      
               </View> 
         </View>
-
       </ScrollView>
 
-    </View>
   );
 }
 
@@ -62,38 +56,60 @@ HomeScreen.navigationOptions = {
 
 
 const styles = StyleSheet.create({
+  scrollContainer:{
+    flex: 1,
+  },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-  },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
-  },
-  contentContainer: {
-    paddingTop: 30,
-  },
-  welcomeContainer: {
     alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
+    backgroundColor: '#e8f7d7'
   },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
+  titleText: {
+    fontSize:32,
+    fontWeight: '600',
+    color: '#8a888c',
   },
-  welcomeImage2: {
-    width: 120,
-    height: 120,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
+  container2: {
+    backgroundColor: 'rgba(0,0,0,0.05)',
+    borderRadius: 3,
+    paddingHorizontal: 4,
+    marginTop:10,
+    marginBottom:10,
+  },
+  description:{
+    fontSize:18,
+    textAlign:'center',
+    marginTop:10,
+    color: '#8a888c',
+    
+  },
+  defiText: {
+    fontSize:18,
+    fontWeight: '600',
+    color: '#228B22',
+    marginTop:10,
+  },
+  Image: {
+    width:200,
+    height:200,
+    justifyContent: 'center',
+    marginBottom:10,
+    marginTop:30,
+    borderRadius: 8,
+    borderWidth: 4,
+    borderColor: "white",
+  },
+  defiText: {
+    fontSize:18,
+    fontWeight: '600',
+    color: '#228B22',
+    marginTop:10,
+  },
+  points:{
+    fontSize:18,
+    fontWeight: '600',
+    color: '#228B22',
+    marginTop:10,
   },
 
   buttonContainer: {
@@ -101,76 +117,26 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
    justifyContent: 'space-between',
+   marginTop:30,
+   marginBottom:20,
   },
   button: {
     backgroundColor: "#83d499",
     padding: 10,
     margin: 5,
     borderRadius: 5,
+    margin:30,
+  },
+  button2: {
+    backgroundColor: "#f46049",
+    padding: 10,
+    margin: 5,
+    borderRadius: 5,
+    margin:30,
   },
   buttonText: {
     fontSize: 20,
     color: '#fff',
-  }, 
+  } 
 
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
-  },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
-  },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
-  },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
-  },
 });

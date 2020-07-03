@@ -7,29 +7,29 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-  ListView
 } from 'react-native';
-
-import { abeille, vinegar } from "../assets";
+import ListView from 'deprecated-react-native-listview'
+import { abeille, vinegar, velo, reparer,veggie, paille, stopPub, douche, ampule, fillet } from "../assets";
+import data from '../db.json'
 
 export default class UsersView extends Component {
-
   constructor(props) {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: ds.cloneWithRows([
-         {image: vinegar, username:"johndoe1"},
-         {image: "../assets/images/velo.jpeg", username:"johndoe2"},
-         {image: "../assets/images/abeille.jpeg", username:"johndoe3"},
-         {image: "../assets/images/ampoule.jpeg", username:"johndoe4"},
-         {image: "../assets/images/art-stop.jpg.", username:"johndoe5"},
-         {image: "../assets/images/douche.jpeg", username:"johndoe6"},
-         {image: "../assets/images/paille.jpeg", username:"johndoe7"},
-         {image: "../assets/images/vegetarien.jpeg", username:"johndoe8"},
-         {image: abeille, username:"johndoe2"},
+            // data.actions
+         {image: vinegar, title:"johndoe1"},
+         {image: velo, title:"johndoe2"},
+         {image: fillet, title:"johndoe3"},
+         {image: ampule , title:"johndoe4"},
+         {image: stopPub, title:"johndoe5"},
+         {image: douche, title:"johndoe6"},
+         {image: paille, title:"johndoe7"},
+         {image: veggie, title:"johndoe8"},
+         {image: abeille, title:"johndoe2"},
       ]),
-    };
+    };   console.log('data//////////////', data.actions[0].image)
   }
 
   render() {
@@ -43,10 +43,10 @@ export default class UsersView extends Component {
                 return (
                   <TouchableOpacity>
                     <View style={styles.box}>
-                    <Image style={styles.image} source={user.image}/> 
+                      <Image style={styles.image} source={user.image}/> 
                     {/* <Image style={styles.image} source={{(`"${user.image}"`)}}/> */}
                       {/* <Image style={styles.image} source={{image: user.image}}/> */}
-                      <Text style={styles.username}>{user.username}</Text>
+                      <Text style={styles.title}>{user.title}</Text>
                       <View style={styles.iconContent}>
                         <Image style={styles.icon} source={{uri: "https://img.icons8.com/material-two-tone/24/000000/plus.png"}}/>
                       </View>
@@ -82,9 +82,9 @@ const styles = StyleSheet.create({
     },
     elevation:2
   },
-  username:{
+  title:{
     color: "#20B2AA",
-    fontSize:22,
+    fontSize:18,
     alignSelf:'center',
     marginLeft:10
   },

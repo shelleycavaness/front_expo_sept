@@ -5,7 +5,8 @@ import HomeScreen from '../screens/HomeScreen';
 import ActionsScreen from '../screens/ActionsScreen';
 import ProfileScreen from '../screens/ProfileScreen'
 // import Cardlist from '../screens/Card-list'
-import Cardlist from '../screens/Card-list2'
+import CardlistScreen from '../screens/Card-list2'
+import Header from "../components/Header"
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
@@ -28,7 +29,7 @@ export default function BottomTabNavigator({ navigation, route }) {
       />
       <BottomTab.Screen
         name="Actions"
-        component={Cardlist}
+        component={CardlistScreen}
         options={{
           title: 'Actions',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-menu" />,
@@ -52,9 +53,9 @@ function getHeaderTitle(route) {
 
   switch (routeName) {
     case 'Home':
-      return 'How to get started';
+      return ()=> <Header/>
     case 'Actions':
-      return 'Call to Actions';
+      return 'Call to Eco Actions';
     case 'Profile':
       return 'Player Profile'; 
 

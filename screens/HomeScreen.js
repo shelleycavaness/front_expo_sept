@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-// import * as WebBrowser from 'expo-web-browser';
+import * as WebBrowser from 'expo-web-browser';
 import { MonoText } from '../components/StyledText';
 import data from '../db.json'
 // import  ActionComponent  from '../components/ActionComponent'
+import { frog } from "../assets";
+
 
 
 export default function HomeScreen({ navigation }) {

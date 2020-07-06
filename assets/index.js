@@ -13,6 +13,7 @@ import dechetsJPG from './images/dechets.jpeg'
 import doucheJPG from './images/douche.jpeg'
 import congratsJPG from './images/congrats.jpg'
 import dommagJPG from './images/dommage.jpeg'
+import frogPNG from './images/frog24.png'
 
 
 
@@ -33,3 +34,4 @@ export const stopPub = stopJPG
 export const dechet = dechetsJPG 
 export const douche = doucheJPG 
 export const paille = pailleJPG 
+export const frog = frogPNG

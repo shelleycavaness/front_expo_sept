@@ -7,47 +7,46 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-  ListView
+  FlatList
 } from 'react-native';
-// import ListView from 'deprecated-react-native-listview'
-import { abeille, vinegar, velo, reparer,veggie, paille, stopPub, douche, ampule, fillet } from "../assets";
-import data from '../db.json'
+
+import { abeille, vinegar } from "../assets";
 
 export default class UsersView extends Component {
+
   constructor(props) {
     super(props);
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    const ds = new FlatList.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows([
-            // data.actions  //take off the array brackets ;-)
-         {image: vinegar, title:"johndoe1"},
-         {image: velo, title:"johndoe2"},
-         {image: fillet, title:"johndoe3"},
-         {image: ampule , title:"johndoe4"},
-         {image: stopPub, title:"johndoe5"},
-         {image: douche, title:"johndoe6"},
-         {image: paille, title:"johndoe7"},
-         {image: veggie, title:"johndoe8"},
-         {image: abeille, title:"johndoe2"},
+      data: ds.cloneWithRows([
+         {image: vinegar, username:"johndoe1"},
+         {image: "../assets/images/velo.jpeg", username:"johndoe2"},
+         {image: "../assets/images/abeille.jpeg", username:"johndoe3"},
+         {image: "../assets/images/ampoule.jpeg", username:"johndoe4"},
+         {image: "../assets/images/art-stop.jpg.", username:"johndoe5"},
+         {image: "../assets/images/douche.jpeg", username:"johndoe6"},
+         {image: "../assets/images/paille.jpeg", username:"johndoe7"},
+         {image: "../assets/images/vegetarien.jpeg", username:"johndoe8"},
+         {image: abeille, username:"johndoe2"},
       ]),
-    };   console.log('data//////////////', data.actions[0].image)
+    };
   }
 
   render() {
     return (
       <ScrollView style={styles.container}>
           <View style={styles.body}>
-            <ListView style={styles.container} enableEmptySections={true}
+            <FlatList style={styles.container} enableEmptySections={true}
               dataSource={this.state.dataSource}
-              renderRow={(user) => {
+              renderItem={(user) => {
                 // {console.log('user======', user)}
                 return (
                   <TouchableOpacity>
                     <View style={styles.box}>
-                      <Image style={styles.image} source={user.image}/> 
+                    <Image style={styles.image} source={user.image}/> 
                     {/* <Image style={styles.image} source={{(`"${user.image}"`)}}/> */}
                       {/* <Image style={styles.image} source={{image: user.image}}/> */}
-                      <Text style={styles.title}>{user.title}</Text>
+                      <Text style={styles.username}>{user.username}</Text>
                       <View style={styles.iconContent}>
                         <Image style={styles.icon} source={{uri: "https://img.icons8.com/material-two-tone/24/000000/plus.png"}}/>
                       </View>
@@ -83,9 +82,9 @@ const styles = StyleSheet.create({
     },
     elevation:2
   },
-  title:{
+  username:{
     color: "#20B2AA",
-    fontSize:18,
+    fontSize:22,
     alignSelf:'center',
     marginLeft:10
   },

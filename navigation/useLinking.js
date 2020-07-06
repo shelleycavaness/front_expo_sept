@@ -11,8 +11,8 @@ export default function(containerRef) {
           Home: 'home',
           Actions: 'actions',
           Profile: 'profile',
-          Felicitation: 'felicitation',
-          Dommage : 'dommage'
+          // Felicitation: 'felicitation',
+          // Dommage : 'dommage'
         },
       },
     },

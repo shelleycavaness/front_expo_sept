@@ -12,11 +12,11 @@ import {
 import {  congrats } from "../assets";
 
 export default function DommageScreen({ navigation }) {
-
+console.log('congrats', congrats)
     return (
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.container}>
-          <Image style={styles.photo} source={{uri: congrats}}/>
+      <Image style={styles.photo} source={{ uri:'congrats' }}/>
           <Text style={styles.companyName}>Felicitation !!!</Text>
           <Text style={styles.slogan}> Rendez-vous demain!</Text>
           <View style={styles.descriptionContent}>

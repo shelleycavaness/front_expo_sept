@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,55 +9,44 @@ import {
   TouchableOpacity,
   FlatList
 } from 'react-native';
+// import ListView from 'deprecated-react-native-listview'
+import { abeille, vinegar, velo, reparer,veggie, paille, stopPub, douche, ampule, fillet } from "../assets";
+import data1 from '../db.json'
 
-import { abeille, vinegar } from "../assets";
+export default function UsersView() {
+    const [actionList, setActions] = useState(
+      data1.actions
+   );
 
-export default class UsersView extends Component {
-
-  constructor(props) {
-    super(props);
-    const ds = new FlatList.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    this.state = {
-      data: ds.cloneWithRows([
-         {image: vinegar, username:"johndoe1"},
-         {image: "../assets/images/velo.jpeg", username:"johndoe2"},
-         {image: "../assets/images/abeille.jpeg", username:"johndoe3"},
-         {image: "../assets/images/ampoule.jpeg", username:"johndoe4"},
-         {image: "../assets/images/art-stop.jpg.", username:"johndoe5"},
-         {image: "../assets/images/douche.jpeg", username:"johndoe6"},
-         {image: "../assets/images/paille.jpeg", username:"johndoe7"},
-         {image: "../assets/images/vegetarien.jpeg", username:"johndoe8"},
-         {image: abeille, username:"johndoe2"},
-      ]),
-    };
-  }
-
-  render() {
     return (
       <ScrollView style={styles.container}>
-          <View style={styles.body}>
-            <FlatList style={styles.container} enableEmptySections={true}
-              dataSource={this.state.dataSource}
-              renderItem={(user) => {
-                // {console.log('user======', user)}
-                return (
-                  <TouchableOpacity>
-                    <View style={styles.box}>
-                    <Image style={styles.image} source={user.image}/> 
-                    {/* <Image style={styles.image} source={{(`"${user.image}"`)}}/> */}
-                      {/* <Image style={styles.image} source={{image: user.image}}/> */}
-                      <Text style={styles.username}>{user.username}</Text>
-                      <View style={styles.iconContent}>
-                        <Image style={styles.icon} source={{uri: "https://img.icons8.com/material-two-tone/24/000000/plus.png"}}/>
-                      </View>
-                    </View>
-                  </TouchableOpacity>
-                )
-            }}/>
-          </View>
+      <Text style={styles.title}>Liste des defis</Text> 
+       <View style={styles.body}>
+        <FlatList style={styles.container} 
+          keyExtractor={ (item) => item.id.toString() }
+          // keyExtractor={ (item) => item.key }
+          data={ actionList }
+          renderItem={ ({ item }) =>(
+            <TouchableOpacity>     
+            <View style={styles.box}>
+              <Image style={styles.image} 
+               source={ item.thumbnailUrl} 
+              /> 
+    {   console.log('==================', item.thumbnailUrl)}
+    {   console.log('*********************', item.image)}
+              <Text style={styles.title}>{item.title}</Text> 
+              <View style={styles.iconContent}>
+                <Image style={styles.icon} source={{uri: "https://img.icons8.com/material-two-tone/24/000000/plus.png"}}/>
+              </View> 
+            </View>
+          </TouchableOpacity>
+          )}
+
+                />
+       </View>
       </ScrollView>
     );
-  }
+ 
 }
 
 const styles = StyleSheet.create({
@@ -82,9 +71,9 @@ const styles = StyleSheet.create({
     },
     elevation:2
   },
-  username:{
+  title:{
     color: "#20B2AA",
-    fontSize:22,
+    fontSize:18,
     alignSelf:'center',
     marginLeft:10
   },
@@ -101,3 +90,20 @@ const styles = StyleSheet.create({
   }
 });
  
+
+///////////////////////////////
+//  const [actionList, setActions] = useState([
+//        {key: '0', image: vinegar, title:"johndoe1"},
+//        {key: '1', image: velo, title:"johndoe2"},
+//        {key: '2', image: fillet, title:"johndoe3"},
+//        {key: '3', image: ampule , title:"johndoe4"},
+//        {key: '4', image: stopPub, title:"johndoe5"},
+//        {key: '5', image: douche, title:"johndoe6"},
+//        {key: '6', image: paille, title:"johndoe7"},
+//        {key: '7', image: veggie, title:"johndoe8"},
+//        {key: '8', image: abeille, title:"johndoe10"},
+//        {key: '9', image: vinegar, title:"johndoe11"},
+//        {key: '10', image: velo, title:"johndoe12"},
+//        {key: '12', image: fillet, title:"johndoe13"},
+//        {key: '13', image: ampule , title:"johndoe14"},
+//     ]);

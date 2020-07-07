@@ -54,7 +54,7 @@
       "completed": false,
       "points" : 100, 
       "thumbnailUrl": "http://placekitten.com/200/300",
-      "image": "../assets/images/abeille.jpeg"
+      "image": "./assets/images/abeille.jpeg"
     
     },
     {

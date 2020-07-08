@@ -10,7 +10,7 @@ import {
   ListView
 } from 'react-native';
 // import ListView from 'deprecated-react-native-listview'
-import { abeille, vinegar, velo, reparer,veggie, paille, stopPub, douche, ampule, fillet } from "../assets";
+import { abeille, vinegar, velo, reparer,veggie, paille, stopPub, douche, ampule, fillet } from "../assets/index";
 import data from '../db.json'
 
 export default class UsersView extends Component {

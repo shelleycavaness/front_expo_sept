@@ -9,14 +9,18 @@ import {
   Alert,
   ScrollView,
 } from 'react-native';
-import {  congrats } from "../assets";
+import {  congrats, tiger } from "../assets/index";
 
 export default function DommageScreen({ navigation }) {
-console.log('congrats', congrats)
+
     return (
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.container}>
-      <Image style={styles.photo} source={{ uri:'congrats' }}/>
+      <Image 
+       style={styles.photo} 
+       source={{uri : tiger}}
+      //  source={require('../assets/images/tigre_heureux.jpg')}
+       />
           <Text style={styles.companyName}>Felicitation !!!</Text>
           <Text style={styles.slogan}> Rendez-vous demain!</Text>
           <View style={styles.descriptionContent}>

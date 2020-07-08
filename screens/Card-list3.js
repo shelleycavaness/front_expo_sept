@@ -7,46 +7,60 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-  FlatList
+  FlatList,
+  TouchableHighlight
 } from 'react-native';
 // import ListView from 'deprecated-react-native-listview'
-import { abeille, vinegar, velo, reparer,veggie, paille, stopPub, douche, ampule, fillet } from "../assets";
+import { abeille, vinegar, velo, reparer,veggie, paille, stopPub, douche, ampule, fillet, tiger } from "../assets/index";
 import data1 from '../db.json'
 
-export default function UsersView() {
-    const [actionList, setActions] = useState(
-      data1.actions
+export default function UsersView({ navigation }) {
+  const [actionList, setActions] = useState(
+    data1.actions
    );
+  const pressHandler = (id) => {
+    console.log('id :=====', id) 
+     navigation.navigate('Detail')
+  };
 
     return (
       <ScrollView style={styles.container}>
       <Text style={styles.title}>Liste des defis</Text> 
        <View style={styles.body}>
+       <Image style={styles.icon} source={{uri: vinegar}}/>
+
         <FlatList style={styles.container} 
           keyExtractor={ (item) => item.id.toString() }
           // keyExtractor={ (item) => item.key }
+          // data={ data1.actions }
           data={ actionList }
           renderItem={ ({ item }) =>(
-            <TouchableOpacity>     
-            <View style={styles.box}>
-              <Image style={styles.image} 
-               source={ item.thumbnailUrl} 
-              /> 
-    {   console.log('==================', item.thumbnailUrl)}
-    {   console.log('*********************', item.image)}
-              <Text style={styles.title}>{item.title}</Text> 
-              <View style={styles.iconContent}>
-                <Image style={styles.icon} source={{uri: "https://img.icons8.com/material-two-tone/24/000000/plus.png"}}/>
-              </View> 
-            </View>
-          </TouchableOpacity>
+            <TouchableHighlight 
+            onPress={ () => pressHandler(item.id) }>     
+              <View style={styles.box}>
+                <Image style={styles.image} 
+              //  source={ item.thumbnailUrl} 
+                 source={{uri: item.image}} 
+                //  source={ item.photo} 
+                /> 
+   {/* {   console.log('/////////////velo//////////', velo)} */}
+    {/* {   console.log('*********************', item.image)} */}
+               <Text style={styles.title}>{ item.title }</Text> 
+                <View style={styles.iconContent} >
+                  <Image style={styles.icon} 
+                   source={{uri: "https://img.icons8.com/material-two-tone/24/000000/plus.png"}}  
+                   />
+                </View> 
+              </View>
+            </TouchableHighlight>
           )}
 
                 />
        </View>
       </ScrollView>
     );
- 
+  
+
 }
 
 const styles = StyleSheet.create({

@@ -5,12 +5,13 @@ import * as WebBrowser from 'expo-web-browser';
 import { MonoText } from '../components/StyledText';
 import data from '../db.json'
 // import  ActionComponent  from '../components/ActionComponent'
-import { frog } from "../assets";
+import { frog, abeille, vinegar, velo, reparer,veggie, paille, stopPub, douche, ampule, fillet } from "../assets/";
 
 
 
 export default function HomeScreen({ navigation }) {
   let id = Math.floor(Math.random() * 4) + 1 ;
+  {{console.log('image+++++++++++++++++', data.actions[id].image)}}
   return (
       <ScrollView style={styles.scrollContainer} >
         <View style={styles.container}>
@@ -27,9 +28,10 @@ export default function HomeScreen({ navigation }) {
           <Text style={styles.points}>
            {data.actions[id].points}
           </Text>
-          <Image
-            source={{uri : data.actions[id].thumbnailUrl}}
-            style={styles.Image}
+          <Image style={styles.Image}
+            // source={{uri : data.actions[id].thumbnailUrl}}
+            // source={require(`.${data.actions[id].image}`)}
+            source={{uri : data.actions[id].image} }
           />
           {/* <ActionComponent /> */}
           <View style={styles.buttonContainer}>

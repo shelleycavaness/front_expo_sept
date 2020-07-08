@@ -11,6 +11,7 @@ import useLinking from './navigation/useLinking';
 import { screensEnabled } from 'react-native-screens';
 import FeliciationScreen from './screens/FeliciationScreen';
 import DommageScreen from './screens/DommageScreen';
+import DetailScreen from './screens/DetailScreen'
 import ActionComponent from './components/ActionComponent';
 
 const Stack = createStackNavigator();
@@ -58,6 +59,7 @@ export default function App(props) {
             <Stack.Screen name="Root" component={BottomTabNavigator} />
             <Stack.Screen name="Felicitation" component={FeliciationScreen} />
             <Stack.Screen name="Dommage" component={DommageScreen} />
+            <Stack.Screen name="Detail" component={DetailScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>

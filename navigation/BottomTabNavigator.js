@@ -5,7 +5,7 @@ import HomeScreen from '../screens/HomeScreen';
 import ActionsScreen from '../screens/ActionsScreen';
 import ProfileScreen from '../screens/ProfileScreen'
 // import Cardlist from '../screens/Card-list'
-import CardlistScreen from '../screens/Card-list2'
+import CardlistScreen from '../screens/Card-list3'
 import Header from "../components/Header"
 
 const BottomTab = createBottomTabNavigator();

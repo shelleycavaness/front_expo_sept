@@ -11,7 +11,7 @@ import {
   TouchableHighlight
 } from 'react-native';
 // import ListView from 'deprecated-react-native-listview'
-import { abeille, vinegar, velo, reparer,veggie, paille, stopPub, douche, ampule, fillet, tiger } from "../assets/index";
+import { allImages } from "../assets/index";
 import data1 from '../db.json'
 
 export default function UsersView({ navigation }) {
@@ -20,15 +20,14 @@ export default function UsersView({ navigation }) {
    );
   const pressHandler = (id) => {
     console.log('id :=====', id) 
-     navigation.navigate('Detail')
+    navigation.navigate('Detail', {id})
+
   };
 
     return (
       <ScrollView style={styles.container}>
       <Text style={styles.title}>Liste des defis</Text> 
        <View style={styles.body}>
-       <Image style={styles.icon} source={{uri: vinegar}}/>
-
         <FlatList style={styles.container} 
           keyExtractor={ (item) => item.id.toString() }
           // keyExtractor={ (item) => item.key }
@@ -39,12 +38,11 @@ export default function UsersView({ navigation }) {
             onPress={ () => pressHandler(item.id) }>     
               <View style={styles.box}>
                 <Image style={styles.image} 
-              //  source={ item.thumbnailUrl} 
-                 source={{uri: item.image}} 
-                //  source={ item.photo} 
+                 // source={ item.thumbnailUrl} 
+                 source={allImages[item.photo]} 
+                 // source={ item.photo} 
                 /> 
-   {/* {   console.log('/////////////velo//////////', velo)} */}
-    {/* {   console.log('*********************', item.image)} */}
+            
                <Text style={styles.title}>{ item.title }</Text> 
                 <View style={styles.iconContent} >
                   <Image style={styles.icon} 
@@ -54,8 +52,7 @@ export default function UsersView({ navigation }) {
               </View>
             </TouchableHighlight>
           )}
-
-                />
+         />    
        </View>
       </ScrollView>
     );

@@ -1,17 +1,23 @@
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
 import { MonoText } from '../components/StyledText';
 import data from '../db.json'
 // import  ActionComponent  from '../components/ActionComponent'
-import { frog, abeille, vinegar, velo, reparer,veggie, paille, stopPub, douche, ampule, fillet } from "../assets/";
+import { allImages } from "../assets/";
 
 
 
 export default function HomeScreen({ navigation }) {
-  let id = Math.floor(Math.random() * 4) + 1 ;
-  {{console.log('image+++++++++++++++++', data.actions[id].image)}}
+  let id = Math.floor(Math.random() * 6) + 1 ;
+  // let id = 4
+  const item = data.actions[id];
+
+
+  // const [actionList, setActions] = useState(
+  //   data1.actions
+  //  );
   return (
       <ScrollView style={styles.scrollContainer} >
         <View style={styles.container}>
@@ -30,9 +36,13 @@ export default function HomeScreen({ navigation }) {
           </Text>
           <Image style={styles.Image}
             // source={{uri : data.actions[id].thumbnailUrl}}
-            // source={require(`.${data.actions[id].image}`)}
-            source={{uri : data.actions[id].image} }
+            // source={{uri : data.actions[id].photo} }
+            source={ allImages[data.actions[id].photo] }
+           
           />
+            {   console.log('*******data.actions[id].photo*************>>>>   ', data.actions[id].photo)}
+            {   console.log('*******data.actions[id].image>>>>   ', data.actions[id].image)}
+          {console.log('item from db.json>> ', item)}
           {/* <ActionComponent /> */}
           <View style={styles.buttonContainer}>
              <TouchableOpacity 

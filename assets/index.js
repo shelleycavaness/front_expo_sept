@@ -14,7 +14,7 @@ import doucheJPG from './images/douche.jpeg'
 import congratsJPG from './images/congrats.jpg'
 import dommagJPG from './images/dommage.jpeg'
 import frogPNG from './images/frog24.png'
-
+import plusPNG from './images/baseline_add_box_black_18dp.png'
 
 
 
@@ -52,5 +52,7 @@ export const allImages = {
  dechet : dechetsJPG, 
  douche : doucheJPG ,
  paille : pailleJPG, 
- frog : frogPNG
+ frog : frogPNG,
+ plus : plusPNG
+
 }

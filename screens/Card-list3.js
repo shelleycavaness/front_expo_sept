@@ -46,7 +46,7 @@ export default function UsersView({ navigation }) {
                <Text style={styles.title}>{ item.title }</Text> 
                 <View style={styles.iconContent} >
                   <Image style={styles.icon} 
-                   source={{uri: "https://img.icons8.com/material-two-tone/24/000000/plus.png"}}  
+                   source={allImages.plus }  
                    />
                 </View> 
               </View>

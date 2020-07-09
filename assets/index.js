@@ -26,7 +26,6 @@ export const velo = veloJPG
 export const tiger = tigerJPG 
 export const reparer = reparerJPG 
 export const veggie = veggiJPG 
-
 export const fillet = filetJPG 
 export const ampule = ampuleJPG 
 export const ane = aneJPG 
@@ -35,3 +34,23 @@ export const dechet = dechetsJPG
 export const douche = doucheJPG 
 export const paille = pailleJPG 
 export const frog = frogPNG
+
+export const allImages = {
+  
+ abeille : abeilleJPG,
+ vinegar : vinegarJPG,
+ dommage : dommagJPG,
+ congrats : congratsJPG,
+ velo : veloJPG,
+ tiger : tigerJPG, 
+ reparer : reparerJPG ,
+ veggie : veggiJPG ,
+ fillet : filetJPG ,
+ ampule : ampuleJPG, 
+ ane : aneJPG, 
+ stopPub : stopJPG, 
+ dechet : dechetsJPG, 
+ douche : doucheJPG ,
+ paille : pailleJPG, 
+ frog : frogPNG
+}

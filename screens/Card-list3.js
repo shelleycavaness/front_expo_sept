@@ -18,12 +18,12 @@ export default function UsersView({ navigation }) {
   const [actionList, setActions] = useState(
     data1.actions
    );
-  const pressHandler = (id) => {
-    console.log('id :=====', id) 
-    navigation.navigate('Detail', {id})
-
+  const pressHandler = ( id ) => {
+//itemId-1 t6 begin with 0 rather than 1 and dispaly the right entry in the database
+    navigation.navigate('Detail', {
+      itemId: id-1
+    })
   };
-
     return (
       <ScrollView style={styles.container}>
       <Text style={styles.title}>Liste des defis</Text> 

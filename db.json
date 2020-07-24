@@ -49,7 +49,7 @@
     {
       "userId": 1,
       "id": 1,
-      "title": "Arrêter l’eau quand on se lave les mains",
+      "title": "Arrêter d’utiliser assiettes, gobelets, couverts et serviettes jetables",
       "description": "Show me the money!” (Jerry Maguire, 1996)",
       "completed": false,
       "points" : 100, 
@@ -121,7 +121,7 @@
     {
       "userId": 1,
       "id": 7,
-      "title": "Arrêter d’utiliser assiettes, gobelets, couverts et serviettes jetables",
+      "title": "Je refuse les publicités papiers dans ma boîte aux lettres en plaçant un message \"Stop Pub\"",
       "description": "You’re gonna need a bigger boat” (Jaws, 1975)",
       "completed": false,
       "points" : 130, 
@@ -151,7 +151,28 @@
       "thumbnailUrl": "https://via.placeholder.com/150/54176f",
       "photo" : "tiger",
       "image": "../assets/images/abeille.jpeg"
-
+    },
+    {
+      "userId": 1,
+      "id": 10,
+      "title": "Refuser les échantillons gratuits",
+      "description": "Here’s looking at you, kid” (Casablanca, 1942)",
+      "completed": false,
+      "points" : 10, 
+      "thumbnailUrl": "https://via.placeholder.com/150/54176f",
+      "photo" : "tiger",
+      "image": "../assets/images/abeille.jpeg"
+    },
+    {
+      "userId": 1,
+      "id": 10,
+      "title": "Je réalise 5 mooc RSE sur Coorpacademy",
+      "description": "Here’s looking at you, kid” (Casablanca, 1942)",
+      "completed": false,
+      "points" : 50, 
+      "thumbnailUrl": "https://via.placeholder.com/150/54176f",
+      "photo" : "tiger",
+      "image": "../assets/images/abeille.jpeg"
     }
   ],
   "scores" : [

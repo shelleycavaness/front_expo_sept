@@ -14,24 +14,22 @@ export default function({ route }) {
   const { itemId } = route.params;
 
   const detailTtile =detail[itemId].title
-  const detailDone =detail[itemId].isDone
+  const detailDone =detail[itemId].completed
+  const detailPoints =detail[itemId].points
   const detailDescription =detail[itemId].description
   const detailPhoto = detail[itemId].photo
   console.log('itemId : detail ---------------', itemId)
 
-
+console.log('detailDone :>> ', detailDone);
 // let result = actions.findIndex(x => x.id === 5);
 // console.log('==========================id', result)
   return(
     <View style={styles.container}>
      <View style={styles.card}>
 
-        <View style={styles.cardHeader}>
-         <View>
-          <Text style={styles.title}>{detailTtile}</Text>
-          <Text style={styles.time}>{detailDone}</Text>
-         </View>
-       </View>
+      <View style={styles.cardHeader}>
+        <Text style={styles.title}>{detailTtile}</Text> 
+      </View>
        <Image style={styles.image} 
         source={allImages[detailPhoto]}
         // source={'../assets/images/abeille.jpeg'}
@@ -39,25 +37,18 @@ export default function({ route }) {
        <View style={styles.separator}/>
        <View style={styles.footer}>
          <View style={styles.contentContainer}>   
-            <View style={styles.contentSection}>         
+            <View style={styles.contentBox}>         
               <Text style={styles.contentSectionText}>{ detailTtile }</Text>       
             </View>    
+            <View style={styles.contentBox}>         
+              <Text style={styles.contentSectionText}>{ detailDescription }</Text>    
+  
+            </View>  
+            <View style={styles.contentBox}>         
+              <Text style={styles.contentSectionText}>{ detailPoints } points</Text>       
+            </View>    
+          </View> 
           
-            <View style={styles.contentSection}>         
-              <Text style={styles.contentSectionText}>{ detailTtile }</Text>       
-            </View>  
-            <View style={styles.contentSection}>         
-              <Text style={styles.contentSectionText}>{ detailTtile }</Text>       
-            </View>  
-            <View style={styles.contentSection}>         
-              <Text style={styles.contentSectionText}>{ detailDescription }</Text>       
-            </View>       
-          </View> 
-          <View style={styles.contentContainer}>  
-          <View style={styles.contentSection}>         
-              <Text style={styles.contentSectionText}>{ detailDescription }</Text>       
-            </View>  
-          </View> 
  
        </View> 
       
@@ -74,7 +65,7 @@ const styles = StyleSheet.create({
     backgroundColor:"#1E6E6",
 
     alignItems: 'center', 
-    // justifyContent: 'center'
+    justifyContent: 'center',
     paddingTop: 10
   },
   card:{
@@ -95,13 +86,25 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderTopLeftRadius: 1,
     borderTopRightRadius: 1,
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    flexWrap: 'wrap',
+  
+   
+  },
+  title:{
+    color: "#51624F",
+    fontSize:19,
+    fontWeight: '600',
+    flexWrap: 'wrap',
+    paddingBottom: 25,
   },
   image:{
     // width: 200,
     height: 300,
     flex: 1,
+    borderRadius: 3,
   },
   separator: {
     marginTop: 10,
@@ -111,37 +114,37 @@ const styles = StyleSheet.create({
   },
   footer:{
     flexDirection: 'row',
-    justifyContent: 'space-between',
     paddingTop: 12.5,
     paddingBottom: 25,
     paddingHorizontal: 16,
     borderBottomLeftRadius: 1,
     borderBottomRightRadius: 1,
-    borderColor: 'orange',
-    borderWidth: 1,
-    borderStyle: 'solid',
+
   },
   contentContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    // flexDirection: 'row',
     flex: 1,
-    borderColor: 'black',
-       borderWidth: 5,
-       borderStyle: 'solid',  
+    paddingTop: 12.5,
+    paddingBottom: 25,
+    borderColor: '#51624F',
+    borderWidth: 3,
+    borderStyle: 'solid',
+    borderRadius: 5,
   }, 
-  contentSection: {
-    justifyContent: 'center',
-    flexDirection: 'row',
+  contentBox: {
+    justifyContent: 'space-evenly', 
+    paddingTop: 15,
+    paddingBottom: 5,
+    // alignSelf: 'center',
     flex: 1,
-    borderColor: 'yellow',
-       borderWidth: 5,
-       borderStyle: 'solid',
+    alignItems: 'right',
+    marginLeft: 14,
+    marginRight: 10,
   },
   contentSectionText: {
-    marginLeft: 8,
-    alignSelf: 'flex-end',
+    color: "#51624F",
+    fontSize:18,
     justifyContent: 'center',
+
   },
 })
 

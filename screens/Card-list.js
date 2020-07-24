@@ -1,178 +1,102 @@
-import React, { Component } from 'react';
+
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
   Image,
-  Alert,
   ScrollView,
+  TouchableOpacity,
   FlatList,
-  Button
+  TouchableHighlight
 } from 'react-native';
-import data from '../db.json'
-export default class Posts extends Component {
+// import ListView from 'deprecated-react-native-listview'
+import { allImages } from "../assets/index";
+import data1 from '../db.json'
 
-  constructor(props) {
-    super(props);
-    this.state = {
-    data : data.actions  
-     
-    };
-    // console.log('data22222222222222222', data)
-  }
-
-  render() {
+export default function UsersView({ navigation }) {
+  const [actionList, setActions] = useState(
+    data1.actions
+   );
+  const pressHandler = ( id ) => {
+//itemId-1 t6 begin with 0 rather than 1 and dispaly the right entry in the database
+    navigation.navigate('Detail', {
+      itemId: id-1
+    })
+  };
     return (
-      <View style={styles.container}>
-        <FlatList style={styles.list}
-          data={this.state.data}
-          keyExtractor= {(item) => {
-            return item.id.toString();
-          }}
-          ItemSeparatorComponent={() => {
-            return (
-              <View style={styles.separator}/>
-            )
-          }}
-          renderItem={(post) => {
-            const item = post.item;
-            return (
-              <TouchableOpacity>
-                <View style={styles.card}>
-
-                  <Image style={styles.cardImage} source={{uri:item.thumbnailUrl}}/>
-                  <View style={styles.cardContent}>
-                    <View>
-                      <Text style={styles.title}>{item.title}</Text>
-                      <Text style={styles.time}>{item.completed}</Text>
-                    </View>
-
-                    <View style={styles.cardFooter}>
-                      <View style={styles.socialBarContainer}>
-                        <View style={styles.socialBarSection}>
-                          <TouchableOpacity style={styles.socialBarButton}>
-                            <Image style={styles.icon} source={{uri: 'https://img.icons8.com/material-outlined/24/000000/like.png'}}/>
-                            <Text style={styles.socialBarLabel}>78</Text>
-                          </TouchableOpacity>
-                        </View>
-
-                        <View style={styles.socialBarSection}>
-                          <TouchableOpacity style={styles.socialBarButton}>
-                            <Image style={styles.icon} source={{uri: 'https://img.icons8.com/carbon-copy/100/000000/day-of-the-dead.png'}}/>
-                            <Text style={styles.socialBarLabel}>25</Text>
-                          </TouchableOpacity>
-                        </View>
-
-                        <View style={styles.socialBarSection}>
-                          <TouchableOpacity style={styles.socialBarButton}>
-                            <Image style={styles.icon} source={{uri: 'https://img.icons8.com/office/16/000000/retweet.png'}}/>
-                            <Text  style={styles.socialBarLabel}>13</Text>
-                          </TouchableOpacity>
-                        </View>
-                      </View>
-                    </View>
-                  </View>
-                </View>
-              </TouchableOpacity>
-            )
-          }}/>
-      </View>
+      <ScrollView style={styles.container}>
+      <Text style={styles.title}>Liste des defis</Text> 
+       <View style={styles.body}>
+        <FlatList style={styles.container} 
+          keyExtractor={ (item) => item.id.toString() }
+          // keyExtractor={ (item) => item.key }
+          // data={ data1.actions }
+          data={ actionList }
+          renderItem={ ({ item }) =>(
+            <TouchableHighlight 
+            onPress={ () => pressHandler(item.id) }>     
+              <View style={styles.box}>
+                <Image style={styles.image} 
+                 source={allImages[item.photo]} 
+                /> 
+               <Text style={styles.title}>{ item.title }</Text> 
+                <View style={styles.iconContent} >
+                  <Image style={styles.icon} 
+                   source={allImages.plus }  
+                   />
+                </View> 
+              </View>
+            </TouchableHighlight>
+          )}
+         />    
+       </View>
+      </ScrollView>
     );
-  }
+  
+
 }
 
 const styles = StyleSheet.create({
-  container:{
-    flex:1,
-    marginTop:20,
+  image:{
+    width: 60,
+    height: 60,
+    borderRadius: 3,
   },
-  list: {
-    backgroundColor:"#E6E6E6",
+  body: {
+    padding:30,
+    backgroundColor :"#AEBEA2",
   },
-  separator: {
-    marginTop: 1,
-  },
-  /******** card **************/
-  card:{
-    margin: 0,
-    borderRadius: 2,
-    borderWidth: 1,
-    borderColor: "#DCDCDC",
-    backgroundColor: "#DCDCDC",
-  },
-  cardHeader: {
-    paddingVertical: 17,
-    paddingHorizontal: 16,
-    borderTopLeftRadius: 1,
-    borderTopRightRadius: 1,
+  box: {
+    marginTop:5,
+    marginBottom:5,
+    backgroundColor: '#FFFFFF',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    shadowColor: 'black',
+    shadowOpacity: .2,
+    shadowOffset: {
+      height:1,
+      width:-2
+    },
+    elevation:2
   },
-  cardContent: {
-    paddingVertical: 12.5,
-    paddingHorizontal: 16,
-    //overlay efect
-    flex: 1,
-    height: 200,
-    width: null,
-    position: 'absolute',
-    zIndex: 100,
-    left: 0,
-    right: 0,
-    backgroundColor: 'transparent'
-  },
-  cardFooter:{
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingTop: 15,
-    paddingBottom: 0,
-    paddingVertical: 7.5,
-    paddingHorizontal: 0
-  },
-  cardImage:{
-    flex: 1,
-    height: 150,
-    width: null,
-  },
-  /******** card components **************/
   title:{
-    fontSize:22,
-    color: "#ffffff",
-    marginTop: 10,
-    fontWeight:'bold'
+    color: "#E6D5AA",
+    fontSize:18,
+    alignSelf:'center',
+    marginLeft:10
   },
-  time:{
-    fontSize:13,
-    color: "#ffffff",
-    marginTop: 5
-  },
-  icon: {
-    width:25,
-    height:25,
-  },
-  /******** social bar ******************/
-  socialBarContainer: {
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    flexDirection: 'row',
-    flex: 1
-  },
-  socialBarSection: {
-    justifyContent: 'flex-start',
-    flexDirection: 'row',
-    flex: 1,
-  },
-  socialBarlabel: {
-    marginLeft: 8,
-    alignSelf: 'flex-start',
-    justifyContent: 'center',
-    color: "#ffffff",
-  },
-  socialBarButton:{
-    flexDirection: 'row',
-    justifyContent: 'center',
+  iconContent:{
+    width: 60,
+    height: 60,
+    backgroundColor: '#eaeaee',
+    marginLeft: 'auto',
     alignItems: 'center',
+    paddingTop: 10,
+  },
+  icon:{
+    width: 40,
+    height: 40,
   }
-});  
+});
  

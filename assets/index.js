@@ -15,6 +15,9 @@ import congratsJPG from './images/congrats.jpg'
 import dommagJPG from './images/dommage.jpeg'
 import frogPNG from './images/frog24.png'
 import plusPNG from './images/baseline_add_box_black_18dp.png'
+import veggieBagJPG from './images/veggie_bag.jpg'
+import coffeeJPG from './images/coffee_filter.jpg'
+import plasticCupJPG from './images/coffee_filter.jpg'
 
 
 
@@ -34,6 +37,10 @@ export const dechet = dechetsJPG
 export const douche = doucheJPG 
 export const paille = pailleJPG 
 export const frog = frogPNG
+export const veggieBag = veggieBagJPG
+export const coffee = coffeeJPG
+export const plasticCup = plasticCupJPG
+
 
 export const allImages = {
   
@@ -53,6 +60,9 @@ export const allImages = {
  douche : doucheJPG ,
  paille : pailleJPG, 
  frog : frogPNG,
- plus : plusPNG
+ plus : plusPNG,
+ veggieBag : veggieBagJPG,
+ coffee : coffeeJPG,
+ plasticCup : plasticCupJPG,
 
 }

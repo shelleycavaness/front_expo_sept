@@ -49,12 +49,12 @@
     {
       "userId": 1,
       "id": 1,
-      "title": "Arrêter d’utiliser assiettes, gobelets, couverts et serviettes jetables",
-      "description": "Show me the money!” (Jerry Maguire, 1996)",
+      "title": "Arrêter d’utiliser assiettes, gobelets et couverts jetables",
+      "description": "Show me the money!” (Jerry Maguire, 1996) Arrêter d’utiliser assiettes, gobelets, couverts et serviettes jetables",
       "completed": false,
       "points" : 100, 
       "thumbnailUrl": "http://placekitten.com/200/300",
-      "photo" : "abeille",
+      "photo" : "plasticCup",
       "image": "../assets/images/abeille.jpeg"
     
     },
@@ -90,7 +90,7 @@
       "points" : 80, 
       "description": "You've got to ask yourself one question: 'Do I feel lucky?' Well, do ya punk?” (Dirty Harry, 1971).",
       "thumbnailUrl": "https://via.placeholder.com/150/56a8c2",
-      "photo" : "velo",
+      "photo" : "veggieBag",
       "image": "../assets/images/abeille.jpeg"
 
     },
@@ -121,14 +121,13 @@
     {
       "userId": 1,
       "id": 7,
-      "title": "Je refuse les publicités papiers dans ma boîte aux lettres en plaçant un message \"Stop Pub\"",
-      "description": "You’re gonna need a bigger boat” (Jaws, 1975)",
+      "title": "Je refuse les publicités papiers dans ma boîte aux lettres",
+      "description": "Je refuse les publicités papiers dans ma boîte aux lettres en plaçant un message \"Stop Pub\"",
       "completed": false,
       "points" : 130, 
       "thumbnailUrl": "https://via.placeholder.com/150/51aa97",
       "photo" : "stopPub",
       "image": "../assets/images/dechets.jpeg"
-
     },
     {
       "userId": 1,
@@ -138,7 +137,7 @@
       "completed": true,
       "points" : 125, 
       "thumbnailUrl": "https://via.placeholder.com/150/54176f",
-      "photo" : "veggie",
+      "photo" : "coffee",
       "image": "../assets/images/vegetarien.jpeg"
     },
     {
@@ -160,7 +159,7 @@
       "completed": false,
       "points" : 10, 
       "thumbnailUrl": "https://via.placeholder.com/150/54176f",
-      "photo" : "tiger",
+      "photo" : "veggie",
       "image": "../assets/images/abeille.jpeg"
     },
     {

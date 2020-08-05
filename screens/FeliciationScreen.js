@@ -11,26 +11,49 @@ import {
 } from 'react-native';
 import {  congrats, tiger } from "../assets/index";
 
-export default function FeliciationScreen({ navigation, route }) {
-  // const { propsItem } = route.params;
-  // console.log('coucou :>> ', propsItem);
+export default function FelicitationScreen({ navigation, route }) {
+ const { propsItem } = route.params;
+ const defiTitle = propsItem.title;
+ const defiDescript = propsItem.description;
+ const defipoint = propsItem.points;
+ const defiCO2 = propsItem.co2;
+//  const defiImg = allImages[data.actions[id].photo]
+
+
+  console.log('coucou :>> ', propsItem);
+  console.log('$$$$$$$$$$$$$$$$$$defiTitle', defiTitle)
     return (
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.container}>
-      <Image 
+        <View style={styles.header}>         
+         <Text style={styles.contentSectionText}>{defiTitle}</Text>       
+        </View>   
+        <Image 
        style={styles.photo} 
        source={{uri : tiger}}
       //  source={require('../assets/images/tigre_heureux.jpg')}
        />
           <Text style={styles.companyName}>Felicitation !!!</Text>
-          <Text style={styles.slogan}> Rendez-vous demain!</Text>
+        
           <View style={styles.descriptionContent}>
+         
             <Text style={styles.description}>
-              Lorem ipsum dolor sit amet, altera conceptam ei cum. Hinc temporibus repudiandae eu mel, cum impetus legendos ei. 
-              Fugit everti dissentias duo cu, nihil fabellas id pri, nonumy verear ea pri. Sit et nisl eros. Ad sapientem forensibus est, 
-              ne vis sonet iuvaret, his sint fabulas dolores ad. Repudiare gubergren voluptatum ius ne, nec nostro possim nostrud ad, 
+              you saved : {defiCO2} tones of carbon !!
             </Text>
+            <Text style={styles.description}>
+              you earned : {defipoint} game points.  
+            </Text>
+              
           </View>
+          <View style={styles.separator}/>
+       <View style={styles.footer}>
+         <View style={styles.contentContainer}>   
+            <View style={styles.contentBox}>         
+              <Text style={styles.contentSectionText}>{defiDescript}</Text>       
+            </View>     
+            <Text style={styles.slogan}> Rendez-vous demain!</Text> 
+          </View>
+        </View> 
           <TouchableHighlight style={[styles.buttonContainer, styles.sendButton]} onPress={() => navigation.goBack()}>
             <Text style={styles.buttonText}>Go  back</Text>
           </TouchableHighlight>
@@ -49,7 +72,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#a4dbca',
   },
-  photo:{
+  header: {
+    color: "#51624F",
+    fontSize:29,
+    fontWeight: '600',
+  },
+  photo: {
     width:200,
     height:200,
     justifyContent: 'center',
@@ -93,5 +121,45 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#EE82EE',
-  }
+  },
+  separator: {
+    marginTop: 10,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderStyle: 'solid',
+  },
+  footer:{
+    flexDirection: 'row',
+    paddingTop: 12.5,
+    paddingBottom: 25,
+    paddingHorizontal: 16,
+    borderBottomLeftRadius: 1,
+    borderBottomRightRadius: 1,
+
+  },
+  contentContainer: {
+    flex: 1,
+    paddingTop: 12.5,
+    paddingBottom: 25,
+    borderColor: '#FFF',
+    borderWidth: 3,
+    borderStyle: 'solid',
+    borderRadius: 5,
+  }, 
+  contentBox: {
+    justifyContent: 'space-evenly', 
+    paddingTop: 15,
+    paddingBottom: 5,
+    // alignSelf: 'center',
+    flex: 1,
+    alignItems: 'right',
+    marginLeft: 14,
+    marginRight: 10,
+  },
+  contentSectionText: {
+    color: "#FFF",
+    fontSize:18,
+    justifyContent: 'center',
+
+  },
 }); 

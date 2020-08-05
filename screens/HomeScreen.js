@@ -25,9 +25,10 @@ export default function HomeScreen({ navigation }) {
 
   const pressHandler = (id ) => {
     navigation.navigate('Felicitation',
-   
     {propsItem: id},
-    console.log('item clicked homeScreen:>> ', item),
+    // console.log('data.players.id :>> ', data.players.id);
+    console.log('item clicked homeScreen:>> ', id),
+    // console.log('item clicked data:>> ', propsItem),
     )};
   // const [actionList, setActions] = useState(
   //   data1.actions

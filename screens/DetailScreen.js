@@ -7,7 +7,7 @@ import data from '../db.json'
 import { allImages, frog, abeille, vinegar, velo, reparer,veggie, paille, stopPub, douche, ampule, fillet } from "../assets/";
 
 export default function({ route }) {
-  const [detail, setDetails] = useState(
+  const [detail, setDetail] = useState(
     data.actions
    );
 
@@ -15,7 +15,7 @@ export default function({ route }) {
 
   const detailTtile =detail[itemId].title
   const detailDone =detail[itemId].completed
-  const detailPoints =detail[itemId].points
+  const detailPoint =detail[itemId].points
   const detailDescription =detail[itemId].description
   const detailPhoto = detail[itemId].photo
   console.log('itemId : detail ---------------', itemId)
@@ -45,7 +45,7 @@ console.log('detailDone :>> ', detailDone);
   
             </View>  
             <View style={styles.contentBox}>         
-              <Text style={styles.contentSectionText}>{ detailPoints } points</Text>       
+              <Text style={styles.contentSectionText}>{ detailPoint } points</Text>       
             </View>    
           </View> 
           

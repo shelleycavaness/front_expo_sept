@@ -5,10 +5,11 @@ import data from '../db.json'
 
 
 export default function ProfileScreen(){
-
-  let id = Math.floor(Math.random() * 4) + 1;
-  id = id - 1
-  // console.log('id player :', id)
+//the random is called at the beginning of the lifecyle, not with the navigation
+  // let id = Math.floor(Math.random() * 4) + 1;
+  // id = id - 1
+  let id = 2
+  console.log('id player :', id)
   return(
    <View  style={styles.container} >
      <ScrollView  style={styles.container} contentContainerStyle={styles.contentContainer} >
@@ -18,12 +19,12 @@ export default function ProfileScreen(){
           <Text style={styles.name}>
          {data.players[id].name}
           </Text>
-          <Text style={styles.name}>
-         {data.players[id].username}
+          <Text style={styles.name}> user name:
+         {" "+data.players[id].username}
           </Text>
         </View>
     </View> 
-     <View style={styles.profileDetail}>
+    <View style={styles.profileDetail}>
       <View style={styles.detailContent}>
         <Text style={styles.title}>Score</Text>
         <Text style={styles.count}>{data.players[id].score}</Text>
@@ -37,7 +38,17 @@ export default function ProfileScreen(){
         <Text style={styles.count}>{data.players[id].email}</Text>
       </View>
     </View>
+    <View >
+      <View style={styles.detailContent}>
+        <Text style={styles.title}>Ecological Footprint Indicator</Text>
+        <Text style={styles.count}>{data.players[id].score}</Text>
+      </View>
+      <View style={styles.detailContent}>
+        <Text style={styles.title}>Bilan carbone, tonnes de CO2 Compensés</Text>
+        <Text style={styles.count}>{data.players[id].score} </Text>
+      </View>
 
+    </View>
 
 
      </ScrollView>  
@@ -55,38 +66,17 @@ const styles = StyleSheet.create({
      contentContainer: {
             paddingTop: 30,
             alignItems: 'center',
-            borderColor: 'black'
+            
         },
-    
-    buttonContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-around',
-    },
-    button: {
-        backgroundColor: "#83d499",
-        padding: 20,
-        borderRadius: 5,
-            // justifyContent: "space-between",
-    },
-    buttonText: {
-        fontSize: 20,
-        color: '#fff',
-    }, 
-        // button: nth-child(1): {},
-       
     profileText: {
         fontSize: 17,
         color: 'rgba(96,100,109, 1)',
         lineHeight: 24,
         textAlign: 'center',
-    },
-    
-    
+    },    
     headerContent:{
       padding:30,
-      alignItems: 'center',
+      alignItems: 'center',    
     },
     avatar: {
       width: 130,
@@ -102,12 +92,14 @@ const styles = StyleSheet.create({
       fontWeight:'600',
     },
     profileDetail:{
-      alignSelf: 'center',
-      marginTop:200,
+      // alignSelf: 'center',
+      // marginTop:100,
       alignItems: 'center',
-      flexDirection: 'row',
-      position:'absolute',
-      backgroundColor: "#ffffff"
+      // flexDirection: 'row',
+      // position:'absolute',
+      paddingLeft: 40,
+      paddingRight:40,
+
     },
     detailContent:{
       margin:10,

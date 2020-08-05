@@ -13,8 +13,22 @@ export default function HomeScreen({ navigation }) {
   let id = Math.floor(Math.random() * 6) + 1 ;
   // let id = 4
   const item = data.actions[id];
+  const defiTitle = data.actions[id].title;
+  const defiDescript = data.actions[id].description;
+  const defipoint = data.actions[id].points;
+  const defiCO2 = data.actions[id].co2;
+  const defiImg = allImages[data.actions[id].photo]
 
 
+
+
+
+  const pressHandler = (id ) => {
+    navigation.navigate('Felicitation',
+   
+    {propsItem: id},
+    console.log('item clicked homeScreen:>> ', item),
+    )};
   // const [actionList, setActions] = useState(
   //   data1.actions
   //  );
@@ -23,30 +37,31 @@ export default function HomeScreen({ navigation }) {
         <View style={styles.container}>
           <Text style={styles.titleText}>Le defi du jour : </Text>
           <View style={styles.container2}>
-            <Text style={styles.defiText}>{data.actions[id].title}</Text>
+            <Text style={styles.defiText}>{ defiTitle }</Text>
           </View>
           <Text style={styles.description}>
-           {data.actions[id].description} 
+           { defiDescript } 
           </Text>
           <Text style={styles.description}>
           points gagnes : 
+          
           </Text>
           <Text style={styles.points}>
-           {data.actions[id].points}
+           { defipoint }
           </Text>
+          <View style={styles.container3}>
+            <Text style={styles.description}>Tonnes de CO2 Compensés maintenant : {" "+ defiCO2}</Text>
+          </View>
           <Image style={styles.Image}
             // source={{uri : data.actions[id].thumbnailUrl}}
             // source={{uri : data.actions[id].photo} }
-            source={ allImages[data.actions[id].photo] }
+            source={ defiImg }
            
           />
-            {   console.log('*******data.actions[id].photo*************>>>>   ', data.actions[id].photo)}
-            {   console.log('*******data.actions[id].image>>>>   ', data.actions[id].image)}
-          {console.log('item from db.json>> ', item)}
-          {/* <ActionComponent /> */}
+      
           <View style={styles.buttonContainer}>
              <TouchableOpacity 
-                onPress={() => navigation.navigate('Felicitation')} 
+                onPress={() => pressHandler(item)} 
                 style={styles.button}>
                 <Text style={styles.buttonText}>Je l'ai fait</Text>
              </TouchableOpacity>
@@ -84,25 +99,42 @@ const styles = StyleSheet.create({
     color: '#8a888c',
   },
   container2: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
+    // backgroundColor: '#FFF',
     borderRadius: 3,
     paddingHorizontal: 4,
     marginTop:10,
     marginBottom:10,
+    marginLeft:10,
+    marginRight:10,
+    // textAlign:'center',
+    // borderColor: 'red',
+    // borderWidth: 5,
+    // borderStyle: 'dotted',
   },
   description:{
     fontSize:18,
-    textAlign:'center',
     marginTop:10,
     color: '#8a888c',
-    
+    textAlign:'center',
+  
   },
   defiText: {
     fontSize:18,
     fontWeight: '600',
     color: '#228B22',
     marginTop:10,
+    padding:30,
+    textAlign:'center',
+    borderColor: 'black',
+    borderWidth: 5,
+    borderStyle: 'solid',
   },
+  container3: {
+    backgroundColor: '#FFF',
+    borderRadius: 3,
+    paddingHorizontal: 4,
+    
+  },  
   Image: {
     width:200,
     height:200,

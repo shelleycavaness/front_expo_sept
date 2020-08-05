@@ -19,7 +19,7 @@ export default function UsersView({ navigation }) {
     data1.actions
    );
   const pressHandler = ( id ) => {
-//itemId-1 t6 begin with 0 rather than 1 and dispaly the right entry in the database
+//itemId-1 to begin with 0 rather than 1 and dispaly the right entry in the database
     navigation.navigate('Detail', {
       itemId: id-1
     })

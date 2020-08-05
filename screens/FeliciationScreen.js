@@ -11,8 +11,9 @@ import {
 } from 'react-native';
 import {  congrats, tiger } from "../assets/index";
 
-export default function DommageScreen({ navigation }) {
-
+export default function FeliciationScreen({ navigation, route }) {
+  // const { propsItem } = route.params;
+  // console.log('coucou :>> ', propsItem);
     return (
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.container}>

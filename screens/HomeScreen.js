@@ -19,16 +19,13 @@ export default function HomeScreen({ navigation }) {
   const defiCO2 = data.actions[id].co2;
   const defiImg = allImages[data.actions[id].photo]
 
-
-
-
-
   const pressHandler = (id ) => {
     navigation.navigate('Felicitation',
-    {propsItem: id},
-    // console.log('data.players.id :>> ', data.players.id);
-    console.log('item clicked homeScreen:>> ', id),
-    // console.log('item clicked data:>> ', propsItem),
+    {propsItem: id,
+      // newScore : 300,
+      newScore: data.players[2].score + defipoint
+    },
+    console.log('item clicked previous score:>> ', data.players[2].score),  
     )};
   // const [actionList, setActions] = useState(
   //   data1.actions

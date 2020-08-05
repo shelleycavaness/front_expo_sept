@@ -13,15 +13,14 @@ import {  congrats, tiger } from "../assets/index";
 
 export default function FelicitationScreen({ navigation, route }) {
  const { propsItem } = route.params;
+ const { newScore } = route.params;
+ console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    newScore :>> ', newScore);
  const defiTitle = propsItem.title;
  const defiDescript = propsItem.description;
  const defipoint = propsItem.points;
  const defiCO2 = propsItem.co2;
+//  (typeof defiCO2 !== 'undefined') ? defiCO2 : 2018;
 //  const defiImg = allImages[data.actions[id].photo]
-
-
-  console.log('coucou :>> ', propsItem);
-  console.log('$$$$$$$$$$$$$$$$$$defiTitle', defiTitle)
     return (
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.container}>
@@ -33,7 +32,7 @@ export default function FelicitationScreen({ navigation, route }) {
        source={{uri : tiger}}
       //  source={require('../assets/images/tigre_heureux.jpg')}
        />
-          <Text style={styles.companyName}>Felicitation !!!</Text>
+          <Text style={styles.sloganName}>Felicitation !!!</Text>
         
           <View style={styles.descriptionContent}>
          
@@ -51,7 +50,7 @@ export default function FelicitationScreen({ navigation, route }) {
             <View style={styles.contentBox}>         
               <Text style={styles.contentSectionText}>{defiDescript}</Text>       
             </View>     
-            <Text style={styles.slogan}> Rendez-vous demain!</Text> 
+            <Text style={styles.slogan}> new score : {newScore}. Rendez-vous demain!</Text> 
           </View>
         </View> 
           <TouchableHighlight style={[styles.buttonContainer, styles.sendButton]} onPress={() => navigation.goBack()}>
@@ -72,11 +71,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#a4dbca',
   },
-  header: {
-    color: "#51624F",
-    fontSize:29,
-    fontWeight: '600',
-  },
+ 
   photo: {
     width:200,
     height:200,
@@ -87,7 +82,7 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: "white",
   },
-  companyName: {
+  sloganName: {
     fontSize:32,
     fontWeight: '600',
     color: '#FFFFFF',
@@ -152,9 +147,6 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     // alignSelf: 'center',
     flex: 1,
-    alignItems: 'right',
-    marginLeft: 14,
-    marginRight: 10,
   },
   contentSectionText: {
     color: "#FFF",

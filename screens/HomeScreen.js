@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState, useLayoutEffect, useEffect} from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
@@ -6,7 +6,6 @@ import { MonoText } from '../components/StyledText';
 import data from '../db.json'
 // import  ActionComponent  from '../components/ActionComponent'
 import { allImages } from "../assets/";
-
 
 
 export default function HomeScreen({ navigation }) {
@@ -19,6 +18,16 @@ export default function HomeScreen({ navigation }) {
   const defiCO2 = data.actions[id].co2;
   const defiImg = allImages[data.actions[id].photo]
 
+  const [actionList, setActions] = useState([]);
+
+  useLayoutEffect(()=>{
+    fetch( "https://docker-nestjs-my-eco-defi.apps.ocp.lab-nxtit.com/api/v1/actions")
+     .then((response) => response.json())
+     .then((responseJson) => setActions(Object.values(responseJson)))
+     .catch((error) => console.error('error in catch ----------',error))
+  }, [])
+  console.log('actionList', actionList)
+
   const pressHandler = (id ) => {
     navigation.navigate('Felicitation',
     {propsItem: id,
@@ -27,9 +36,7 @@ export default function HomeScreen({ navigation }) {
     },
     console.log('item clicked previous score:>> ', data.players[2].score),  
     )};
-  // const [actionList, setActions] = useState(
-  //   data1.actions
-  //  );
+
   return (
       <ScrollView style={styles.scrollContainer} >
         <View style={styles.container}>
@@ -41,8 +48,7 @@ export default function HomeScreen({ navigation }) {
            { defiDescript } 
           </Text>
           <Text style={styles.description}>
-          points gagnes : 
-          
+          points gagnes :
           </Text>
           <Text style={styles.points}>
            { defipoint }
@@ -51,10 +57,8 @@ export default function HomeScreen({ navigation }) {
             <Text style={styles.description}>Tonnes de CO2 Compensés maintenant : {" "+ defiCO2}</Text>
           </View>
           <Image style={styles.Image}
-            // source={{uri : data.actions[id].thumbnailUrl}}
             // source={{uri : data.actions[id].photo} }
             source={ defiImg }
-           
           />
       
           <View style={styles.buttonContainer}>

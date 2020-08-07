@@ -9,24 +9,29 @@ import { allImages } from "../assets/";
 
 
 export default function HomeScreen({ navigation }) {
-  let id = Math.floor(Math.random() * 6) + 1 ;
-  // let id = 4
-  const item = data.actions[id];
-  const defiTitle = data.actions[id].title;
-  const defiDescript = data.actions[id].description;
-  const defipoint = data.actions[id].points;
-  const defiCO2 = data.actions[id].co2;
-  const defiImg = allImages[data.actions[id].photo]
-
+  let id = Math.floor(Math.random() * 3) + 1 ;
+  // let id = 1
   const [actionList, setActions] = useState([]);
-
-  useLayoutEffect(()=>{
+  useEffect(()=>{
     fetch( "https://docker-nestjs-my-eco-defi.apps.ocp.lab-nxtit.com/api/v1/actions")
+      //  fetch('http://localhost:9999/api/v1/actions')
      .then((response) => response.json())
      .then((responseJson) => setActions(Object.values(responseJson)))
      .catch((error) => console.error('error in catch ----------',error))
   }, [])
-  console.log('actionList', actionList)
+
+  console.log('actionList--------------', actionList[1])
+  const item = data.actions[id];
+  // const defiTitle = actionList[id].actionName;
+  const defiTitle = data.actions[id].title;
+  // const defiDescript = actionList[id].description;
+  // const defiDescript = data.actions[id].description;
+  // const defipoint = actionList[id].actionPoint;
+  const defipoint = data.actions[id].points;
+  // const defiCO2 = actionList[id].co2;
+  const defiCO2 = data.actions[id].co2;
+  // const defiImg = allImages[actionList[id].photo]
+  const defiImg = allImages[data.actions[id].photo]
 
   const pressHandler = (id ) => {
     navigation.navigate('Felicitation',
@@ -38,30 +43,41 @@ export default function HomeScreen({ navigation }) {
     )};
 
   return (
-      <ScrollView style={styles.scrollContainer} >
-        <View style={styles.container}>
+    <ScrollView style={styles.scrollContainer} >
+      <View style={styles.container}>
           <Text style={styles.titleText}>Le defi du jour : </Text>
           <View style={styles.container2}>
-            <Text style={styles.defiText}>{ defiTitle }</Text>
+            {
+              actionList && actionList.length > 0 ?
+              <Text style={styles.defiText}>{ actionList[id].actionName }</Text> : 
+              <Text style={styles.defiText}>{ 'defiTitle' }</Text>
+            }
           </View>
-          <Text style={styles.description}>
-           { defiDescript } 
-          </Text>
-          <Text style={styles.description}>
-          points gagnes :
-          </Text>
-          <Text style={styles.points}>
-           { defipoint }
-          </Text>
-          <View style={styles.container3}>
-            <Text style={styles.description}>Tonnes de CO2 Compensés maintenant : {" "+ defiCO2}</Text>
-          </View>
-          <Image style={styles.Image}
-            // source={{uri : data.actions[id].photo} }
+           {
+            actionList && actionList.length > 0 ?
+            <Text style={styles.description}>{ actionList[id].description } </Text> :
+            <Text style={styles.description}>{ 'defiDescript' } </Text>
+           }
+          
+          <Text style={styles.description}>points gagnes :</Text>
+           {
+            actionList && actionList.length > 0 ?
+            <Text style={styles.points}> { defipoint }</Text> :
+            <Text style={styles.points}>{ 'defipoint' } </Text>
+           }  
+        <View style={styles.container3}>
+            {
+              actionList && actionList.length > 0 ?
+              <Text style={styles.description}>Tonnes de CO2 Compensés maintenant : {" "+ defiCO2}</Text> :
+              <Text style={styles.points}>{ 'defipoint' } </Text>
+            }
+        </View>
+        <Image style={styles.Image}
+            // source={allImages[actionList[id].actionImg]}
             source={ defiImg }
           />
       
-          <View style={styles.buttonContainer}>
+        <View style={styles.buttonContainer}>
              <TouchableOpacity 
                 onPress={() => pressHandler(item)} 
                 style={styles.button}>
@@ -73,9 +89,9 @@ export default function HomeScreen({ navigation }) {
                style={styles.button2}>
               <Text style={styles.buttonText}>Je refuse</Text>
              </TouchableOpacity>      
-              </View> 
-        </View>
-      </ScrollView>
+        </View> 
+    </View>
+  </ScrollView>
 
   );
 }

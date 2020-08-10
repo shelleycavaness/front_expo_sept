@@ -9,39 +9,50 @@ import { allImages } from "../assets/";
 
 
 export default function HomeScreen({ navigation }) {
-  let id = Math.floor(Math.random() * 3) + 1 ;
+  let id = Math.floor(Math.random() * 4) + 1 ;
   // let id = 1
-  const [actionList, setActions] = useState([]);
+  let playerId = 1
+  const [actionList, setActionsList] = useState([]);
+  const [action, setAction] = useState({})
+  const [playerInfo, setPlayerInfo] = useState([]);
+  // const item = data.actions[id];
+
   useEffect(()=>{
     fetch( "https://docker-nestjs-my-eco-defi.apps.ocp.lab-nxtit.com/api/v1/actions")
       //  fetch('http://localhost:9999/api/v1/actions')
      .then((response) => response.json())
-     .then((responseJson) => setActions(Object.values(responseJson)))
+     .then((responseJson) => setActionsList(Object.values(responseJson)))
      .catch((error) => console.error('error in catch ----------',error))
+     
+  }, [])
+  useEffect(()=>{
+    fetch( "https://docker-nestjs-my-eco-defi.apps.ocp.lab-nxtit.com/api/v1/players/"+playerId)
+      //  fetch('http://localhost:9999/api/v1/actions')
+     .then((response) => response.json())
+     .then((responseJson) => setPlayerInfo(Object.values(responseJson)))
+     .catch((error) => console.error('error in catch ----------',error))
+     
   }, [])
 
-  console.log('actionList--------------', actionList[1])
-  const item = data.actions[id];
-  // const defiTitle = actionList[id].actionName;
-  const defiTitle = data.actions[id].title;
-  // const defiDescript = actionList[id].description;
-  // const defiDescript = data.actions[id].description;
-  // const defipoint = actionList[id].actionPoint;
-  const defipoint = data.actions[id].points;
-  // const defiCO2 = actionList[id].co2;
-  const defiCO2 = data.actions[id].co2;
-  // const defiImg = allImages[actionList[id].photo]
-  const defiImg = allImages[data.actions[id].photo]
+ playerInfo && playerInfo.length? console.log("player>>>>>>>>>>>>>", playerInfo) : console.log('no id')
+//   actionList && actionList.length? console.log("item>>>>>>>>>>>>>", item) : console.log('no object here')
+  // console.log("9999999999999999999999999",action)
 
-  const pressHandler = (id ) => {
+  const pressHandler =  (action) => {
+    console.log('I have been clicked :>> ', action);
+    console.log('actionList.length :>> ', actionList);
+     setActionObj(),
     navigation.navigate('Felicitation',
-    {propsItem: id,
-      // newScore : 300,
-      newScore: data.players[2].score + defipoint
-    },
-    console.log('item clicked previous score:>> ', data.players[2].score),  
+    {propsItem: actionList[id],
+      newScore : 300,
+      // newScore: playerInfo[id].score + actionList[id].actionPoint
+    }, 
     )};
-
+   const setActionObj = () => {
+     if(actionList && actionList.length){ 
+       setAction(actionList[id]);
+      console.log('action :>> ', action);}
+    }
   return (
     <ScrollView style={styles.scrollContainer} >
       <View style={styles.container}>
@@ -55,31 +66,34 @@ export default function HomeScreen({ navigation }) {
           </View>
            {
             actionList && actionList.length > 0 ?
-            <Text style={styles.description}>{ actionList[id].description } </Text> :
+            <Text style={styles.description}>{ actionList[id].actionDescription } </Text> :
             <Text style={styles.description}>{ 'defiDescript' } </Text>
            }
           
           <Text style={styles.description}>points gagnes :</Text>
            {
             actionList && actionList.length > 0 ?
-            <Text style={styles.points}> { defipoint }</Text> :
+            <Text style={styles.points}> { actionList[id].actionPoint }</Text> :
             <Text style={styles.points}>{ 'defipoint' } </Text>
            }  
         <View style={styles.container3}>
             {
               actionList && actionList.length > 0 ?
-              <Text style={styles.description}>Tonnes de CO2 Compensés maintenant : {" "+ defiCO2}</Text> :
+              <Text style={styles.description}>Tonnes de CO2 Compensés maintenant : {" "+ actionList[id].actionCo2}</Text> :
               <Text style={styles.points}>{ 'defipoint' } </Text>
             }
         </View>
-        <Image style={styles.Image}
-            // source={allImages[actionList[id].actionImg]}
-            source={ defiImg }
-          />
-      
+          {
+            actionList && actionList.length > 0 ?
+            <Image style={styles.Image}source={allImages[actionList[id].actionImg]}></Image> :
+            <Text>no image</Text>
+          }
         <View style={styles.buttonContainer}>
              <TouchableOpacity 
-                onPress={() => pressHandler(item)} 
+                // onPress={() => pressHandler(item)} 
+                // onPress={() => pressHandler(id)} 
+
+                onPress={() => pressHandler(action)} 
                 style={styles.button}>
                 <Text style={styles.buttonText}>Je l'ai fait</Text>
              </TouchableOpacity>

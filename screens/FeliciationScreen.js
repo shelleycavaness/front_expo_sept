@@ -15,7 +15,8 @@ export default function FelicitationScreen({ navigation, route }) {
  const { propsItem } = route.params;
  const { newScore } = route.params;
  console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    newScore :>> ', newScore);
- const defiTitle = propsItem.title;
+ console.log('propsItem', propsItem)
+ const defiTitle = propsItem.actionName;
  const defiDescript = propsItem.description;
  const defipoint = propsItem.points;
  const defiCO2 = propsItem.co2;

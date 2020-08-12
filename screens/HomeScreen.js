@@ -1,65 +1,96 @@
-import * as React from 'react';
+import React, {useState, useLayoutEffect, useEffect} from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
 import { MonoText } from '../components/StyledText';
-import data from '../db.json'
-// import  ActionComponent  from '../components/ActionComponent'
 import { allImages } from "../assets/";
 
 
-
 export default function HomeScreen({ navigation }) {
-  let id = Math.floor(Math.random() * 6) + 1 ;
-  // let id = 4
-  const item = data.actions[id];
-  const defiTitle = data.actions[id].title;
-  const defiDescript = data.actions[id].description;
-  const defipoint = data.actions[id].points;
-  const defiCO2 = data.actions[id].co2;
-  const defiImg = allImages[data.actions[id].photo]
+  let id = Math.floor(Math.random() * 4) + 1 ;
+  // let id = 1
+  let playerId = 1
+  const [actionList, setActionsList] = useState([]);
+  const [action, setAction] = useState({})
+  const [playerInfo, setPlayerInfo] = useState([]);
 
-  const pressHandler = (id ) => {
+  useEffect(()=>{
+    fetch( "https://docker-nestjs-my-eco-defi.apps.ocp.lab-nxtit.com/api/v1/actions")
+      //  fetch('http://localhost:9999/api/v1/actions')
+     .then((response) => response.json())
+     .then((responseJson) => setActionsList(Object.values(responseJson)))
+     .catch((error) => console.error('error in catch ----------',error))
+     
+  }, [])
+  useEffect(()=>{
+    fetch( "https://docker-nestjs-my-eco-defi.apps.ocp.lab-nxtit.com/api/v1/players/"+playerId)
+      //  fetch('http://localhost:9999/api/v1/actions')
+     .then((response) => response.json())
+     .then((responseJson) => setPlayerInfo(Object.values(responseJson)))
+     .catch((error) => console.error('error in catch ----------',error))
+     
+  }, [])
+
+//  playerInfo && playerInfo.length? console.log("player>>>>>>>>>>>>>", playerInfo) : console.log('no id')
+//   actionList && actionList.length? console.log("item>>>>>>>>>>>>>", item) : console.log('no object here')
+// console.log("9999999999999999999999999",action)
+
+  const pressHandler =  (action) => {
+    console.log('I have been clicked :>> ', action);
+    console.log('actionList.length :>> ', actionList);
+     setActionObj(),
     navigation.navigate('Felicitation',
-    {propsItem: id,
-      // newScore : 300,
-      newScore: data.players[2].score + defipoint
-    },
-    console.log('item clicked previous score:>> ', data.players[2].score),  
+    {propsItem: actionList[id],
+      newScore : 300,
+      // newScore: playerInfo[id].score + actionList[id].actionPoint
+    }, 
     )};
-  // const [actionList, setActions] = useState(
-  //   data1.actions
-  //  );
+   const setActionObj = () => {
+     if(actionList && actionList.length){ 
+       setAction(actionList[id]);
+      console.log('action :>> ', action);}
+    }
   return (
-      <ScrollView style={styles.scrollContainer} >
-        <View style={styles.container}>
+    <ScrollView style={styles.scrollContainer} >
+      <View style={styles.container}>
           <Text style={styles.titleText}>Le defi du jour : </Text>
           <View style={styles.container2}>
-            <Text style={styles.defiText}>{ defiTitle }</Text>
+            {
+              actionList && actionList.length > 0 ?
+              <Text style={styles.defiText}>{ actionList[id].actionName }</Text> : 
+              <Text style={styles.defiText}>{ 'defiTitle' }</Text>
+            }
           </View>
-          <Text style={styles.description}>
-           { defiDescript } 
-          </Text>
-          <Text style={styles.description}>
-          points gagnes : 
+           {
+            actionList && actionList.length > 0 ?
+            <Text style={styles.description}>{ actionList[id].actionDescription } </Text> :
+            <Text style={styles.description}>{ 'defiDescript' } </Text>
+           }
           
-          </Text>
-          <Text style={styles.points}>
-           { defipoint }
-          </Text>
-          <View style={styles.container3}>
-            <Text style={styles.description}>Tonnes de CO2 Compensés maintenant : {" "+ defiCO2}</Text>
-          </View>
-          <Image style={styles.Image}
-            // source={{uri : data.actions[id].thumbnailUrl}}
-            // source={{uri : data.actions[id].photo} }
-            source={ defiImg }
-           
-          />
-      
-          <View style={styles.buttonContainer}>
+          <Text style={styles.description}>points gagnes :</Text>
+           {
+            actionList && actionList.length > 0 ?
+            <Text style={styles.points}> { actionList[id].actionPoint }</Text> :
+            <Text style={styles.points}>{ 'defipoint' } </Text>
+           }  
+        <View style={styles.container3}>
+            {
+              actionList && actionList.length > 0 ?
+              <Text style={styles.description}>Tonnes de CO2 Compensés maintenant : {" "+ actionList[id].actionCo2}</Text> :
+              <Text style={styles.points}>{ 'defipoint' } </Text>
+            }
+        </View>
+          {
+            actionList && actionList.length > 0 ?
+            <Image style={styles.Image}source={allImages[actionList[id].actionImg]}></Image> :
+            <Text>no image</Text>
+          }
+        <View style={styles.buttonContainer}>
              <TouchableOpacity 
-                onPress={() => pressHandler(item)} 
+                // onPress={() => pressHandler(item)} 
+                // onPress={() => pressHandler(id)} 
+
+                onPress={() => pressHandler(action)} 
                 style={styles.button}>
                 <Text style={styles.buttonText}>Je l'ai fait</Text>
              </TouchableOpacity>
@@ -69,9 +100,9 @@ export default function HomeScreen({ navigation }) {
                style={styles.button2}>
               <Text style={styles.buttonText}>Je refuse</Text>
              </TouchableOpacity>      
-              </View> 
-        </View>
-      </ScrollView>
+        </View> 
+    </View>
+  </ScrollView>
 
   );
 }

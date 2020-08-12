@@ -3,24 +3,28 @@ import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button } fro
 import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
 import { MonoText } from '../components/StyledText';
-import data from '../db.json'
+// import data from '../db.json'
 import { allImages, frog, abeille, vinegar, velo, reparer,veggie, paille, stopPub, douche, ampule, fillet } from "../assets/";
 
 export default function({ route }) {
-  const [detail, setDetail] = useState(
-    data.actions
-   );
+  // const [detail, setDetail] = useState(
+  //   data.actions
+  //  );
 
   const { itemId } = route.params;
+  const detailTtile = itemId.actionName
+  // const detailTtile =detail[itemId].title
+  // const detailDone =detail[itemId].completed
+  // const detailPoint =detail[itemId].points
+  const detailDescription = itemId.actionDescription
+   const detailPoint =itemId.actionPoint
+   const actionCo2 = itemId.actionCo2
 
-  const detailTtile =detail[itemId].title
-  const detailDone =detail[itemId].completed
-  const detailPoint =detail[itemId].points
-  const detailDescription =detail[itemId].description
-  const detailPhoto = detail[itemId].photo
+  // const detailPhoto = detail[itemId].photo
+   const detailPhoto = itemId.actionImg
   console.log('itemId : detail ---------------', itemId)
 
-console.log('detailDone :>> ', detailDone);
+// console.log('detailDone :>> ', detailDone);
 // let result = actions.findIndex(x => x.id === 5);
 // console.log('==========================id', result)
   return(
@@ -38,7 +42,7 @@ console.log('detailDone :>> ', detailDone);
        <View style={styles.footer}>
          <View style={styles.contentContainer}>   
             <View style={styles.contentBox}>         
-              <Text style={styles.contentSectionText}>{ detailTtile }</Text>       
+              <Text style={styles.contentSectionText}>{ `you saved ${actionCo2} tones co2` }</Text>       
             </View>    
             <View style={styles.contentBox}>         
               <Text style={styles.contentSectionText}>{ detailDescription }</Text>    

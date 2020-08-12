@@ -15,42 +15,42 @@ export default function FelicitationScreen({ navigation, route }) {
  const { propsItem } = route.params;
  const { newScore } = route.params;
  console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    newScore :>> ', newScore);
- const defiTitle = propsItem.title;
- const defiDescript = propsItem.description;
- const defipoint = propsItem.points;
- const defiCO2 = propsItem.co2;
+ console.log('propsItem', propsItem)
+ const defiTitle = propsItem.actionName;
+ const defiDescript = propsItem.actionDescription;
+ const defipoint = propsItem.actionPoint;
+ const defiCO2 = propsItem.actionCo2;
 //  (typeof defiCO2 !== 'undefined') ? defiCO2 : 2018;
 //  const defiImg = allImages[data.actions[id].photo]
     return (
       <ScrollView style={styles.scrollContainer}>
-        <View style={styles.container}>
-        <View style={styles.header}>         
-         <Text style={styles.contentSectionText}>{defiTitle}</Text>       
+       <View style={styles.container}>
+         <View style={styles.header}>  
+          <Text style={styles.slogan}> your new score is: {newScore}. Rendez-vous demain!</Text>        
         </View>   
         <Image 
-       style={styles.photo} 
-       source={{uri : tiger}}
-      //  source={require('../assets/images/tigre_heureux.jpg')}
-       />
-          <Text style={styles.sloganName}>Felicitation !!!</Text>
-        
-          <View style={styles.descriptionContent}>
-         
-            <Text style={styles.description}>
-              you saved : {defiCO2} tones of carbon !!
-            </Text>
-            <Text style={styles.description}>
-              you earned : {defipoint} game points.  
-            </Text>
-              
-          </View>
-          <View style={styles.separator}/>
-       <View style={styles.footer}>
+          style={styles.photo} 
+          source={{uri : tiger}}
+        />
+        <Text style={styles.sloganName}>Felicitation !!!</Text>       
+        <View style={styles.descriptionContent}>
+         <Text style={styles.description}>
+           you saved : {defiCO2} tones of carbon !!
+         </Text>
+         <Text style={styles.description}>
+           you earned : {defipoint} game points.  
+          </Text>   
+        </View>
+ 
+        <View style={styles.footer}>
+     
          <View style={styles.contentContainer}>   
-            <View style={styles.contentBox}>         
+         <Text style={styles.contentSectionText}>{defiTitle}</Text> 
+          <View style={styles.contentBox}>     
+            {/* <View style={styles.separator}/>        */}
               <Text style={styles.contentSectionText}>{defiDescript}</Text>       
             </View>     
-            <Text style={styles.slogan}> new score : {newScore}. Rendez-vous demain!</Text> 
+            
           </View>
         </View> 
           <TouchableHighlight style={[styles.buttonContainer, styles.sendButton]} onPress={() => navigation.goBack()}>
@@ -91,7 +91,8 @@ const styles = StyleSheet.create({
     fontSize:18,
     fontWeight: '600',
     color: '#228B22',
-    marginTop:10,
+    margin:10,
+    textAlign:'center',
   },
   descriptionContent:{
     padding:30
@@ -119,9 +120,10 @@ const styles = StyleSheet.create({
   },
   separator: {
     marginTop: 10,
-    borderColor: 'gray',
+    marginBottom: 10,
+    borderColor: '#FFF',
     borderWidth: 1,
-    borderStyle: 'solid',
+    borderStyle: 'dotted',
   },
   footer:{
     flexDirection: 'row',

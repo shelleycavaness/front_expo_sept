@@ -2,9 +2,7 @@ import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import ActionsScreen from '../screens/ActionsScreen';
 import ProfileScreen from '../screens/ProfileScreen'
-// import Cardlist from '../screens/Card-list'
 import CardlistScreen from '../screens/Card-list'
 import Header from "../components/Header"
 

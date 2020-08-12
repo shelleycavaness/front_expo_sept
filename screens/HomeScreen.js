@@ -3,8 +3,6 @@ import { Image, StyleSheet, Text, TouchableOpacity, View, Button } from 'react-n
 import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
 import { MonoText } from '../components/StyledText';
-import data from '../db.json'
-// import  ActionComponent  from '../components/ActionComponent'
 import { allImages } from "../assets/";
 
 
@@ -15,7 +13,6 @@ export default function HomeScreen({ navigation }) {
   const [actionList, setActionsList] = useState([]);
   const [action, setAction] = useState({})
   const [playerInfo, setPlayerInfo] = useState([]);
-  // const item = data.actions[id];
 
   useEffect(()=>{
     fetch( "https://docker-nestjs-my-eco-defi.apps.ocp.lab-nxtit.com/api/v1/actions")
@@ -34,9 +31,9 @@ export default function HomeScreen({ navigation }) {
      
   }, [])
 
- playerInfo && playerInfo.length? console.log("player>>>>>>>>>>>>>", playerInfo) : console.log('no id')
+//  playerInfo && playerInfo.length? console.log("player>>>>>>>>>>>>>", playerInfo) : console.log('no id')
 //   actionList && actionList.length? console.log("item>>>>>>>>>>>>>", item) : console.log('no object here')
-  // console.log("9999999999999999999999999",action)
+// console.log("9999999999999999999999999",action)
 
   const pressHandler =  (action) => {
     console.log('I have been clicked :>> ', action);

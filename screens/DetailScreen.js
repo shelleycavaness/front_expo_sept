@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     flex: 1, 
     // marginTop:1,
     paddingHorizontal: 17,
-    backgroundColor:"#1E6E6",
+    backgroundColor:"#FFF",
 
     alignItems: 'center', 
     justifyContent: 'center',
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     // alignSelf: 'center',
     flex: 1,
-    alignItems: 'right',
+    // alignItems: 'right',
     marginLeft: 14,
     marginRight: 10,
   },

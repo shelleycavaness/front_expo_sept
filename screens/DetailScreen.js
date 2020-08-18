@@ -44,13 +44,14 @@ export default function({ route }) {
             <View style={styles.contentBox}>         
               <Text style={styles.contentSectionText}>{ `you saved ${actionCo2} tones co2` }</Text>       
             </View>    
-            <View style={styles.contentBox}>         
-              <Text style={styles.contentSectionText}>{ detailDescription }</Text>    
-  
-            </View>  
+
             <View style={styles.contentBox}>         
               <Text style={styles.contentSectionText}>{ detailPoint } points</Text>       
-            </View>    
+            </View>   
+                
+              <Text style={styles.detailSectionText}>{ detailDescription }</Text>    
+  
+            
           </View> 
           
  
@@ -119,8 +120,8 @@ const styles = StyleSheet.create({
   footer:{
     flexDirection: 'row',
     paddingTop: 12.5,
-    paddingBottom: 25,
-    paddingHorizontal: 16,
+    paddingBottom: 15,
+    paddingHorizontal: 10,
     borderBottomLeftRadius: 1,
     borderBottomRightRadius: 1,
 
@@ -129,25 +130,34 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 12.5,
     paddingBottom: 25,
+    paddingLeft: 15,
+    paddingRight: 15,
     borderColor: '#51624F',
     borderWidth: 3,
     borderStyle: 'solid',
     borderRadius: 5,
   }, 
   contentBox: {
-    justifyContent: 'space-evenly', 
-    paddingTop: 15,
-    paddingBottom: 5,
-    // alignSelf: 'center',
     flex: 1,
-    // alignItems: 'right',
-    marginLeft: 14,
-    marginRight: 10,
+    justifyContent: 'space-evenly', 
+
   },
   contentSectionText: {
     color: "#51624F",
     fontSize:18,
     justifyContent: 'center',
+    paddingTop: 5,
+    // paddingBottom: 5,
+
+  },
+  detailSectionText: {
+    color: "#51624F",
+    fontSize:15,
+    justifyContent: 'center',
+    paddingTop: 5,
+    paddingBottom: 5,
+    // borderColor: '#51624F',
+    // borderWidth: 3,
 
   },
 })

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image  } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import data from '../db.json'
 
-export default function ProfileScreen(){
+export default function ProfileScreen( { navigation }){
 //the random is called at the beginning of the lifecyle, not with the navigation
   // let id = Math.floor(Math.random() * 4) + 1;
   // id = id - 1

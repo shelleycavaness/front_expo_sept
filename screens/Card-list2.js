@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,68 +7,92 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-  ListView
+  FlatList,
+  TouchableHighlight
 } from 'react-native';
 // import ListView from 'deprecated-react-native-listview'
-import { abeille, vinegar, velo, reparer,veggie, paille, stopPub, douche, ampule, fillet } from "../assets/index";
-import data from '../db.json'
+import { allImages } from "../assets/index";
+// import data1 from '../db.json'
 
-export default class UsersView extends Component {
-  constructor(props) {
-    super(props);
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    this.state = {
-      dataSource: ds.cloneWithRows([
-            // data.actions  //take off the array brackets ;-)
-         {image: vinegar, title:"johndoe1"},
-         {image: velo, title:"johndoe2"},
-         {image: fillet, title:"johndoe3"},
-         {image: ampule , title:"johndoe4"},
-         {image: stopPub, title:"johndoe5"},
-         {image: douche, title:"johndoe6"},
-         {image: paille, title:"johndoe7"},
-         {image: veggie, title:"johndoe8"},
-         {image: abeille, title:"johndoe2"},
-      ]),
-    };   console.log('data//////////////', data.actions[0].image)
-  }
+export default function MesDefisList({ navigation }) {
+  const [actionList, setActionsList] = useState([] );
 
-  render() {
+  useEffect(()=>{
+    // fetch( "https://docker-nestjs-my-eco-defi.apps.ocp.lab-nxtit.com/api/v1/actions")
+       fetch('http://localhost:9999/api/v1/actions/')
+    .then((response) => response.json())
+    .then((responseJson) => setActionsList(Object.values(responseJson)))
+    .catch((error) => console.error('error in catch ----------',error))
+  }, [])   
+  
+  // actionList && actionList.length ? 
+  // console.log("actionList>>>>>>>>>>>>>", actionList) : 
+  // console.log('no object here')
+
+  //function for organizing actions in Ascending point order & Descending
+  const sortPointsUP = actionList.slice(0);
+  sortPointsUP.sort(function(a,b) {
+      return a.actionPoint - b.actionPoint;
+  });
+  
+  const sortPointsDown = actionList.slice(0);
+  sortPointsUP.sort(function(a,b) {
+      return b.actionPoint - a.actionPoint;
+  });
+
+
+  const pressHandler = ( id ) => {
+//itemId-1 to begin with 0 rather than 1 and dispaly the right entry in the database
+    navigation.navigate('Detail', {
+      itemId: actionList[id]
+    })
+  };
     return (
       <ScrollView style={styles.container}>
-          <View style={styles.body}>
-            <ListView style={styles.container} enableEmptySections={true}
-              dataSource={this.state.dataSource}
-              renderRow={(user) => {
-                // {console.log('user======', user)}
-                return (
-                  <TouchableOpacity>
-                    <View style={styles.box}>
-                      <Image style={styles.image} source={user.image}/> 
-                    {/* <Image style={styles.image} source={{(`"${user.image}"`)}}/> */}
-                      {/* <Image style={styles.image} source={{image: user.image}}/> */}
-                      <Text style={styles.title}>{user.title}</Text>
-                      <View style={styles.iconContent}>
-                        <Image style={styles.icon} source={{uri: "https://img.icons8.com/material-two-tone/24/000000/plus.png"}}/>
-                      </View>
-                    </View>
-                  </TouchableOpacity>
-                )
-            }}/>
-          </View>
+      <Text style={styles.title}>Mes defis</Text> 
+       <View style={styles.body}>
+        <FlatList style={styles.container} 
+          keyExtractor={ (item) => item.id.toString() }
+          // keyExtractor={ (item) => item.key }
+          // data={ data1.actions }
+          
+          data={  actionList && actionList.length > 0 ? 
+            actionList :  console.log('actionList empty :>> ', actionList) 
+          }
+
+          renderItem={ ({ item }) =>(
+            <TouchableHighlight 
+            onPress={ () => pressHandler(item.id) }>     
+              <View style={styles.box}>
+                <Image style={styles.image} 
+                 source={allImages[item.actionImg]} 
+                /> 
+                <Text style={styles.title}>{ item.actionName }</Text> 
+                <View style={styles.iconContent} >
+                  <Image style={styles.icon} 
+                   source={allImages.plus }  
+                   />
+                </View> 
+              </View>
+            </TouchableHighlight>
+          )}
+         />    
+       </View>
       </ScrollView>
     );
-  }
+  
+
 }
 
 const styles = StyleSheet.create({
   image:{
     width: 60,
     height: 60,
+    borderRadius: 3,
   },
   body: {
     padding:30,
-    backgroundColor :"#E6E6FA",
+    backgroundColor :"pink",
   },
   box: {
     marginTop:5,
@@ -84,7 +108,7 @@ const styles = StyleSheet.create({
     elevation:2
   },
   title:{
-    color: "#20B2AA",
+    color: "#E6D5AA",
     fontSize:18,
     alignSelf:'center',
     marginLeft:10
@@ -92,9 +116,10 @@ const styles = StyleSheet.create({
   iconContent:{
     width: 60,
     height: 60,
-    backgroundColor: '#40E0D0',
+    backgroundColor: '#eaeaee',
     marginLeft: 'auto',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingTop: 10,
   },
   icon:{
     width: 40,

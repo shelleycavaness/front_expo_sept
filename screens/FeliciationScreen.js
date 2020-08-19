@@ -14,8 +14,8 @@ import {  congrats, tiger } from "../assets/index";
 export default function FelicitationScreen({ navigation, route }) {
  const { propsItem } = route.params;
  const { newScore } = route.params;
- console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    newScore :>> ', newScore);
- console.log('propsItem', propsItem)
+ console.log(`@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ${newScore}   newScore :>> `, newScore  );
+//  console.log('propsItem', propsItem)
  const defiTitle = propsItem.actionName;
  const defiDescript = propsItem.actionDescription;
  const defipoint = propsItem.actionPoint;
@@ -26,7 +26,13 @@ export default function FelicitationScreen({ navigation, route }) {
       <ScrollView style={styles.scrollContainer}>
        <View style={styles.container}>
          <View style={styles.header}>  
-          <Text style={styles.slogan}> your new score is: {newScore}. Rendez-vous demain!</Text>        
+         {
+          newScore && newScore > 0  ?(<Text style={styles.slogan}> your new score is: {newScore}. Rendez-vous demain!</Text>) : 
+          (<Text style={styles.slogan}> your new score is: 42. Rendez-vous demain!</Text>)
+        
+      
+         }
+                  
         </View>   
         <Image 
           style={styles.photo} 

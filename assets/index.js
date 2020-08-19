@@ -18,6 +18,8 @@ import plusPNG from './images/baseline_add_box_black_18dp.png'
 import veggieBagJPG from './images/veggie_bag.jpg'
 import coffeeJPG from './images/coffee_filter.jpg'
 import plasticCupJPG from './images/coffee_filter.jpg'
+import userWoPNG from './images/userWo.png'
+import userPNG from './images/icons/icons8-utilisateur-50.png'
 
 
 
@@ -40,6 +42,8 @@ export const frog = frogPNG
 export const veggieBag = veggieBagJPG
 export const coffee = coffeeJPG
 export const plasticCup = plasticCupJPG
+export const userWo = userWoPNG
+export const user = userPNG
 
 
 export const allImages = {
@@ -64,5 +68,7 @@ export const allImages = {
  veggieBag : veggieBagJPG,
  coffee : coffeeJPG,
  plasticCup : plasticCupJPG,
+ userWo : userWoPNG,
+ user : userPNG ,
 
 }

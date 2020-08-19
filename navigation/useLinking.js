@@ -13,6 +13,7 @@ export default function(containerRef) {
           Profile: 'profile',
           // Felicitation: 'felicitation',
           // Dommage : 'dommage'
+
         },
       },
     },

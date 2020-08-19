@@ -16,16 +16,28 @@ import { allImages } from "../assets/index";
 
 export default function UsersView({ navigation }) {
   const [actionList, setActionsList] = useState([] );
+
   useEffect(()=>{
-    fetch( "https://docker-nestjs-my-eco-defi.apps.ocp.lab-nxtit.com/api/v1/actions")
-      //  fetch('http://localhost:9999/api/v1/actions')
+    // fetch( "https://docker-nestjs-my-eco-defi.apps.ocp.lab-nxtit.com/api/v1/actions")
+       fetch('http://localhost:9999/api/v1/actions/')
     .then((response) => response.json())
     .then((responseJson) => setActionsList(Object.values(responseJson)))
     .catch((error) => console.error('error in catch ----------',error))
   }, [])   
-  actionList && actionList.length ? 
-  console.log("actionList>>>>>>>>>>>>>", actionList) : 
-  console.log('no object here')
+  
+  // actionList && actionList.length ? 
+  // console.log("actionList>>>>>>>>>>>>>", actionList) : 
+  // console.log('no object here')
+
+  //function for organizing actions in ascending point order
+  const sortPointsUP = actionList.slice(0);
+  sortPointsUP.sort(function(a,b) {
+      return a.actionPoint - b.actionPoint;
+  });
+  // console.log('>>>>>>>points  :');
+  // console.log(sortPointsUP);
+
+
 
   const pressHandler = ( id ) => {
 //itemId-1 to begin with 0 rather than 1 and dispaly the right entry in the database
@@ -53,7 +65,7 @@ export default function UsersView({ navigation }) {
                 <Image style={styles.image} 
                  source={allImages[item.actionImg]} 
                 /> 
-               <Text style={styles.title}>{ item.actionName }</Text> 
+                <Text style={styles.title}>{ item.actionName }</Text> 
                 <View style={styles.iconContent} >
                   <Image style={styles.icon} 
                    source={allImages.plus }  

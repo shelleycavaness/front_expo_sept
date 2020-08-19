@@ -12,7 +12,7 @@ import { screensEnabled } from 'react-native-screens';
 import FeliciationScreen from './screens/FeliciationScreen';
 import DommageScreen from './screens/DommageScreen';
 import DetailScreen from './screens/DetailScreen'
-import ActionComponent from './components/ActionComponent';
+import ProfileScreen from './screens/ProfileScreen';
 
 const Stack = createStackNavigator();
 
@@ -60,6 +60,7 @@ export default function App(props) {
             <Stack.Screen name="Felicitation" component={FeliciationScreen} />
             <Stack.Screen name="Dommage" component={DommageScreen} />
             <Stack.Screen name="Detail" component={DetailScreen} />
+            <Stack.Screen name="Profile" component={ProfileScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>

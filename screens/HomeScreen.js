@@ -1,25 +1,21 @@
 import React, { useState, useLayoutEffect, useEffect } from "react";
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Button,
-} from "react-native";
+import ProfileScreen from './ProfileScreen'
+import { Image, StyleSheet, Text, TouchableOpacity,View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import * as WebBrowser from "expo-web-browser";
 import { MonoText } from "../components/StyledText";
 import { allImages } from "../assets/";
 
 export default function HomeScreen({ navigation }) {
-  const [actionList, setActionsList] = useState();
+  const [actionList, setActionList] = useState();
   const [action, setAction] = useState({});
-  const [playerInfo, setPlayerInfo] = useState([]);
-  const [id, setId] = useState(0);
+  const [playerList, setPlayerList] = useState() 
+  const [player, setPlayer] = useState({});
+  const [newScore, setNewScore] = useState(0)
+  const [id, setId] = useState();
 
   useEffect(() => {
-    let playerId = 1;
+    let playerId = 2;
     const randomId = Math.floor(Math.random() * Math.floor(4));
     setId(randomId);
     
@@ -28,43 +24,56 @@ export default function HomeScreen({ navigation }) {
     )
       //  fetch('http://localhost:9999/api/v1/actions')
       .then((response) => response.json())
-      .then((responseJson) => setActionsList(Object.values(responseJson)))
+      .then((responseJson) => setActionList(Object.values(responseJson)))
       .catch((error) => console.error("error in catch ----------", error));
-    fetch(
-      "https://docker-nestjs-my-eco-defi.apps.ocp.lab-nxtit.com/api/v1/players/" +
-        playerId
-    )
-      //  fetch('http://localhost:9999/api/v1/actions')
+    // fetch(
+    //   "https://docker-nestjs-my-eco-defi.apps.ocp.lab-nxtit.com/api/v1/players/" +
+    //     playerId
+    // )
+      //  fetch('http://localhost:9999/api/v1/players/' + playerId)
+       fetch('http://localhost:9999/api/v1/players')
+
       .then((response) => response.json())
-      .then((responseJson) => setPlayerInfo(Object.values(responseJson)))
+      .then((responseJson) => setPlayerList(Object.values(responseJson)))
       .catch((error) => console.error("error in catch ----------", error));
   }, []);
   
-  //  playerInfo && playerInfo.length? console.log("player>>>>>>>>>>>>>", playerInfo) : console.log('no id')
-  //   actionList && actionList.length? console.log("item>>>>>>>>>>>>>", item) : console.log('no object here')
-  // console.log("9999999999999999999999999",action)
 
-  const pressHandler = (action) => {
-    console.log("I have been clicked :>> ", action);
-    console.log("actionList.length :>> ", actionList);
-    setActionObj(),
-      navigation.navigate("Felicitation", {
-        propsItem: actionList[id],
-        newScore: 300,
-        // newScore: playerInfo[id].score + actionList[id].actionPoint
-      });
-  };
   const setActionObj = () => {
     if (actionList && actionList.length) {
       setAction(actionList[id]);
-      console.log("action :>> ", action);
     }
   };
+  const setPlayerObj = () => {
+    if (playerList && playerList.length) {
+      setPlayer(playerList[id]);
+      // console.log("playerlist setter :>> ", player);
+    }
+  };
+  const getNewScore =() => {
+    setNewScore(actionList[id].actionPoint + playerList[id].playerStats.cumulatedScore )
+    // console.log('******************newScore', newScore)
+  };
+
+  const pressHandler = (action) => {
+    setActionObj(),
+    setPlayerObj(),
+    getNewScore(),
+      navigation.navigate("Felicitation", {
+        propsItem: actionList[id],
+        newScore: newScore,
+       
+      });
+  };
+
 
   useEffect(() => {
-    if (actionList) {
-      console.log(actionList);
-      console.log(actionList[id].actionImg);
+    if (playerList) {
+      // console.log(playerList);
+  
+    }
+    if (newScore > 0) {
+      console.log('bigger than 0 ',newScore)
     }
   })
 
@@ -113,9 +122,6 @@ export default function HomeScreen({ navigation }) {
         )}
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-            // onPress={() => pressHandler(item)}
-            // onPress={() => pressHandler(id)}
-
             onPress={() => pressHandler(action)}
             style={styles.button}
           >
@@ -135,7 +141,8 @@ export default function HomeScreen({ navigation }) {
 }
 
 HomeScreen.navigationOptions = {
-  header: null,
+  // header: null,
+  // header : 'Profile'
 };
 
 const styles = StyleSheet.create({

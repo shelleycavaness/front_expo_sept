@@ -3,7 +3,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen'
+// import ProfileScreen from '../screens/Card-list2'
+import MesDefisListScreen from '../screens/Card-list2'
 import CardlistScreen from '../screens/Card-list'
+
 import Header from "../components/Header"
 
 const BottomTab = createBottomTabNavigator();
@@ -48,14 +51,13 @@ export default function BottomTabNavigator({ navigation, route }) {
 
 function getHeaderTitle(route) {
   const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
-
   switch (routeName) {
     case 'Home':
       return ()=> <Header/>
     case 'Actions':
-      return 'Call to Eco Actions';
+      return ()=> <Header/>
     case 'Profile':
-      return 'Player Profile'; 
+      return ()=> <Header/>
 
   }
 }

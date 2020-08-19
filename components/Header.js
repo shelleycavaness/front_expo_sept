@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View,  } from 'react-native';
-import {frog} from '../assets/index'
+import {frog, userWo, user} from '../assets/index';
+import ProfileScreen from '../screens/ProfileScreen'
+import { useNavigation, useRoute } from '@react-navigation/native';
 
-export default function Header() {
+export default function Header( { navigation, route } ) {
+  // const navigation = useNavigation();
+
+  const pressHandler = () => {
+    console.log("I have been clicked :>> ");
+  //  return navigation.navigate("Profile")
+  }
   return(
     <View style={styles.header}>
 
@@ -10,9 +18,16 @@ export default function Header() {
       source={{uri : frog}}
       style={styles.image}
      />
-     {/* <View>
-       <Text style={styles.headerText}>yep</Text>
-     </View> */}
+      <TouchableOpacity
+       onPress={() => pressHandler() }
+      //  onPress={() => navigation.navigate("Profile") }
+      >
+          <Image   
+          source={{uri : userWo}}
+          style={styles.image}
+        />
+     </TouchableOpacity>
+    
     </View>
    
   )
@@ -24,8 +39,8 @@ const styles = StyleSheet.create({
   width :'100%',
   height: '100%',
   flexDirection: 'row',
-  alignItems: 'center',
-  justifyContent: 'center'
+  // alignItems: 'center',
+  justifyContent: 'space-between'
  },
  headerText:{
    fontWeight: 'bold',

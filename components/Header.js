@@ -1,16 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View,  } from 'react-native';
 import {frog, userWo, user} from '../assets/index';
-import ProfileScreen from '../screens/ProfileScreen'
-import { useNavigation, useRoute } from '@react-navigation/native';
-
-export default function Header( { navigation, route } ) {
-  // const navigation = useNavigation();
-
-  const pressHandler = () => {
-    console.log("I have been clicked :>> ");
-  //  return navigation.navigate("Profile")
-  }
+import { useNavigation  } from '@react-navigation/native';
+export default function Header({ Profile }) {
+  const navigation = useNavigation();
   return(
     <View style={styles.header}>
 
@@ -18,16 +11,15 @@ export default function Header( { navigation, route } ) {
       source={{uri : frog}}
       style={styles.image}
      />
+
       <TouchableOpacity
-       onPress={() => pressHandler() }
-      //  onPress={() => navigation.navigate("Profile") }
+       onPress={() => navigation.navigate('Profile')}
       >
-          <Image   
+        <Image   
           source={{uri : userWo}}
           style={styles.image}
         />
      </TouchableOpacity>
-    
     </View>
    
   )

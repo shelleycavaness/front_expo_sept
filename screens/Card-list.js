@@ -10,8 +10,10 @@ import {
   FlatList,
   TouchableHighlight
 } from 'react-native';
+import Colors from '../constants/Colors';
 // import ListView from 'deprecated-react-native-listview'
 import { allImages } from "../assets/index";
+import plusIcon from '../assets/images/icons/iconfinder_plus_325963.png'
 // import data1 from '../db.json'
 
 export default function UsersView({ navigation }) {
@@ -24,21 +26,22 @@ export default function UsersView({ navigation }) {
     .then((responseJson) => setActionsList(Object.values(responseJson)))
     .catch((error) => console.error('error in catch ----------',error))
   }, [])   
-  
-  // actionList && actionList.length ? 
-  // console.log("actionList>>>>>>>>>>>>>", actionList) : 
-  // console.log('no object here')
+  //watching the actionList to update in real time
+  useEffect(()=>{
+  }, [actionList])
+
 
   //function for organizing actions in ascending point order
-  const sortPointsUP = actionList.slice(0);
-  sortPointsUP.sort(function(a,b) {
-      return a.actionPoint - b.actionPoint;
-  });
-  // console.log('>>>>>>>points  :');
-  // console.log(sortPointsUP);
+  const filterUP =()=>{
+    const sortPointsUP = actionList.slice(0);
+    sortPointsUP.sort(function(a,b) {
+        return a.actionPoint - b.actionPoint;   
+    });
+    console.log('>>>>>>>points  :',sortPointsUP);
+    setActionsList(sortPointsUP)
+  }
 
-
-
+  
   const pressHandler = ( id ) => {
 //itemId-1 to begin with 0 rather than 1 and dispaly the right entry in the database
     navigation.navigate('Detail', {
@@ -47,7 +50,14 @@ export default function UsersView({ navigation }) {
   };
     return (
       <ScrollView style={styles.container}>
+      <View >
       <Text style={styles.title}>Liste des defis</Text> 
+      <TouchableOpacity style={[styles.buttonContainer, styles.loginButton]}
+        onPress={()=> filterUP()}
+      >
+          <Text style={styles.loginText}>mes defis</Text>
+        </TouchableOpacity>
+        </View> 
        <View style={styles.body}>
         <FlatList style={styles.container} 
           keyExtractor={ (item) => item.id.toString() }
@@ -68,7 +78,8 @@ export default function UsersView({ navigation }) {
                 <Text style={styles.title}>{ item.actionName }</Text> 
                 <View style={styles.iconContent} >
                   <Image style={styles.icon} 
-                   source={allImages.plus }  
+                  //  source={allImages.plus }  
+                   source={plusIcon }  
                    />
                 </View> 
               </View>
@@ -85,12 +96,12 @@ export default function UsersView({ navigation }) {
 const styles = StyleSheet.create({
   image:{
     width: 60,
-    height: 60,
     borderRadius: 3,
   },
   body: {
     padding:30,
-    backgroundColor :"#E6EEEA",
+    // backgroundColor :"#E6EEEA",
+    backgroundColor: Colors.tintColor,
   },
   box: {
     marginTop:5,
@@ -113,7 +124,7 @@ const styles = StyleSheet.create({
   },
   iconContent:{
     width: 60,
-    height: 60,
+    // height: 60,
     backgroundColor: '#eaeaee',
     marginLeft: 'auto',
     alignItems: 'center',
@@ -122,6 +133,21 @@ const styles = StyleSheet.create({
   icon:{
     width: 40,
     height: 40,
-  }
+  },
+  buttonContainer: {
+    height:25,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom:10,
+    width:150,
+    borderRadius:30,
+  },
+  loginButton: {
+    backgroundColor: '#c5ced4',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderRadius: 5,
+  },
 });
  

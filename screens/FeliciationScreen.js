@@ -60,7 +60,7 @@ export default function FelicitationScreen({ navigation, route }) {
           </View>
         </View> 
           <TouchableHighlight style={[styles.buttonContainer, styles.sendButton]} onPress={() => navigation.goBack()}>
-            <Text style={styles.buttonText}>Go  back</Text>
+            <Text style={styles.buttonText}>Je confirme</Text>
           </TouchableHighlight>
         </View>
       </ScrollView>

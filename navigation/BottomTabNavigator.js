@@ -32,16 +32,16 @@ export default function BottomTabNavigator({ navigation, route }) {
         name="Actions"
         component={CardlistScreen}
         options={{
-          title: 'Actions',
+          title: 'Mes défis',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-menu" />,
         }}
       />
       <BottomTab.Screen
-        name="Profile"
-        component={ProfileScreen}
+        name="MesDefisListScreen"
+        component={MesDefisListScreen}
         options={{
-          title: 'Profile',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-person" />,
+          title: 'défis dispos',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-menu" />,
         }}
       />
       
@@ -56,7 +56,7 @@ function getHeaderTitle(route) {
       return ()=> <Header/>
     case 'Actions':
       return ()=> <Header/>
-    case 'Profile':
+    case 'MesDefisListScreen':
       return ()=> <Header/>
 
   }

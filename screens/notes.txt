@@ -1,0 +1,45 @@
+
+*Catagories des defis
+numerique responsable
+tranport
+alimentation
+vie courrante -menage
+
+*3 mesures
+imapact -co2
+impact kilo watt heure
+impact litre H2O
+
+
+defi du jour et je releve les defi (je chossis)
+
+Profil screen
+score
+total imapact -co2
+total impact kilo watt heure
+total impact litre H2O
+
+
+Greg Gibier dans l'equipe
+
+
+
+///////////////////////////////////////////////////////////
+Points:
+when I accept the challenge offered I earn more points;
+than when I choose one.
+when I redo a challenge I get less points.
+
+
+i accept or i have done impact
+one click or do we have a second to make sure they don't go crazy clicking
+LImit the number of challenges per day?
+
+
+when I refuse
+I navigate to a new challenge or the list
+
+
+apps// look for awards
+we act for good
+duolingo

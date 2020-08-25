@@ -125,7 +125,7 @@ export default function HomeScreen({ navigation }) {
             onPress={() => pressHandler(action)}
             style={styles.button}
           >
-            <Text style={styles.buttonText}>Je l'ai fait</Text>
+            <Text style={styles.buttonText}>Je l'accepte !</Text>
           </TouchableOpacity>
 
           <TouchableOpacity

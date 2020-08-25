@@ -87,7 +87,7 @@ export default function MesDefisList({ navigation }) {
 const styles = StyleSheet.create({
   image:{
     width: 60,
-    height: 60,
+    // height: 60,
     borderRadius: 3,
   },
   body: {
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   },
   iconContent:{
     width: 60,
-    height: 60,
+    // height: 60,
     backgroundColor: '#eaeaee',
     marginLeft: 'auto',
     alignItems: 'center',

@@ -20,6 +20,8 @@ import coffeeJPG from './images/coffee_filter.jpg'
 import plasticCupJPG from './images/coffee_filter.jpg'
 import userWoPNG from './images/userWo.png'
 import userPNG from './images/icons/icons8-utilisateur-50.png'
+import Co2PNG from './images/icons/co2.png'
+import WattsJPG from './images/icons/watts.jpg'
 
 
 
@@ -44,6 +46,8 @@ export const coffee = coffeeJPG
 export const plasticCup = plasticCupJPG
 export const userWo = userWoPNG
 export const user = userPNG
+export const co2 = Co2PNG
+export const watts = WattsJPG
 
 
 export const allImages = {
@@ -70,5 +74,7 @@ export const allImages = {
  plasticCup : plasticCupJPG,
  userWo : userWoPNG,
  user : userPNG ,
+ co2 : Co2PNG,
+ watts : WattsJPG,
 
 }

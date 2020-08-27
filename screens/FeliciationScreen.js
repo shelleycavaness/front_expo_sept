@@ -1,5 +1,5 @@
             
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -20,6 +20,10 @@ export default function FelicitationScreen({ navigation, route }) {
  const defiDescript = propsItem.actionDescription;
  const defipoint = propsItem.actionPoint;
  const defiCO2 = propsItem.actionCo2;
+
+ useEffect(() => {
+  alert('super Vallll')
+ }, [newScore])
 //  (typeof defiCO2 !== 'undefined') ? defiCO2 : 2018;
 //  const defiImg = allImages[data.actions[id].photo]
     return (

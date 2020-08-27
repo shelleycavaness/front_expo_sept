@@ -52,7 +52,7 @@ export default function HomeScreen({ navigation }) {
   };
   const getNewScore =() => {
     setNewScore(actionList[id].actionPoint + playerList[id].playerStats.cumulatedScore )
-    // console.log('******************newScore', newScore)
+   
   };
 
   const pressHandler = (action) => {
@@ -70,12 +70,11 @@ export default function HomeScreen({ navigation }) {
   useEffect(() => {
     if (playerList) {
       // console.log(playerList);
-  
     }
     if (newScore > 0) {
       console.log('bigger than 0 ',newScore)
     }
-  })
+  }, [newScore])
 
   return (
     <ScrollView style={styles.scrollContainer}>

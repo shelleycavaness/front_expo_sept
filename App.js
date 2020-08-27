@@ -13,6 +13,8 @@ import FeliciationScreen from './screens/FeliciationScreen';
 import DommageScreen from './screens/DommageScreen';
 import DetailScreen from './screens/DetailScreen'
 import ProfileScreen from './screens/ProfileScreen';
+import ActionListProvider from './contexts/actionListContext'
+import CurrentUserProvider from './contexts/currentUserContext'
 
 const Stack = createStackNavigator();
 
@@ -52,18 +54,22 @@ export default function App(props) {
     return null;
   } else {
     return (
-      <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
-          <Stack.Navigator>
-            <Stack.Screen name="Root" component={BottomTabNavigator} />
-            <Stack.Screen name="Felicitation" component={FeliciationScreen} />
-            <Stack.Screen name="Dommage" component={DommageScreen} />
-            <Stack.Screen name="Detail" component={DetailScreen} />
-            <Stack.Screen name="Profile" component={ProfileScreen} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </View>
+      <CurrentUserProvider>
+        <ActionListProvider>
+          <View style={styles.container}>
+            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
+              <Stack.Navigator>
+                <Stack.Screen name="Root" component={BottomTabNavigator} />
+                <Stack.Screen name="Felicitation" component={FeliciationScreen} />
+                <Stack.Screen name="Dommage" component={DommageScreen} />
+                <Stack.Screen name="Detail" component={DetailScreen} />
+                <Stack.Screen name="Profile" component={ProfileScreen} />
+              </Stack.Navigator>
+            </NavigationContainer>
+          </View>
+        </ActionListProvider>
+      </CurrentUserProvider>
     );
   }
 }

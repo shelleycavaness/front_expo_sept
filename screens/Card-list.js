@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   StyleSheet,
   Text,
@@ -10,7 +10,9 @@ import {
   FlatList,
   TouchableHighlight
 } from 'react-native';
+import { ActionListContext } from '../contexts/actionListContext'
 import Colors from '../constants/Colors';
+import getActions from '../services/actions';
 // import ListView from 'deprecated-react-native-listview'
 import { allImages } from "../assets/index";
 import plusIcon from '../assets/images/icons/iconfinder_plus_325963.png'
@@ -18,7 +20,6 @@ import plusIcon from '../assets/images/icons/iconfinder_plus_325963.png'
 
 export default function UsersView({ navigation }) {
   const [actionList, setActionsList] = useState([] );
-
   useEffect(()=>{
     // fetch( "https://docker-nestjs-my-eco-defi.apps.ocp.lab-nxtit.com/api/v1/actions")
        fetch('http://localhost:9999/api/v1/actions/')
@@ -26,9 +27,16 @@ export default function UsersView({ navigation }) {
     .then((responseJson) => setActionsList(Object.values(responseJson)))
     .catch((error) => console.error('error in catch ----------',error))
   }, [])   
-  //watching the actionList to update in real time
+  // watching the actionList to update in real time
   useEffect(()=>{
+    
   }, [actionList])
+ 
+  // const {actionList, setActionsList} = useContext(ActionListContext)
+  // useEffect( async ()=>{
+  //   setActionsList( await getActions()) //fetch
+  // }, [])
+  // console.log('actionList ::::::::::::::::::::::::::::::::::::::::::::::::::::>> ', actionList);
 
 
   //function for organizing actions in ascending point order
@@ -40,7 +48,14 @@ export default function UsersView({ navigation }) {
     console.log('>>>>>>>points  :',sortPointsUP);
     setActionsList(sortPointsUP)
   }
-
+  const filterDown =()=>{
+    const sortPointsDown = actionList.slice(0);
+    sortPointsDown.sort(function(a,b) {
+        return  b.actionPoint- a.actionPoint;   
+    });
+    console.log('>>>>>>>points  :',sortPointsDown);
+    setActionsList(sortPointsDown)
+  }
   
   const pressHandler = ( id ) => {
 //itemId-1 to begin with 0 rather than 1 and dispaly the right entry in the database
@@ -53,9 +68,9 @@ export default function UsersView({ navigation }) {
       <View >
       <Text style={styles.title}>Liste des defis</Text> 
       <TouchableOpacity style={[styles.buttonContainer, styles.loginButton]}
-        onPress={()=> filterUP()}
+        onPress={()=> filterDown()}
       >
-          <Text style={styles.loginText}>mes defis</Text>
+          <Text style={styles.loginText}>filter points</Text>
         </TouchableOpacity>
         </View> 
        <View style={styles.body}>

@@ -56,6 +56,11 @@ export default function UsersView({ navigation }) {
     console.log('>>>>>>>points  :',sortPointsDown);
     setActionsList(sortPointsDown)
   }
+  const completedActions =() =>{
+     actionList.filter( (el) => {
+      return el.isDone == true      
+    });
+  }
   
   const pressHandler = ( id ) => {
 //itemId-1 to begin with 0 rather than 1 and dispaly the right entry in the database

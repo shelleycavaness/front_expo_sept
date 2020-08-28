@@ -1,5 +1,5 @@
             
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import {
   StyleSheet,
   Text,
@@ -10,33 +10,30 @@ import {
   ScrollView,
 } from 'react-native';
 import {  congrats, tiger } from "../assets/index";
+import { CurrentUserContext } from '../contexts/currentUserContext'
+
 
 export default function FelicitationScreen({ navigation, route }) {
  const { propsItem } = route.params;
- const { newScore } = route.params;
- console.log(`@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ${newScore}   newScore :>> `, newScore  );
+//  const { newScore } = route.params;
+//  console.log(`@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ${newScore}   newScore :>> `, newScore  );
 //  console.log('propsItem', propsItem)
  const defiTitle = propsItem.actionName;
  const defiDescript = propsItem.actionDescription;
  const defipoint = propsItem.actionPoint;
  const defiCO2 = propsItem.actionCo2;
+ const { currentPlayer } = useContext(CurrentUserContext)
 
  useEffect(() => {
-  alert('super Vallll')
- }, [newScore])
+ }, [currentPlayer])
 //  (typeof defiCO2 !== 'undefined') ? defiCO2 : 2018;
 //  const defiImg = allImages[data.actions[id].photo]
     return (
       <ScrollView style={styles.scrollContainer}>
        <View style={styles.container}>
          <View style={styles.header}>  
-         {
-          newScore && newScore > 0  ?(<Text style={styles.slogan}> your new score is: {newScore}. Rendez-vous demain!</Text>) : 
-          (<Text style={styles.slogan}> your new score is: 42. Rendez-vous demain!</Text>)
-        
-      
-         }
-                  
+         
+          <Text style={styles.slogan}> your new score is: {currentPlayer.playerStats.cumulatedScore}. Rendez-vous demain!</Text>       
         </View>   
         <Image 
           style={styles.photo} 

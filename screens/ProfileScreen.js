@@ -6,10 +6,13 @@ import data from '../db.json'
 import { allImages } from "../assets/";
 import Colors from '../constants/Colors';
 import * as Svg from 'react-native-svg';
+import { CurrentUserContext } from '../contexts/currentUserContext'
+
 
 export default function ProfileScreen( { navigation }){
   let id = 2
-  
+  const { currentPlayer } = useContext(CurrentUserContext)
+
   const [playerList, setPlayerList] = useState([]);
   const [player, setPlayer] = useState({});
   const setPlayerObj = () => {
@@ -21,20 +24,10 @@ export default function ProfileScreen( { navigation }){
      };
     //  setPlayerObj()
   useEffect (() => {
-   console.log('Our component  did mount')  
-   fetch('http://localhost:9999/api/v1/players/')
-  // fetch( "https://docker-nestjs-my-eco-defi.apps.ocp.lab-nxtit.com/api/v1/players")
-   .then((response) => response.json())
-  // .then((responseJson) => console.log('responseJson>>>>>>>>>>>>>>>>>', responseJson))
-   .then((responseJson) => setPlayerList(Object.values(responseJson)))
-   .catch((error) => console.error('error in catch ----------',error))
-    }, [])
+
+    }, [currentPlayer])
 
 
-
-    //  playerList && setPlayerList.length > 0 ? console.log('object data finally arrived  ', playerList[0]) : console.log('oh no Empty') 
-  // const {currentPlayer} = useContext(CurrentUserContext)
-  // console.log('currentPlayer8888888888888888888888888888888888888888888', currentPlayer)
 
   return(
 
@@ -45,34 +38,22 @@ export default function ProfileScreen( { navigation }){
          style={styles.avatar} 
          source={allImages.userWo}
          />
-          {
-            playerList && playerList.length > 0 ? 
-           <Text style={styles.name}> { playerList[0].lastName } </Text> :
-           <span>not ready</span>
-          }
-          {
-            playerList && playerList.length > 0 ? 
-           <Text style={styles.name}> { playerList[0].firstName } </Text> :
-           <span>not ready</span>
-          }
+          
+           <Text style={styles.name}> { currentPlayer.lastName } </Text>
+           <Text style={styles.name}> { currentPlayer.firstName } </Text> 
+       
         </View>  
         <View style={styles.headerContent}> 
          
           <View style={styles.headerDetail}>
             <Text style={styles.title}>Lieu : </Text>
-            {
-              playerList && playerList.length > 0 ? 
-              <Text style={styles.count}>{ playerList[0].location }  </Text> : 
-              <span>not ready</span>
-            }
+          
+              <Text style={styles.count}>{ currentPlayer.location }  </Text>
           </View>
           <View style={styles.headerDetail}>
             <Text style={styles.title}>Email : </Text>
-            {
-              playerList && playerList.length > 0 ? 
-              <Text style={styles.count}>{ playerList[0].email } finally </Text> : 
-              <span>not ready</span>
-            }
+           
+              <Text style={styles.count}>{ currentPlayer.email } </Text> 
           </View>
         </View>
     </View> 
@@ -84,33 +65,23 @@ export default function ProfileScreen( { navigation }){
           style={styles.icon}
           source={allImages.watts}
           />
-         {
-         playerList && playerList.length > 0 ? 
-         <Text style={styles.title}>{ playerList[0].playerStats.cumulatedScore } CO2 </Text> : 
-         <span>0</span>
-        }
+         
+         <Text style={styles.title}>{currentPlayer.playerStats.cumulatedScore } CO2 </Text> 
       </View>
       <View style={styles.iconBox}> 
         <Image 
           style={styles.icon}
           source={allImages.watts}
           />
-        {
-         playerList && playerList.length > 0 ? 
-         <Text style={styles.title}>{ playerList[0].playerStats.cumulatedScore } littres</Text> : 
-         <span>0</span>
-        }
+       
+         <Text style={styles.title}>{ currentPlayer.playerStats.potentialScore } litres</Text> 
       </View>
       <View style={styles.iconBox}> 
         <Image 
           style={styles.icon}
           source={allImages.watts}
           />
-        {
-         playerList && playerList.length > 0 ? 
-         <Text style={styles.title}>{ playerList[0].playerStats.cumulatedScore }kwatts</Text> : 
-         <span>0</span>
-        }
+         <Text style={styles.title}>{ currentPlayer.playerStats.numberOfActionsDone }kwatts</Text> 
          
       </View>
       
@@ -118,16 +89,15 @@ export default function ProfileScreen( { navigation }){
        <View style={styles.detailBox}>
         <View style={styles.detailContent}>
           <Text style={styles.title}>Score : </Text>
-          <Text style={styles.count}>{data.players[id].score}</Text>
+          <Text style={styles.count}>{currentPlayer.playerStats.cumulatedScore}</Text>
         </View>
         <View style={styles.detailContent}>
-          <Text style={styles.title}>Ecological Footprint Indicator : <Text style={styles.count}> {data.players[id].score}
+          <Text style={styles.title}>Ecological Footprint Indicator : <Text style={styles.count}> {currentPlayer.playerStats.numberOfActionsDone}
           </Text > </Text>
         </View>
         <View style={styles.detailContent}>
           <Text style={styles.title}>Tonnes de CO2 Compensés 
-          { playerList && playerList.length > 0 ?  playerList[0].playerStats.Co2  : "42"
-          }</Text>
+           { currentPlayer.playerStats.numberOfActionsDone }  </Text>
         </View>
       </View>
    </View>

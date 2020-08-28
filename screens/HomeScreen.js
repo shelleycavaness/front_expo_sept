@@ -1,10 +1,11 @@
-import React, { useState, useLayoutEffect, useEffect } from "react";
+import React, { useState, useLayoutEffect, useEffect, useContext } from "react";
 import ProfileScreen from './ProfileScreen'
 import { Image, StyleSheet, Text, TouchableOpacity,View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import * as WebBrowser from "expo-web-browser";
 import { MonoText } from "../components/StyledText";
 import { allImages } from "../assets/";
+import { CurrentUserContext } from '../contexts/currentUserContext'
 
 export default function HomeScreen({ navigation }) {
   const [actionList, setActionList] = useState();
@@ -13,6 +14,7 @@ export default function HomeScreen({ navigation }) {
   const [player, setPlayer] = useState({});
   const [newScore, setNewScore] = useState(0)
   const [id, setId] = useState();
+  const { setCurrentPlayer } = useContext(CurrentUserContext)
 
   useEffect(() => {
     let playerId = 2;
@@ -55,14 +57,36 @@ export default function HomeScreen({ navigation }) {
    
   };
 
-  const pressHandler = (action) => {
-    setActionObj(),
-    setPlayerObj(),
-    getNewScore(),
+  const pressHandler = async (action) => {
+    const data = {
+      "id": 3,
+      "lastName": " Jacoby",
+      "firstName": "Rebecca",
+      "email": "Rebecca.Jacoby.Cisco@socgen.com",
+      "pseudo": "Jacoby-cto-cisco",
+      "location": "Les Dunes",
+      "playerActions": [],
+      "playerStats": {
+          "cumulatedScore": 500,
+          "numberOfActionsDone": 20,
+          "numberOfActionsRefused": 60,
+          "potentialScore": 100
+      }
+    }
+      const result = await fetch('http://localhost:9999/api/v1/players/3',
+      {method: 'PUT', 
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify(data)} 
+      )
+      .then(response => response.json())
+      setCurrentPlayer( await result)
+///////////navigation//////
       navigation.navigate("Felicitation", {
         propsItem: actionList[id],
-        newScore: newScore,
-       
+        // newScore: newScore,
       });
   };
 

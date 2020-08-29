@@ -18,6 +18,7 @@ import { allImages } from "../assets/index";
 import plusIcon from '../assets/images/icons/iconfinder_plus_325963.png'
 // import data1 from '../db.json'
 
+
 export default function UsersView({ navigation }) {
   const [actionList, setActionsList] = useState([]);
   const [filteredList, setFilteredList] = useState([])

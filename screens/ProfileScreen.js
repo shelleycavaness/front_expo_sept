@@ -7,7 +7,9 @@ import { allImages } from "../assets/";
 import Colors from '../constants/Colors';
 import * as Svg from 'react-native-svg';
 import { CurrentUserContext } from '../contexts/currentUserContext'
-
+import waterPNG from '../assets/images/icons/icons8-water-50.png'
+import co2PNG from '../assets/images/icons/icons8-co2-50.png'
+import wattsPNG from '../assets/images/icons/icons8-renewable-energy-50.png'
 
 export default function ProfileScreen( { navigation }){
   let id = 2
@@ -63,7 +65,7 @@ export default function ProfileScreen( { navigation }){
       <View style={styles.iconBox}> 
         <Image 
           style={styles.icon}
-          source={allImages.watts}
+          source={ co2PNG }
           />
          
          <Text style={styles.title}>{currentPlayer.playerStats.cumulatedScore } CO2 </Text> 
@@ -71,7 +73,7 @@ export default function ProfileScreen( { navigation }){
       <View style={styles.iconBox}> 
         <Image 
           style={styles.icon}
-          source={allImages.watts}
+          source={ wattsPNG }
           />
        
          <Text style={styles.title}>{ currentPlayer.playerStats.potentialScore } litres</Text> 
@@ -79,7 +81,7 @@ export default function ProfileScreen( { navigation }){
       <View style={styles.iconBox}> 
         <Image 
           style={styles.icon}
-          source={allImages.watts}
+          source={ waterPNG }
           />
          <Text style={styles.title}>{ currentPlayer.playerStats.numberOfActionsDone }kwatts</Text> 
          
@@ -118,15 +120,12 @@ const styles = StyleSheet.create({
       flex: 1,
       padding: 20,
       backgroundColor: Colors.Turquoise2,// '#e3e3e8',   
-
-      // alignItems: 'center',  
-      paddingBottom: 30,
     },
     headerImgBlock :{
       flex: 1,
       flexDirection: 'row',
       alignItems: 'center',
-      paddingBottom: 10,
+      // paddingBottom: 10,
     },
    
     avatar: {
@@ -140,11 +139,11 @@ const styles = StyleSheet.create({
     name:{
       fontSize:22,
       color:"#FFFFFF",
-      fontWeight:'600',
+      fontWeight:'800',
       fontFamily: "Roboto",
     },
     headerContent:{
-      padding: 20,
+      padding: 10,
   
     },
     sectionWrapper: {
@@ -171,17 +170,20 @@ const styles = StyleSheet.create({
     },
     iconBox: {
       alignItems: 'center', 
+      backgroundColor: 'white',
       borderColor: Colors.silver,
       borderWidth: 1,
       borderStyle: 'solid',
-      padding: 20,
+      paddingTop: 15,
       borderRadius: 12,
-      width: 100,
-      
+      width: 80,
+      height:80,
+
     },
     icon: {
-      height: 30,
-      width: 30,
+      height:50,
+      width: 50,
+      borderRadius: 8,
     },
     
     detailBox:{
@@ -206,6 +208,7 @@ const styles = StyleSheet.create({
       fontSize:18,
       color: "white",
       fontFamily: "Roboto",
+      fontWeight:'500',
     },
     profileText: {
       fontSize: 17,

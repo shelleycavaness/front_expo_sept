@@ -19,7 +19,8 @@ import plusIcon from '../assets/images/icons/iconfinder_plus_325963.png'
 // import data1 from '../db.json'
 
 export default function UsersView({ navigation }) {
-  const [actionList, setActionsList] = useState([] );
+  const [actionList, setActionsList] = useState([]);
+  const [filteredList, setFilteredList] = useState([])
   useEffect(()=>{
     // fetch( "https://docker-nestjs-my-eco-defi.apps.ocp.lab-nxtit.com/api/v1/actions")
        fetch('http://localhost:9999/api/v1/actions/')
@@ -39,7 +40,7 @@ export default function UsersView({ navigation }) {
   // console.log('actionList ::::::::::::::::::::::::::::::::::::::::::::::::::::>> ', actionList);
 
 
-  //function for organizing actions in ascending point order
+//function for organizing actions filtering actions
   const filterUP =()=>{
     const sortPointsUP = actionList.slice(0);
     sortPointsUP.sort(function(a,b) {
@@ -56,11 +57,25 @@ export default function UsersView({ navigation }) {
     console.log('>>>>>>>points  :',sortPointsDown);
     setActionsList(sortPointsDown)
   }
-  const completedActions =() =>{
-     actionList.filter( (el) => {
-      return el.isDone == true      
-    });
-  }
+  const getCompletedActions= () => {
+    const completedActions = actionList.filter( (el) => {
+       return el.actionIsDone == true  
+     });
+     setFilteredList(completedActions) 
+    console.log('/////////////////////////', completedActions)    
+    }
+  const getIncomplActions= () => {
+    const inCompletActions = actionList.filter( (el) => {
+       return el.actionIsDone == false      
+     });
+     setFilteredList(inCompletActions) 
+    console.log('/////////////////////////', inCompletActions)    
+    }
+  const getAllActions =() => {
+      setFilteredList(actionList) 
+      // console.log('3333333333333333333333333', filteredList)
+      }
+  console.log('getAllActions', filteredList)
   
   const pressHandler = ( id ) => {
 //itemId-1 to begin with 0 rather than 1 and dispaly the right entry in the database
@@ -70,42 +85,53 @@ export default function UsersView({ navigation }) {
   };
     return (
       <ScrollView style={styles.container}>
-      <View >
-      <Text style={styles.title}>Liste des defis</Text> 
-      <TouchableOpacity style={[styles.buttonContainer, styles.loginButton]}
-        onPress={()=> filterDown()}
-      >
-          <Text style={styles.loginText}>filter points</Text>
-        </TouchableOpacity>
+      
+       <Text style={styles.title}>Liste des mes defis</Text> 
+       <View style={styles.tabBox}>
+          <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
+              onPress={()=> getAllActions()}
+            >
+              <Text style={styles.tabText}>all actions </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
+              onPress={()=> getCompletedActions()}
+          >
+              <Text style={styles.tabText}>actions done</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
+              onPress={()=> getIncomplActions()}
+           >
+              <Text style={styles.tabText}>undone actions </Text>
+           </TouchableOpacity>
         </View> 
        <View style={styles.body}>
-        <FlatList style={styles.container} 
-          keyExtractor={ (item) => item.id.toString() }
-          // keyExtractor={ (item) => item.key }
-          // data={ data1.actions }
-          
-          data={  actionList && actionList.length > 0 ? 
-            actionList :  console.log('actionList empty :>> ', actionList) 
-          }
+          <FlatList style={styles.container} 
+            keyExtractor={ (item) => item.id.toString() }
+            // keyExtractor={ (item) => item.key }
+            // data={ data1.actions }
+            
+            data={ 
+              filteredList && filteredList.length > 0? filteredList : actionList  
+            }
 
-          renderItem={ ({ item }) =>(
-            <TouchableHighlight 
-            onPress={ () => pressHandler(item.id) }>     
-              <View style={styles.box}>
-                <Image style={styles.image} 
-                 source={allImages[item.actionImg]} 
-                /> 
-                <Text style={styles.title}>{ item.actionName }</Text> 
-                <View style={styles.iconContent} >
-                  <Image style={styles.icon} 
-                  //  source={allImages.plus }  
-                   source={plusIcon }  
-                   />
-                </View> 
-              </View>
-            </TouchableHighlight>
-          )}
-         />    
+            renderItem={ ({ item }) =>(
+              <TouchableHighlight 
+              onPress={ () => pressHandler(item.id) }>     
+                <View style={styles.box}>
+                  <Image style={styles.image} 
+                  source={allImages[item.actionImg]} 
+                  /> 
+                  <Text style={styles.title}>{ item.actionName }</Text> 
+                  <View style={styles.iconContent} >
+                    <Image style={styles.icon} 
+                    //  source={allImages.plus }  
+                    source={plusIcon }  
+                    />
+                  </View> 
+                </View>
+              </TouchableHighlight>
+            )}
+          />    
        </View>
       </ScrollView>
     );
@@ -117,6 +143,43 @@ const styles = StyleSheet.create({
   image:{
     width: 60,
     borderRadius: 3,
+  },
+  tabBox:{
+    flex: 1,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    // borderColor: Colors.silver,    
+    // borderColor: 'yellow',
+    flexDirection: 'row',
+    
+    // borderWidth: 2,
+    // borderStyle: 'solid',
+
+  },
+  buttonContainer: {
+    height:25,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom:10,
+    width:100,
+    borderRadius:30,
+    borderColor: Colors.grey1, 
+    borderWidth: 2,
+    flexDirection: 'row',
+    borderStyle: 'solid',
+
+  },
+  tabButton: {
+    backgroundColor:Colors.platinum,
+    borderWidth: 2,
+    borderStyle: 'solid',
+    borderRadius: 5,
+    borderBottomColor: Colors.slateGray,
+  },
+  tabText:{
+    color: Colors.Turquoise2,
+    fontFamily: "Roboto",
   },
   body: {
     padding:30,
@@ -154,20 +217,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
   },
-  buttonContainer: {
-    height:25,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom:10,
-    width:150,
-    borderRadius:30,
-  },
-  loginButton: {
-    backgroundColor: '#c5ced4',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderRadius: 5,
-  },
+
+
 });
  

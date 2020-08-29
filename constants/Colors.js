@@ -11,9 +11,16 @@ export default {
   warningText: '#666804',
   noticeBackground: tintColor,
   noticeText: '#fff',
+  
+  platinum: 'e5e4e2',
   grey1: '#D3D3D3',
   silver: '#C0C0C0',
-  grey2:'#A9A9A9	',
+  grey2:'##bebebe	',
+  grey3:'#A9A9A9	',
+  lightslategrey: '#778899',
+  slateGray: '#708090',
+
+
   greyLight:'00CED1',
   Turquoise1: '#c5f5f0' ,
   Turquoise2: '#79e9de',

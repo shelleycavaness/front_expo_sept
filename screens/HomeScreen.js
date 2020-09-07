@@ -75,10 +75,10 @@ export default function HomeScreen({ navigation }) {
     }
       const result = await fetch('http://localhost:9999/api/v1/players/3',
       {method: 'PUT', 
-      headers: {
+       headers: {
         'Content-Type': 'application/json'
         // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
+        },
       body: JSON.stringify(data)} 
       )
       .then(response => response.json())

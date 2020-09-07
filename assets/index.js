@@ -22,6 +22,7 @@ import userWoPNG from './images/userWo.png'
 import userPNG from './images/icons/icons8-utilisateur-50.png'
 import Co2PNG from './images/icons/co2.png'
 import WattsJPG from './images/icons/watts.jpg'
+import LogoPNG from './images/SOC102.png'
 
 
 
@@ -48,6 +49,7 @@ export const userWo = userWoPNG
 export const user = userPNG
 export const co2 = Co2PNG
 export const watts = WattsJPG
+export const logo = LogoPNG
 
 
 export const allImages = {
@@ -76,5 +78,6 @@ export const allImages = {
  user : userPNG ,
  co2 : Co2PNG,
  watts : WattsJPG,
+ logo : LogoPNG
 
 }

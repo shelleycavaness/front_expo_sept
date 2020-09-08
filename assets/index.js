@@ -22,7 +22,7 @@ import userWoPNG from './images/userWo.png'
 import userPNG from './images/icons/icons8-utilisateur-50.png'
 import Co2PNG from './images/icons/co2.png'
 import WattsJPG from './images/icons/watts.jpg'
-import LogoPNG from './images/SOC102.png'
+import LogoPNG from './images/Sg_Logo.png'
 import RenewablPNG from './images/icons/icons8-renewable-energy-50.png'
 import ReadMorePNG from './images/icons/icons8-view-more-48.png'
 

@@ -44,6 +44,12 @@ export default function CardItem({item}) {
                   </View>
                   <View style={styles.socialBarSection}>
                             <TouchableOpacity style={styles.socialBarButton}>
+                              <Image style={styles.icon} source={{uri: allImages.waterDrop}}/>
+                              <Text style={styles.socialBarLabel}>{item.actionPoint}</Text>
+                            </TouchableOpacity>
+                  </View>
+                  <View style={styles.socialBarSection}>
+                            <TouchableOpacity style={styles.socialBarButton}>
                               <Image style={styles.icon} source={{uri:allImages.renewable }}/>
                               <Text style={styles.socialBarLabel}>{item.actionCo2}</Text>
                             </TouchableOpacity>
@@ -92,6 +98,8 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    borderColor: 'pink',
+    borderWidth: 2,
   },
   cardContent: {
     paddingVertical: 12.5,
@@ -101,7 +109,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingTop: 12.5,
-    paddingBottom: 25,
+    paddingBottom: 15,
     paddingHorizontal: 16,
     borderBottomLeftRadius: 1,
     borderBottomRightRadius: 1,
@@ -132,6 +140,9 @@ const styles = StyleSheet.create({
   icon: {
     width:25,
     height:25,
+    borderRadius: 5,
+    borderColor: 'white',
+    borderWidth: 2,
   },
   iconData:{
     width:15,

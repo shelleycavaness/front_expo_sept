@@ -8,7 +8,7 @@ export default function Header({ Profile }) {
     <View style={styles.header}>
 
      <Image   
-      source={{uri : frog}}
+      source={{uri : logo}}
      style={styles.image}
     //  style={styles.logo}
 

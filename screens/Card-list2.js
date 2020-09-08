@@ -13,6 +13,7 @@ import {
 // import ListView from 'deprecated-react-native-listview'
 import { allImages } from "../assets/index";
 // import data1 from '../db.json'
+import CardItem from './CardItem'
 
 export default function MesDefisList({ navigation }) {
   const [actionList, setActionsList] = useState([] );
@@ -61,20 +62,9 @@ export default function MesDefisList({ navigation }) {
           }
 
           renderItem={ ({ item }) =>(
-            <TouchableHighlight 
-            onPress={ () => pressHandler(item.id) }>     
-              <View style={styles.box}>
-                <Image style={styles.image} 
-                 source={allImages[item.actionImg]} 
-                /> 
-                <Text style={styles.title}>{ item.actionName }</Text> 
-                <View style={styles.iconContent} >
-                  <Image style={styles.icon} 
-                   source={allImages.plus }  
-                   />
-                </View> 
-              </View>
-            </TouchableHighlight>
+
+              <CardItem  item={item}/>
+        
           )}
          />    
        </View>

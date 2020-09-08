@@ -8,9 +8,9 @@ export default function Header({ Profile }) {
     <View style={styles.header}>
 
      <Image   
-      source={{uri : logo}}
-     // style={styles.image}
-     style={styles.logo}
+      source={{uri : frog}}
+     style={styles.image}
+    //  style={styles.logo}
 
      />
 
@@ -19,8 +19,8 @@ export default function Header({ Profile }) {
       >
         <Image   
           source={{uri : userWo}}
-         // style={styles.image}
-         style={styles.user}
+         style={styles.image}
+        //  style={styles.user}
 
         />
      </TouchableOpacity>
@@ -44,17 +44,17 @@ const styles = StyleSheet.create({
    color: '#333',
    letterSpacing: 1
  },
-//  image: {
-//   width: 40,
-//   height: 40
-//  },
- logo: {
-   width: 200,
-   height: 40
- },
- user: {
-  width:40,
+ image: {
+  width: 40,
   height: 40
-},
+ },
+//  logo: {
+//    width: 200,
+//    height: 40
+//  },
+//  user: {
+//   width:40,
+//   height: 40
+// },
 
 })

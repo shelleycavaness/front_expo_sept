@@ -22,7 +22,7 @@ export default function({ route }) {
 
   // const detailPhoto = detail[itemId].photo
    const detailPhoto = itemId.actionImg
-  console.log('itemId : detail ---------------', itemId)
+  // console.log('itemId : detail ---------------', itemId)
 
 // console.log('detailDone :>> ', detailDone);
 // let result = actions.findIndex(x => x.id === 5);

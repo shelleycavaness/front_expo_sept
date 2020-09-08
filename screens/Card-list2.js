@@ -10,14 +10,14 @@ import {
   FlatList,
   TouchableHighlight
 } from 'react-native';
-// import ListView from 'deprecated-react-native-listview'
+
 import { allImages } from "../assets/index";
-// import data1 from '../db.json'
+import Colors from '../constants/Colors';
 import CardItem from './CardItem'
 
 export default function MesDefisList({ navigation }) {
   const [actionList, setActionsList] = useState([] );
-
+  const [filteredList, setFilteredList] = useState([])
   useEffect(()=>{
     // fetch( "https://docker-nestjs-my-eco-defi.apps.ocp.lab-nxtit.com/api/v1/actions")
        fetch('http://localhost:9999/api/v1/actions/')
@@ -25,21 +25,27 @@ export default function MesDefisList({ navigation }) {
     .then((responseJson) => setActionsList(Object.values(responseJson)))
     .catch((error) => console.error('error in catch ----------',error))
   }, [])   
-  
-  // actionList && actionList.length ? 
-  // console.log("actionList>>>>>>>>>>>>>", actionList) : 
-  // console.log('no object here')
+  useEffect(()=>{
+  }, [actionList])
 
-  //function for organizing actions in Ascending point order & Descending
-  const sortPointsUP = actionList.slice(0);
-  sortPointsUP.sort(function(a,b) {
-      return a.actionPoint - b.actionPoint;
-  });
-  
-  const sortPointsDown = actionList.slice(0);
-  sortPointsUP.sort(function(a,b) {
-      return b.actionPoint - a.actionPoint;
-  });
+  const getCompletedActions= () => {
+    const completedActions = actionList.filter( (el) => {
+       return el.actionIsDone == true  
+     });
+     setFilteredList(completedActions) 
+    console.log('/////////////////////////', completedActions)    
+    }
+  const getIncomplActions= () => {
+    const inCompletActions = actionList.filter( (el) => {
+       return el.actionIsDone == false      
+     });
+     setFilteredList(inCompletActions) 
+    console.log('/////////////////////////', inCompletActions)    
+    }
+  const getAllActions =() => {
+      setFilteredList(actionList) 
+      // console.log('3333333333333333333333333', filteredList)
+      }
 
 
   const pressHandler = ( id ) => {
@@ -50,7 +56,24 @@ export default function MesDefisList({ navigation }) {
   };
     return (
       <ScrollView style={styles.container}>
-      <Text style={styles.title}>Mes defis</Text> 
+      <Text style={styles.title}>Mes defis par catagorie</Text> 
+      <View style={styles.tabBox}>
+          <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
+              onPress={()=> getAllActions()}
+            >
+              <Text style={styles.tabText}>all </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
+              onPress={()=> getCompletedActions()}
+          >
+              <Text style={styles.tabText}>numerique</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
+              onPress={()=> getIncomplActions()}
+           >
+              <Text style={styles.tabText}> quotidien</Text>
+           </TouchableOpacity>
+        </View> 
        <View style={styles.body}>
         <FlatList style={styles.container} 
           keyExtractor={ (item) => item.id.toString() }
@@ -75,6 +98,43 @@ export default function MesDefisList({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  tabBox:{
+    flex: 1,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    // borderColor: Colors.silver,    
+    // borderColor: 'yellow',
+    flexDirection: 'row',
+    
+    // borderWidth: 2,
+    // borderStyle: 'solid',
+
+  },
+  buttonContainer: {
+    height:25,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom:10,
+    width:100,
+    borderRadius:30,
+    borderColor: Colors.grey1, 
+    borderWidth: 2,
+    flexDirection: 'row',
+    borderStyle: 'solid',
+
+  },
+  tabButton: {
+    backgroundColor:Colors.platinum,
+    borderWidth: 2,
+    borderStyle: 'solid',
+    borderRadius: 5,
+    borderBottomColor: Colors.slateGray,
+  },
+  tabText:{
+    color: Colors.Turquoise2,
+    fontFamily: "Roboto",
+  },
   image:{
     width: 60,
     // height: 60,
@@ -82,7 +142,7 @@ const styles = StyleSheet.create({
   },
   body: {
     padding:30,
-    backgroundColor :"pink",
+    backgroundColor :Colors.silver,
   },
   box: {
     marginTop:5,

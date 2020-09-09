@@ -1,10 +1,11 @@
 import React, { useState, useLayoutEffect, useEffect, useContext } from "react";
-import ProfileScreen from './ProfileScreen'
 import { Image, StyleSheet, Text, TouchableOpacity,View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import * as WebBrowser from "expo-web-browser";
 import { MonoText } from "../components/StyledText";
 import { allImages } from "../assets/";
+import Colors from '../constants/Colors';
+import {ActionListContext} from '../contexts/actionListContext'
 import { CurrentUserContext } from '../contexts/currentUserContext'
 
 export default function HomeScreen({ navigation }) {
@@ -12,22 +13,24 @@ export default function HomeScreen({ navigation }) {
   const [action, setAction] = useState({});
   const [playerList, setPlayerList] = useState() 
   const [player, setPlayer] = useState({});
-  const [newScore, setNewScore] = useState(0)
+  // const [newScore, setNewScore] = useState(0)
   const [id, setId] = useState();
   const { setCurrentPlayer } = useContext(CurrentUserContext)
+  const {setActionsList} = useContext(ActionListContext)
 
   useEffect(() => {
     let playerId = 2;
     const randomId = Math.floor(Math.random() * Math.floor(4));
     setId(randomId);
     
-    fetch(
-      "https://docker-nestjs-my-eco-defi.apps.ocp.lab-nxtit.com/api/v1/actions"
-    )
-      //  fetch('http://localhost:9999/api/v1/actions')
+    // fetch(
+    //   "https://docker-nestjs-my-eco-defi.apps.ocp.lab-nxtit.com/api/v1/actions"
+    // )
+       fetch('http://localhost:9999/api/v1/actions')
       .then((response) => response.json())
       .then((responseJson) => setActionList(Object.values(responseJson)))
       .catch((error) => console.error("error in catch ----------", error));
+      
     // fetch(
     //   "https://docker-nestjs-my-eco-defi.apps.ocp.lab-nxtit.com/api/v1/players/" +
     //     playerId
@@ -40,22 +43,26 @@ export default function HomeScreen({ navigation }) {
       .catch((error) => console.error("error in catch ----------", error));
   }, []);
   
+useEffect(()=>{
 
-  const setActionObj = () => {
     if (actionList && actionList.length) {
       setAction(actionList[id]);
+     alert('object')
     }
-  };
-  const setPlayerObj = () => {
-    if (playerList && playerList.length) {
-      setPlayer(playerList[id]);
-      // console.log("playerlist setter :>> ", player);
-    }
-  };
-  const getNewScore =() => {
-    setNewScore(actionList[id].actionPoint + playerList[id].playerStats.cumulatedScore )
+},[])
+
+  
+  // };
+  // const setPlayerObj = () => {
+  //   if (playerList && playerList.length) {
+  //     setPlayer(playerList[id]);
+  //     // console.log("playerlist setter :>> ", player);
+  //   }
+  // };
+  // const getNewScore =() => {
+  //   setNewScore(actionList[id].actionPoint + playerList[id].playerStats.cumulatedScore )
    
-  };
+  // };
 
   const pressHandler = async (action) => {
     const data = {
@@ -91,14 +98,15 @@ export default function HomeScreen({ navigation }) {
   };
 
 
-  useEffect(() => {
-    if (playerList) {
-      // console.log(playerList);
-    }
-    if (newScore > 0) {
-      console.log('bigger than 0 ',newScore)
-    }
-  }, [newScore])
+  // useEffect(() => {
+  //   if (playerList) {
+  //     // console.log(playerList);
+  //   }
+  //   if (newScore > 0) {
+  //     console.log('bigger than 0 ',newScore)
+  //   }
+  // }, [newScore])
+  
 
   return (
     <ScrollView style={styles.scrollContainer}>
@@ -150,7 +158,6 @@ export default function HomeScreen({ navigation }) {
           >
             <Text style={styles.buttonText}>Je l'accepte !</Text>
           </TouchableOpacity>
-
           <TouchableOpacity
             onPress={() => navigation.navigate("Dommage")}
             style={styles.button2}
@@ -160,6 +167,7 @@ export default function HomeScreen({ navigation }) {
         </View>
       </View>
     </ScrollView>
+    
   );
 }
 
@@ -245,8 +253,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginTop: 30,
-    marginBottom: 20,
+    // marginTop: 30,
+    // marginBottom: 20,
   },
   button: {
     backgroundColor: "#83d499",

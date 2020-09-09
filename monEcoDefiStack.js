@@ -30,14 +30,14 @@ export default function MonEcoDefiStack(props) {
         try{
           setCurrentPlayer(await getCurrentUser()) 
         } catch(err){
-          console.log('err :>> ', err);
+          console.log('err in fetchCurrentUser:>> ', err);
         }  
       }
       fetchCurrentUser()  
   }, [])
   
   useEffect(()=>{
-    console.log('currentPlayer0000000000000000000000000000000000000000', currentPlayer)
+    // console.log('currentPlayer0000000000000000000000000000000000000000', currentPlayer)
 
   }, [currentPlayer])  
 

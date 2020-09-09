@@ -4,7 +4,7 @@ export default async function getActions(){
 
  .then((reponse) => reponse.json())
  .then( (responseJson) =>  {
-     console.log('/////////////////////////////////////////////', responseJson)
+     console.log('////////fetch actions', responseJson)
   return responseJson
     })
  .catch((error) => console.error('error in catch ----------',error))

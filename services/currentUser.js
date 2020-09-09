@@ -4,7 +4,7 @@ export default async function getCurrentUser(){
 
     .then((reponse) => reponse.json())
     .then( (responseJson) =>  {
-        console.log('/////////////////////////////////////////////', responseJson)
+        console.log('////// fetch getCurrentUser', responseJson)
         return responseJson
        })
     .catch((error) => console.error('error in catch ----------',error))

@@ -89,21 +89,20 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 4,
     marginVertical: 8,
-    backgroundColor:"white"
+    backgroundColor:"white",
+    borderRadius: 5,
   },
   cardHeader: {
     paddingVertical: 17,
     paddingHorizontal: 16,
     borderTopLeftRadius: 1,
     borderTopRightRadius: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    borderColor: 'pink',
-    borderWidth: 2,
+    flexDirection: 'collumn',
   },
   cardContent: {
     paddingVertical: 12.5,
     paddingHorizontal: 16,
+    justifyContent: 'space-between',
   },
   cardFooter:{
     flexDirection: 'row',
@@ -117,7 +116,8 @@ const styles = StyleSheet.create({
   },
   cardImage:{
     flex: 1,
-    height: 150,
+    borderRadius: 5,
+    height: 120,
     width: null,
   },
   /******** card components **************/
@@ -131,6 +131,9 @@ const styles = StyleSheet.create({
     flex:1,
     marginTop:5,
     marginBottom:5,
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
   },
   time:{
     fontSize:13,

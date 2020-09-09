@@ -14,22 +14,10 @@ import wattsPNG from '../assets/images/icons/icons8-renewable-energy-50.png'
 export default function ProfileScreen( { navigation }){
   let id = 2
   const { currentPlayer } = useContext(CurrentUserContext)
-
-  const [playerList, setPlayerList] = useState([]);
-  const [player, setPlayer] = useState({});
-  const setPlayerObj = () => {
-    if (playerList && playerList.length>0) {
-      setPlayer(playerList[2]);
-      console.log("playerlist setter :******************************>> ", player.playerStats);
-      // console.log(' players[0].playerStats :>> ',  players[0].playerStats);
-      }
-     };
-    //  setPlayerObj()
+  // const [playerList, setPlayerList] = useState([]);
   useEffect (() => {
 
     }, [currentPlayer])
-
-
 
   return(
 
@@ -60,52 +48,55 @@ export default function ProfileScreen( { navigation }){
         </View>
     </View> 
     <View  style={styles.sectionWrapper}>
-    <Text style={styles.sectionTitle}>Impact Total </Text>
-    <View style={styles.iconBoxWrapper}> 
-      <View style={styles.iconBox}> 
-        <Image 
-          style={styles.icon}
-          source={ co2PNG }
-          />
-         
-         <Text style={styles.title}>{currentPlayer.playerStats.cumulatedScore } CO2 </Text> 
-      </View>
-      <View style={styles.iconBox}> 
-        <Image 
-          style={styles.icon}
-          source={ wattsPNG }
-          />
-       
-         <Text style={styles.title}>{ currentPlayer.playerStats.potentialScore } litres</Text> 
-      </View>
-      <View style={styles.iconBox}> 
-        <Image 
-          style={styles.icon}
-          source={ waterPNG }
-          />
-         <Text style={styles.title}>{ currentPlayer.playerStats.numberOfActionsDone }kwatts</Text> 
-         
-      </View>
-      
-      </View>
+      <Text style={styles.sectionTitle}>Impact Total </Text>
+        <View style={styles.iconBoxWrapper}> 
+            <View style={styles.iconBox}> 
+              <Image 
+                style={styles.icon}
+                source={ co2PNG }
+                />
+              
+              <Text style={styles.title}>{currentPlayer.playerStats && currentPlayer.playerStats.co2Saved } CO2 </Text> 
+            </View>
+            <View style={styles.iconBox}> 
+              <Image 
+                style={styles.icon}
+                source={ wattsPNG }
+                />
+            {currentPlayer && console.log('currentPlayer', currentPlayer)}
+              <Text style={styles.title}>{ currentPlayer.playerStats && currentPlayer.playerStats.kwSaved } kwatts </Text> 
+            </View>
+            <View style={styles.iconBox}> 
+              <Image 
+                style={styles.icon}
+                source={ waterPNG }
+                />
+              <Text style={styles.title}>{ currentPlayer.playerStats && currentPlayer.playerStats.h2OSaved }litres</Text> 
+            </View>
+       </View>
        <View style={styles.detailBox}>
         <View style={styles.detailContent}>
-          <Text style={styles.title}>Score : </Text>
-          <Text style={styles.count}>{currentPlayer.playerStats.cumulatedScore}</Text>
+          <Text style={styles.title}>Player's Score : </Text>
+          <Text style={styles.count}>{ 
+            currentPlayer.playerStats && currentPlayer.playerStats.cumulatedScore
+            }</Text>
         </View>
         <View style={styles.detailContent}>
-          <Text style={styles.title}>Ecological Footprint Indicator : <Text style={styles.count}> {currentPlayer.playerStats.numberOfActionsDone}
-          </Text > </Text>
+          <Text style={styles.title}>Total number of actions : </Text >
+          <Text style={styles.count}> {
+            currentPlayer.playerStats && currentPlayer.playerStats.numberOfActionsDone
+            }
+           </Text>
         </View>
         <View style={styles.detailContent}>
-          <Text style={styles.title}>Tonnes de CO2 Compensés 
-           { currentPlayer.playerStats.numberOfActionsDone }  </Text>
+          <Text style={styles.title}> Potenial Score:  </Text>
+          <Text style={styles.count}>  { 
+            currentPlayer.playerStats && currentPlayer.playerStats.potentialScore 
+            }  </Text>
         </View>
       </View>
    </View>
   </ScrollView>  
-
-
   )  
 }
 
@@ -201,7 +192,7 @@ const styles = StyleSheet.create({
     },
     title:{
       fontSize:13,
-      color: "#FFFFFF",
+      color: "grey",
       fontFamily: "Roboto",
     },
     count:{

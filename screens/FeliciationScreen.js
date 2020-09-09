@@ -33,7 +33,7 @@ export default function FelicitationScreen({ navigation, route }) {
        <View style={styles.container}>
          <View style={styles.header}>  
          
-          <Text style={styles.slogan}> your new score is: {currentPlayer.playerStats.cumulatedScore}. Rendez-vous demain!</Text>       
+          <Text style={styles.slogan}> your new score is: { currentPlayer.playerStats && currentPlayer.playerStats.cumulatedScore}. Rendez-vous demain!</Text>       
         </View>   
         <Image 
           style={styles.photo} 

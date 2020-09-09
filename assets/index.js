@@ -25,6 +25,7 @@ import WattsJPG from './images/icons/watts.jpg'
 import LogoPNG from './images/Sg_Logo.png'
 import RenewablPNG from './images/icons/icons8-renewable-energy-50.png'
 import ReadMorePNG from './images/icons/icons8-view-more-48.png'
+import WaterDropPNG from './images/icons/icons8-water-50.png'
 
 
 
@@ -54,7 +55,7 @@ export const watts = WattsJPG
 export const logo = LogoPNG
 export const renewable = RenewablPNG
 export const readMore = ReadMorePNG
-
+export const waterDrop = WaterDropPNG
 
 export const allImages = {
   
@@ -85,5 +86,5 @@ export const allImages = {
  logo : LogoPNG,
  renewable : RenewablPNG,
  readMore :  ReadMorePNG,
-
+ waterDrop : WaterDropPNG,
 }

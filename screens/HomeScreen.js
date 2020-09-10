@@ -6,21 +6,18 @@ import { MonoText } from "../components/StyledText";
 import { allImages } from "../assets/";
 import Colors from '../constants/Colors';
 import {ActionListContext} from '../contexts/actionListContext'
-import { CurrentUserContext } from '../contexts/currentUserContext'
+import { CurrentUserContext  } from '../contexts/currentUserContext'
 
 export default function HomeScreen({ navigation }) {
   const [actionList, setActionList] = useState();
   const [action, setAction] = useState({});
   const [playerList, setPlayerList] = useState() 
-  const [player, setPlayer] = useState({});
-  // const [newScore, setNewScore] = useState(0)
   const [id, setId] = useState();
-  const { setCurrentPlayer } = useContext(CurrentUserContext)
-  const {setActionsList} = useContext(ActionListContext)
+  const { setCurrentPlayer, currentPlayer } = useContext(CurrentUserContext)
 
   useEffect(() => {
     let playerId = 2;
-    const randomId = Math.floor(Math.random() * Math.floor(4));
+    const randomId = Math.floor(Math.random() * Math.floor(7));
     setId(randomId);
     
     // fetch(
@@ -42,135 +39,28 @@ export default function HomeScreen({ navigation }) {
       .then((responseJson) => setPlayerList(Object.values(responseJson)))
       .catch((error) => console.error("error in catch ----------", error));
   }, []);
-  
-useEffect(()=>{
+   
+  useEffect(()=>{
+   
+    actionList && setAction(actionList[id])
+     
+  },[])
 
-    if (actionList && actionList.length) {
-      setAction(actionList[id]);
-     alert('object')
-    }
-},[])
-
+    const pushActionToPlayer = ()=>{
+      let playerCopy = currentPlayer
+      currentPlayer.playerActions && playerCopy.playerActions.push(actionList[id])
+      console.log('object =======================:>> ', playerCopy);
+      return playerCopy
+  }
   
-  // };
-  // const setPlayerObj = () => {
-  //   if (playerList && playerList.length) {
-  //     setPlayer(playerList[id]);
-  //     // console.log("playerlist setter :>> ", player);
-  //   }
-  // };
+ 
   // const getNewScore =() => {
   //   setNewScore(actionList[id].actionPoint + playerList[id].playerStats.cumulatedScore )
-   
   // };
 
   const pressHandler = async (action) => {
-    const data = {
-      "id": 3,
-      "lastName": " Jacoby",
-      "firstName": "Rebecca",
-      "email": "Rebecca.Jacoby.Cisco@socgen.com",
-      "pseudo": "Jacoby-cto-cisco",
-      "location": "Les Dunes",
-      "playerActions": [
-        {
-          "id": 0,
-          "actionName": "Faire tourner la machine à laver le linge pleine",
-          "actionDescription": "Le fait de remplir votre lave-linge, vous permet donc de faire des économies d'énergie, aussi bien sur l'eau que sur l'électricité, car vous faites moins de machines. En toute logique, il est plus rentable de faire tourner une machine pleine que deux demi-machines.",
-          "actionIsDone": true,
-          "actionIsRefused": false,
-          "actionImg": "vinegar",
-          "actionPoint": 130,
-          "actionCo2": 30,
-          "actionKw": 30,
-          "actionH2O": 30
-      },
-      {
-          "id": 1,
-          "actionName": "Je refuse les publicités papiers dans ma boîte aux lettres",
-          "actionDescription": "Je refuse les publicités papiers dans ma boîte aux lettres en plaçant un message \"Stop Pub\". Précédemment, on disait bye-bye aux courriers non sollicités. Nous avons poursuivi avec les dépliants.",
-          "actionIsDone": true,
-          "actionIsRefused": false,
-          "actionImg": "stopPub",
-          "actionPoint": 30,
-          "actionCo2": 30,
-          "actionKw": 30,
-          "actionH2O": 30
-      },
-      {
-          "id": 2,
-          "actionName": "Arrêter d’utiliser assiettes, gobelets et couverts jetables",
-          "actionDescription": "utiliser de la vaisselle solides et non jetables, emmener des serviettes en tissus, préparer des plats simples et facile à manger.",
-          "actionIsDone": true,
-          "actionIsRefused": false,
-          "actionImg": "plasticCup",
-          "actionPoint": 80,
-          "actionCo2": 30,
-          "actionKw": 30,
-          "actionH2O": 30
-      },
-      {
-          "id": 3,
-          "actionName": "Arrêter l’eau quand on se lave les mains",
-          "actionDescription": "Cette méthode permet d'économiser 15 litres d'eau potable à chaque fois que vous vous lavez les mains. Moi, je me lave les mains plus de 5 fois par jour. Donc cela fait déjà 75 litres par jour.",
-          "actionIsDone": true,
-          "actionIsRefused": false,
-          "actionImg": "douche",
-          "actionPoint": 90,
-          "actionCo2": 30,
-          "actionKw": 30,
-          "actionH2O": 30
-      },
-      {
-          "id": 4,
-          "actionName": "Acheter des fruits et légumes de saison",
-          "actionDescription": "Consommer en suivant le calendrier des saisons permet d’économiser de l’argent. En effet, les fruits et légumes de saison sont bien moins chers que ceux cultivés en serre ou importés.",
-          "actionIsDone": true,
-          "actionIsRefused": false,
-          "actionImg": "veggieBag",
-          "actionPoint": 50,
-          "actionCo2": 30,
-          "actionKw": 30,
-          "actionH2O": 30
-      },
-      {
-          "id": 5,
-          "actionName": "On dit « Non aux échantillons » ",
-          "actionDescription": "Refuser les échantillons gratuits.",
-          "actionIsDone": true,
-          "actionIsRefused": false,
-          "actionImg": "abeille",
-          "actionPoint": 50,
-          "actionCo2": 30,
-          "actionKw": 30,
-          "actionH2O": 30
-      },
-      {
-          "id": 6,
-          "actionName": "Installer un mousseur sur les robinets",
-          "actionDescription": "L'eau est un poste de dépense important pour votre foyer d’autant que son prix ne cesse d’augmenter. Selon l’Ademe, équiper tous vos robinets d'éco-mousseurs peut vous aider à réduire considérablement votre consommation d’eau, sachant que le débit courant d’un robinet est de 12 litres par minute. En effet, il est possible de consommer jusqu’à 50% d’eau en moins et donc de réaliser des économies importantes.",
-          "actionIsDone": false,
-          "actionIsRefused": true,
-          "actionImg": "ampule",
-          "actionPoint": 50,
-          "actionCo2": 30,
-          "actionKw": 30,
-          "actionH2O": 30
-      },
-      {
-          "id": 7,
-          "actionName": "Planifier ses menus pour éviter le gaspillage",
-          "actionDescription": "Faire ses plannings de repas équilibrés et éviter le gaspillage alimentaire. Le concept de Menu to Shop se base sur un constat très simple, planifier ses repas permet de manger plus équilibré, plus diversifié tout en gaspillant moins.",
-          "actionIsDone": true,
-          "actionIsRefused": false,
-          "actionImg": "fillet",
-          "actionPoint": 50,
-          "actionCo2": 30,
-          "actionKw": 30,
-          "actionH2O": 30
-      }
-      ], 
-    }
+    const data = pushActionToPlayer()
+
       const result = await fetch('http://localhost:9999/api/v1/players/3',
       {method: 'PUT', 
        headers: {
@@ -182,22 +72,12 @@ useEffect(()=>{
       .then(response => response.json())
       console.log('await result', await result)
       setCurrentPlayer( await result)
-///////////navigation//////
+/////////////////////navigation///////////////////////
       navigation.navigate("Felicitation", {
         propsItem: actionList[id],
         // newScore: newScore,
       });
   };
-
-
-  // useEffect(() => {
-  //   if (playerList) {
-  //     // console.log(playerList);
-  //   }
-  //   if (newScore > 0) {
-  //     console.log('bigger than 0 ',newScore)
-  //   }
-  // }, [newScore])
   
 
   return (
@@ -205,58 +85,66 @@ useEffect(()=>{
       <View style={styles.container}>
         <Text style={styles.titleText}>Le defi du jour : </Text>
         <View style={styles.container2}>
-          {actionList && actionList.length > 0 ? (
-            <Text style={styles.defiText}>{actionList[id].actionName}</Text>
-          ) : (
-            <Text style={styles.defiText}>{"defiTitle"}</Text>
-          )}
+          {actionList && actionList.length > 0 ? 
+          ( <Text style={styles.defiText}>{actionList[id].actionName}</Text>) 
+          : 
+          ( <Text style={styles.defiText}>{"defiTitle"}</Text>  )}
         </View>
-        {actionList && actionList.length > 0 ? (
-          <Text style={styles.description}>
-            {actionList[id].actionDescription}{" "}
-          </Text>
-        ) : (
-          <Text style={styles.description}>{"defiDescript"} </Text>
-        )}
+
+        {
+            actionList && actionList.length > 0 ? 
+            ( <Text style={styles.description}>
+              {actionList[id].actionDescription}{" "}
+            </Text>) 
+            : 
+            ( <Text style={styles.description}>{"defiDescript"} </Text>)
+        }
+         {/* {(action != undefined) && console.log('action-------', action)} */}
 
         <Text style={styles.description}>points gagnes :</Text>
-        {actionList && actionList.length > 0 ? (
-          <Text style={styles.points}> {actionList[id].actionPoint}</Text>
-        ) : (
-          <Text style={styles.points}>{"defipoint"} </Text>
-        )}
-        <View style={styles.container3}>
+        {
+          actionList && actionList.length > 0 ? 
+          (  <Text style={styles.points}> {actionList[id].actionPoint}</Text>) 
+          :
+         ( <Text style={styles.points}>{"defipoint"} </Text> )
+        }
+
+          <View style={styles.container3}>
+            {actionList && actionList.length > 0 ? (
+              <Text style={styles.description}>
+                Tonnes de CO2 Compensés maintenant :{" "}
+                {" " + actionList[id].actionCo2}
+              </Text>
+            ) : (
+              <Text style={styles.points}>{"defipoint"} </Text>
+            )}
+          </View>
+
           {actionList && actionList.length > 0 ? (
-            <Text style={styles.description}>
-              Tonnes de CO2 Compensés maintenant :{" "}
-              {" " + actionList[id].actionCo2}
-            </Text>
+            <Image
+              style={styles.Image}
+              source={allImages[actionList[id].actionImg]}
+            ></Image>
           ) : (
-            <Text style={styles.points}>{"defipoint"} </Text>
+            <Text>no image</Text>
           )}
-        </View>
-        {actionList && actionList.length > 0 ? (
-          <Image
-            style={styles.Image}
-            source={allImages[actionList[id].actionImg]}
-          ></Image>
-        ) : (
-          <Text>no image</Text>
-        )}
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            onPress={() => pressHandler(action)}
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>Je l'accepte !</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Dommage")}
-            style={styles.button2}
-          >
-            <Text style={styles.buttonText}>Je refuse</Text>
-          </TouchableOpacity>
-        </View>
+
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              onPress={() => pressHandler(action)}
+              style={styles.button}
+            >
+              <Text style={styles.buttonText}>Je l'accepte !</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Dommage",  {
+                propsItem: actionList[id]   
+              }  )}
+              style={styles.button2}
+            >
+              <Text style={styles.buttonText}>Je refuse</Text>
+            </TouchableOpacity>
+          </View>
       </View>
     </ScrollView>
     
@@ -367,3 +255,103 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
 });
+
+const data2 = [
+  
+{
+  "id": 0,
+  "actionName": "Faire tourner la machine à laver le linge pleine",
+  "actionDescription": "Le fait de remplir votre lave-linge, vous permet donc de faire des économies d'énergie, aussi bien sur l'eau que sur l'électricité, car vous faites moins de machines. En toute logique, il est plus rentable de faire tourner une machine pleine que deux demi-machines.",
+  "actionIsDone": true,
+  "actionIsRefused": false,
+  "actionImg": "vinegar",
+  "actionPoint": 130,
+  "actionCo2": 30,
+  "actionKw": 30,
+  "actionH2O": 30
+},
+{
+  "id": 1,
+  "actionName": "Je refuse les publicités papiers dans ma boîte aux lettres",
+  "actionDescription": "Je refuse les publicités papiers dans ma boîte aux lettres en plaçant un message \"Stop Pub\". Précédemment, on disait bye-bye aux courriers non sollicités. Nous avons poursuivi avec les dépliants.",
+  "actionIsDone": true,
+  "actionIsRefused": false,
+  "actionImg": "stopPub",
+  "actionPoint": 30,
+  "actionCo2": 30,
+  "actionKw": 30,
+  "actionH2O": 30
+},
+{
+  "id": 2,
+  "actionName": "Arrêter d’utiliser assiettes, gobelets et couverts jetables",
+  "actionDescription": "utiliser de la vaisselle solides et non jetables, emmener des serviettes en tissus, préparer des plats simples et facile à manger.",
+  "actionIsDone": true,
+  "actionIsRefused": false,
+  "actionImg": "plasticCup",
+  "actionPoint": 80,
+  "actionCo2": 30,
+  "actionKw": 30,
+  "actionH2O": 30
+},
+{
+  "id": 3,
+  "actionName": "Arrêter l’eau quand on se lave les mains",
+  "actionDescription": "Cette méthode permet d'économiser 15 litres d'eau potable à chaque fois que vous vous lavez les mains. Moi, je me lave les mains plus de 5 fois par jour. Donc cela fait déjà 75 litres par jour.",
+  "actionIsDone": true,
+  "actionIsRefused": false,
+  "actionImg": "douche",
+  "actionPoint": 90,
+  "actionCo2": 30,
+  "actionKw": 30,
+  "actionH2O": 30
+},
+{
+  "id": 4,
+  "actionName": "Acheter des fruits et légumes de saison",
+  "actionDescription": "Consommer en suivant le calendrier des saisons permet d’économiser de l’argent. En effet, les fruits et légumes de saison sont bien moins chers que ceux cultivés en serre ou importés.",
+  "actionIsDone": true,
+  "actionIsRefused": false,
+  "actionImg": "veggieBag",
+  "actionPoint": 50,
+  "actionCo2": 30,
+  "actionKw": 30,
+  "actionH2O": 30
+},
+{
+  "id": 5,
+  "actionName": "On dit « Non aux échantillons » ",
+  "actionDescription": "Refuser les échantillons gratuits.",
+  "actionIsDone": true,
+  "actionIsRefused": false,
+  "actionImg": "abeille",
+  "actionPoint": 50,
+  "actionCo2": 30,
+  "actionKw": 30,
+  "actionH2O": 30
+},
+{
+  "id": 6,
+  "actionName": "Installer un mousseur sur les robinets",
+  "actionDescription": "L'eau est un poste de dépense important pour votre foyer d’autant que son prix ne cesse d’augmenter. Selon l’Ademe, équiper tous vos robinets d'éco-mousseurs peut vous aider à réduire considérablement votre consommation d’eau, sachant que le débit courant d’un robinet est de 12 litres par minute. En effet, il est possible de consommer jusqu’à 50% d’eau en moins et donc de réaliser des économies importantes.",
+  "actionIsDone": false,
+  "actionIsRefused": true,
+  "actionImg": "ampule",
+  "actionPoint": 50,
+  "actionCo2": 30,
+  "actionKw": 30,
+  "actionH2O": 30
+},
+{
+  "id": 7,
+  "actionName": "Planifier ses menus pour éviter le gaspillage",
+  "actionDescription": "Faire ses plannings de repas équilibrés et éviter le gaspillage alimentaire. Le concept de Menu to Shop se base sur un constat très simple, planifier ses repas permet de manger plus équilibré, plus diversifié tout en gaspillant moins.",
+  "actionIsDone": true,
+  "actionIsRefused": false,
+  "actionImg": "fillet",
+  "actionPoint": 50,
+  "actionCo2": 30,
+  "actionKw": 30,
+  "actionH2O": 30
+}
+]

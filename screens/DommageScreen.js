@@ -1,34 +1,53 @@
             
-import React from 'react';
+import React, {useEffect,useContext} from 'react';
 import {
   StyleSheet,
   Text,
   View,
   TouchableHighlight,
   Image,
-  Alert,
   ScrollView,
 } from 'react-native';
+import { CurrentUserContext } from '../contexts/currentUserContext'
+
+import { allImages } from "../assets/";
+import Colors from '../constants/Colors';
 import { dommage, velo } from "../assets";
 
-export default function DommageScreen({ navigation }) {
+export default function DommageScreen({ navigation, route }) {
+  const { currentPlayer } = useContext(CurrentUserContext)
+  const { propsItem } = route.params;
+  useEffect(() => {
+  }, [currentPlayer])
 
     return (
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.container}>
-          <Image style={styles.photo} source={{uri: dommage}}/>
-          <Text style={styles.companyName}>Dommage !!!</Text>
-          <Text style={styles.slogan}>Rendez-vous demain!</Text>
-          <View style={styles.descriptionContent}>
-            <Text style={styles.description}>
-              Lorem ipsum dolor sit amet, altera conceptam ei cum. Hinc temporibus repudiandae eu mel, cum impetus legendos ei. 
-              Fugit everti dissentias duo cu, nihil fabellas id pri, nonumy verear ea pri. Sit et nisl eros. Ad sapientem forensibus est, 
-              ne vis sonet iuvaret, his sint fabulas dolores ad. Repudiare gubergren voluptatum ius ne, nec nostro possim nostrud ad, 
-            </Text>
+          <View style={styles.cardHeader}>
+              <Image style={styles.photo} source={{uri: dommage}}/>
+              <Text style={styles.title}>Dommage !!!</Text>
+              <Text style={styles.slogan}>Rendez-vous demain!</Text>
+            </View>
+        
+          <View style={styles.descriptionBox}>
+              <Text style={styles.description}> refused challenges : 
+                  {  currentPlayer.playerStats && currentPlayer.playerStats.numberOfActionsRefused   }
+                </Text>
+                <Text style={styles.description}> refused points with this challenge : 
+                  {  propsItem.actionPoint && propsItem.actionPoint  }
+                </Text>
+                <Text style={styles.description}> potential Score  :    
+                  {  currentPlayer.playerStats && currentPlayer.playerStats.potentialScore   }
+                </Text>
           </View>
-          <TouchableHighlight style={[styles.buttonContainer, styles.sendButton]} onPress={() => navigation.goBack()}>
-            <Text style={styles.buttonText}>Goback</Text>
-          </TouchableHighlight>
+          <View style={styles.cardFooter}>
+              <View style={styles.buttonContainer}>
+                {  propsItem &&  console.log('propsItem in Dommage screen:   ', propsItem)}
+                <TouchableHighlight style={[styles.buttonContainer, styles.sendButton]} onPress={() => navigation.navigate('Actions')}>
+                  <Text style={styles.buttonText}>chosir un autre defi</Text>
+                </TouchableHighlight>
+              </View>
+          </View>
         </View>
       </ScrollView>
     );
@@ -38,23 +57,35 @@ export default function DommageScreen({ navigation }) {
 const styles = StyleSheet.create({
   scrollContainer:{
     flex: 1,
+
+    backgroundColor: Colors.Turquoise1,
+    // backgroundColor: '#e0ec80',
   },
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#e0ec80',
+    justifyContent: "space-around",
+  },
+  cardHeader: {
+    borderWidth: 2,
+    borderColor: "pink",
+    // paddingVertical: 17,
+    // paddingHorizontal: 16,
+    // borderTopLeftRadius: 1,
+    // borderTopRightRadius: 1,
+    // flexDirection: 'collumn',
   },
   photo:{
     width:200,
     height:200,
     justifyContent: 'center',
-    marginBottom:10,
-    marginTop:30,
+    marginBottom:5,
+    marginTop:10,
     borderRadius: 5,
     borderWidth: 4,
     borderColor: "white",
   },
-  companyName: {
+  title: {
     fontSize:32,
     fontWeight: '600',
     color: '#FFFFFF',
@@ -65,14 +96,31 @@ const styles = StyleSheet.create({
     color: '#228B22',
     marginTop:10,
   },
-  descriptionContent:{
-    padding:30
+  descriptionBox:{
+    // padding:30
+    borderWidth: 4,
+    borderColor: "white",
+    borderStyle: "dotted",
   },
   description:{
     fontSize:18,
     textAlign:'center',
     marginTop:10,
     color: '#FFFFFF',
+  },
+  cardFooter:{
+    flex : 1,
+    // flexDirection: 'row',
+    // justifyContent: 'space-between',
+    // paddingTop: 12.5,
+    // paddingBottom: 15,
+    // paddingHorizontal: 16,
+    // borderBottomLeftRadius: 1,
+    // borderBottomRightRadius: 1,
+    // backgroundColor:"#EEEEEE",
+    borderWidth: 2,
+    borderColor: "pink",
+
   },
   buttonContainer: {
     height:45,

@@ -6,18 +6,14 @@ import {
   View,
   TouchableHighlight,
   Image,
-  Alert,
   ScrollView,
 } from 'react-native';
 import {  congrats, tiger } from "../assets/index";
 import { CurrentUserContext } from '../contexts/currentUserContext'
 
 
-export default function FelicitationScreen({ navigation, route }) {
+export default function FelicitationScreen({ route }) {
  const { propsItem } = route.params;
-//  const { newScore } = route.params;
-//  console.log(`@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ${newScore}   newScore :>> `, newScore  );
-//  console.log('propsItem', propsItem)
  const defiTitle = propsItem.actionName;
  const defiDescript = propsItem.actionDescription;
  const defipoint = propsItem.actionPoint;
@@ -26,14 +22,19 @@ export default function FelicitationScreen({ navigation, route }) {
 
  useEffect(() => {
  }, [currentPlayer])
-//  (typeof defiCO2 !== 'undefined') ? defiCO2 : 2018;
-//  const defiImg = allImages[data.actions[id].photo]
+ 
+ const validateChallenge = () => {
+   alert('youpi')
+ }
     return (
       <ScrollView style={styles.scrollContainer}>
        <View style={styles.container}>
          <View style={styles.header}>  
-         
-          <Text style={styles.slogan}> your new score is: { currentPlayer.playerStats && currentPlayer.playerStats.cumulatedScore}. Rendez-vous demain!</Text>       
+            <Text style={styles.slogan}> your new score is :  
+            { 
+              currentPlayer.playerStats && currentPlayer.playerStats.cumulatedScore
+            }. Rendez-vous demain!
+            </Text>       
         </View>   
         <Image 
           style={styles.photo} 
@@ -41,27 +42,31 @@ export default function FelicitationScreen({ navigation, route }) {
         />
         <Text style={styles.sloganName}>Felicitation !!!</Text>       
         <View style={styles.descriptionContent}>
-         <Text style={styles.description}>
-           you saved : {defiCO2} tones of carbon !!
-         </Text>
-         <Text style={styles.description}>
-           you earned : {defipoint} game points.  
-          </Text>   
+          <Text style={styles.description}>
+            you saved : {propsItem.actionCo2} tones of carbon !!
+          </Text>
+          <Text style={styles.description}>
+            you earned : {propsItem.actionPoint} game points.  
+            </Text>   
         </View>
  
         <View style={styles.footer}>
      
          <View style={styles.contentContainer}>   
-         <Text style={styles.contentSectionText}>{defiTitle}</Text> 
+         <Text style={styles.contentSectionText}>
+            {propsItem.actionName}
+         </Text> 
           <View style={styles.contentBox}>     
             {/* <View style={styles.separator}/>        */}
-              <Text style={styles.contentSectionText}>{defiDescript}</Text>       
-            </View>     
-            
+              <Text style={styles.contentSectionText}>
+              {propsItem.actionDescription}
+              </Text>       
+          </View>     
+            {console.log('propsItem', propsItem)}
           </View>
         </View> 
-          <TouchableHighlight style={[styles.buttonContainer, styles.sendButton]} onPress={() => navigation.goBack()}>
-            <Text style={styles.buttonText}>Je confirme</Text>
+          <TouchableHighlight style={[styles.buttonContainer, styles.sendButton]} onPress={() => validateChallenge()}>
+            <Text style={styles.buttonText}>Je le confirme</Text>
           </TouchableHighlight>
         </View>
       </ScrollView>

@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   body: {
-    padding:30,
+    padding:10,
     backgroundColor :Colors.silver,
   },
   box: {

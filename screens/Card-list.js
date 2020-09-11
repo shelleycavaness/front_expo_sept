@@ -10,14 +10,10 @@ import {
   FlatList,
   TouchableHighlight
 } from 'react-native';
-import { ActionListContext } from '../contexts/actionListContext'
 import Colors from '../constants/Colors';
 import getActions from '../services/actions';
-// import ListView from 'deprecated-react-native-listview'
 import { allImages } from "../assets/index";
 import plusIcon from '../assets/images/icons/iconfinder_plus_325963.png'
-// import data1 from '../db.json'
-
 
 export default function UsersView({ navigation }) {
   const [actionList, setActionsList] = useState([]);
@@ -28,18 +24,16 @@ export default function UsersView({ navigation }) {
     .then((response) => response.json())
     .then((responseJson) => setActionsList(Object.values(responseJson)))
     .catch((error) => console.error('error in catch ----------',error))
-  }, [])   
+  }, [])  
+
   // watching the actionList to update in real time
   useEffect(()=>{
-    
   }, [actionList])
  
   // const {actionList, setActionsList} = useContext(ActionListContext)
   // useEffect( async ()=>{
   //   setActionsList( await getActions()) //fetch
   // }, [])
-  // console.log('actionList ::::::::::::::::::::::::::::::::::::::::::::::::::::>> ', actionList);
-
 
 //function for organizing actions filtering actions
   const filterUP =()=>{

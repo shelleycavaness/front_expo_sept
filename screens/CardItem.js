@@ -26,12 +26,12 @@ export default function CardItem({item}) {
                       source={allImages[item.actionImg]}                 />
         <View style={styles.cardHeader}>
             <View>
-                          <Text style={styles.title}>{item.actionName }</Text>
-                          <Text style={styles.description}>{item.actionDescription}</Text>
+                   <Text style={styles.title}>{item.actionName }</Text>
+                     {/* <Text style={styles.description}>{item.actionDescription}</Text>
                       <View style={styles.timeContainer}>
                             <Image style={styles.iconData} source={{uri: allImages.readMore}}/>
                             <Text style={styles.time}>read more</Text>
-                      </View>
+                      </View> */}
               </View>
           </View>
           <View style={styles.cardFooter}>
@@ -71,10 +71,10 @@ export default function CardItem({item}) {
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    marginTop:20,
+    // marginTop:10,
   },
   list: {
-    paddingHorizontal: 17,
+    paddingHorizontal: 15,
     backgroundColor:"#E6E6E6",
   },
   separator: {
@@ -93,22 +93,22 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   cardHeader: {
-    paddingVertical: 17,
-    paddingHorizontal: 16,
+    paddingVertical: 5,
+    paddingHorizontal: 15,
     borderTopLeftRadius: 1,
     borderTopRightRadius: 1,
     flexDirection: 'collumn',
   },
   cardContent: {
-    paddingVertical: 12.5,
+    paddingVertical: 5,
     paddingHorizontal: 16,
     justifyContent: 'space-between',
   },
   cardFooter:{
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingTop: 12.5,
-    paddingBottom: 15,
+    paddingTop: 5,
+    paddingBottom: 5,
     paddingHorizontal: 16,
     borderBottomLeftRadius: 1,
     borderBottomRightRadius: 1,
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   },
   /******** card components **************/
   title:{
-    fontSize:18,
+    fontSize:14,
     flex:1,
   }, 
   description:{

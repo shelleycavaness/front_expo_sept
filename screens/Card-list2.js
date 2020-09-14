@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     borderBottomColor: Colors.slateGray,
   },
   tabText:{
-    color: Colors.Turquoise2,
+    color: "black",
     fontFamily: "Roboto",
   },
   image:{
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     elevation:2
   },
   title:{
-    color: "#E6D5AA",
+    color: "darkgrey",
     fontSize:18,
     alignSelf:'center',
     marginLeft:10

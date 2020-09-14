@@ -99,7 +99,7 @@ export default function UsersView({ navigation }) {
           <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
               onPress={()=> getIncomplActions()}
            >
-              <Text style={styles.tabText}>undone actions </Text>
+              <Text style={styles.tabText}>undone</Text>
            </TouchableOpacity>
         </View> 
        <View style={styles.body}>
@@ -137,6 +137,7 @@ export default function UsersView({ navigation }) {
 const styles = StyleSheet.create({
   image:{
     width: 60,
+    height: 60,
     borderRadius: 3,
   },
   tabBox:{
@@ -182,31 +183,37 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.tintColor,
   },
   box: {
+    padding: 10,
     marginTop:5,
     marginBottom:5,
     backgroundColor: '#FFFFFF',
     flexDirection: 'row',
+    justifyContent: "space-between",
     shadowColor: 'black',
     shadowOpacity: .2,
     shadowOffset: {
       height:1,
       width:-2
     },
-    elevation:2
+    // elevation:2,
+    borderRadius: 5,
   },
   title:{
-    color: "#E6D5AA",
-    fontSize:18,
-    alignSelf:'center',
-    marginLeft:10
+    color: "darkgrey",
+    fontSize:14,
+    alignText:'right',
+    // alignSelf: "center",
+    marginLeft:10,
   },
   iconContent:{
+    flex: "column",
     width: 60,
     // height: 60,
     backgroundColor: '#eaeaee',
     marginLeft: 'auto',
     alignItems: 'center',
     paddingTop: 10,
+
   },
   icon:{
     width: 40,

@@ -83,7 +83,7 @@ export default function HomeScreen({ navigation }) {
   return (
     <ScrollView style={styles.scrollContainer}>
       <View style={styles.container}>
-        <Text style={styles.titleText}>Le defi du jour : </Text>
+        <Text style={styles.titleText}>Le défi du jour : </Text>
         <View style={styles.container2}>
           {actionList && actionList.length > 0 ? 
           ( <Text style={styles.defiText}>{actionList[id].actionName}</Text>) 
@@ -166,9 +166,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#e8f7d7",
   },
   titleText: {
-    fontSize: 32,
+    fontSize: '2em',
     fontWeight: "600",
     color: "#8a888c",
+    fontFamily: "Roberto",
   },
   container2: {
     // backgroundColor: '#FFF',
@@ -178,7 +179,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginLeft: 10,
     marginRight: 10,
-    // textAlign:'center',
+   textAlign:'center',
     // borderColor: 'red',
     // borderWidth: 5,
     // borderStyle: 'dotted',

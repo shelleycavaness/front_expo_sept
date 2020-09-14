@@ -84,7 +84,7 @@ export default function UsersView({ navigation }) {
     return (
       <ScrollView style={styles.container}>
       {console.log( currentPlayer.playerActions[0].id + ' &&&&&&&', currentPlayer.playerActions)}
-       <Text style={styles.title}>Liste des mes defis</Text> 
+       <Text style={styles.header}>Liste des mes defis</Text> 
        <View style={styles.tabBox}>
           <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
               onPress={()=> getAllActions()}
@@ -135,6 +135,13 @@ export default function UsersView({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  header:{
+   color: Colors.grey2,
+   fontFamily: "Georgia",
+  fontSize: '1em',
+    textAlign: "center",
+    paddingBottom:5,
+  },
   image:{
     width: 60,
     height: 60,
@@ -144,13 +151,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
-    // borderColor: Colors.silver,    
-    // borderColor: 'yellow',
     flexDirection: 'row',
-    
-    // borderWidth: 2,
-    // borderStyle: 'solid',
-
   },
   buttonContainer: {
     height:25,
@@ -200,10 +201,9 @@ const styles = StyleSheet.create({
   },
   title:{
     color: "darkgrey",
-    fontSize:14,
-    alignText:'right',
-    // alignSelf: "center",
-    marginLeft:10,
+    fontSize:16,
+    // alignText:'right',
+    // marginLeft:10,
   },
   iconContent:{
     flex: "column",

@@ -42,7 +42,7 @@ export default function MesDefisList({ navigation }) {
      setFilteredList(inCompletActions) 
     console.log('/////////////////////////', inCompletActions)    
     }
-  const getAllActions =() => {
+  const getTransportActions =() => {
       setFilteredList(actionList) 
       // console.log('3333333333333333333333333', filteredList)
       }
@@ -59,19 +59,19 @@ export default function MesDefisList({ navigation }) {
       <Text style={styles.title}>Mes defis par catagorie</Text> 
       <View style={styles.tabBox}>
           <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
-              onPress={()=> getAllActions()}
+              onPress={()=> getTransportActions()}
             >
-              <Text style={styles.tabText}>all </Text>
+              <Text style={styles.tabText}>Tranports </Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
               onPress={()=> getCompletedActions()}
           >
-              <Text style={styles.tabText}>numerique</Text>
+              <Text style={styles.tabText}>Numerique</Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
               onPress={()=> getIncomplActions()}
            >
-              <Text style={styles.tabText}> quotidien</Text>
+              <Text style={styles.tabText}> Quotidien</Text>
            </TouchableOpacity>
         </View> 
        <View style={styles.body}>

@@ -62,7 +62,7 @@ const pressHandler = async (action) => {
             onPress={() => pressHandler()}
             style={styles.button}
           >
-            <Text style={styles.buttonText}>Let's go! I'll do it!</Text>
+            <Text style={styles.buttonText}>Lorem lorem</Text>
           </TouchableOpacity>
       </View>  
      </View> 

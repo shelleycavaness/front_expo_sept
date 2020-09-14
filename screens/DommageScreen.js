@@ -30,13 +30,13 @@ export default function DommageScreen({ navigation, route }) {
             </View>
         
           <View style={styles.descriptionBox}>
-              <Text style={styles.description}> refused challenges : 
+              <Text style={styles.description}> Lorem  Lorem s : 
                   {  currentPlayer.playerStats && currentPlayer.playerStats.numberOfActionsRefused   }
                 </Text>
-                <Text style={styles.description}> refused points with this challenge : 
+                <Text style={styles.description}> Lorem  Lorem  Lorem  Lorem :  
                   {  propsItem.actionPoint && propsItem.actionPoint  }
                 </Text>
-                <Text style={styles.description}> potential Score  :    
+                <Text style={styles.description}> Lorem  Score  :    
                   {  currentPlayer.playerStats && currentPlayer.playerStats.potentialScore   }
                 </Text>
           </View>
@@ -44,7 +44,7 @@ export default function DommageScreen({ navigation, route }) {
               <View style={styles.buttonContainer}>
                 {  propsItem &&  console.log('propsItem in Dommage screen:   ', propsItem)}
                 <TouchableHighlight style={[styles.buttonContainer, styles.sendButton]} onPress={() => navigation.navigate('Actions')}>
-                  <Text style={styles.buttonText}>chosir un autre defi</Text>
+                  <Text style={styles.buttonText}>Lorem Lorem </Text>
                 </TouchableHighlight>
               </View>
           </View>
@@ -98,9 +98,9 @@ const styles = StyleSheet.create({
   },
   descriptionBox:{
     // padding:30
-    borderWidth: 4,
-    borderColor: "white",
-    borderStyle: "dotted",
+    // borderWidth: 4,
+    // borderColor: "white",
+    // borderStyle: "dotted",
   },
   description:{
     fontSize:18,

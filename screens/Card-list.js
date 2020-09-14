@@ -10,14 +10,16 @@ import {
   FlatList,
   TouchableHighlight
 } from 'react-native';
+import { CurrentUserContext } from '../contexts/currentUserContext'
 import Colors from '../constants/Colors';
-import getActions from '../services/actions';
 import { allImages } from "../assets/index";
 import plusIcon from '../assets/images/icons/iconfinder_plus_325963.png'
 
 export default function UsersView({ navigation }) {
   const [actionList, setActionsList] = useState([]);
   const [filteredList, setFilteredList] = useState([])
+  const { currentPlayer } = useContext(CurrentUserContext)
+
   useEffect(()=>{
     // fetch( "https://docker-nestjs-my-eco-defi.apps.ocp.lab-nxtit.com/api/v1/actions")
        fetch('http://localhost:9999/api/v1/actions/')
@@ -28,7 +30,7 @@ export default function UsersView({ navigation }) {
 
   // watching the actionList to update in real time
   useEffect(()=>{
-  }, [actionList])
+  }, [filteredList ])
  
   // const {actionList, setActionsList} = useContext(ActionListContext)
   // useEffect( async ()=>{
@@ -53,15 +55,17 @@ export default function UsersView({ navigation }) {
     setActionsList(sortPointsDown)
   }
   const getCompletedActions= () => {
-    const completedActions = actionList.filter( (el) => {
-       return el.actionIsDone == true  
-     });
-     setFilteredList(completedActions) 
-    console.log('/////////////////////////', completedActions)    
+    // const completedActions = actionList.filter( (el) => {
+    //    return el.actionIsDone == true  
+    //  });
+     setFilteredList(currentPlayer.playerActions) 
+    console.log('///////////getCompletedActions//////////////', currentPlayer.playerActions)    
     }
+  ////pseudo incomplete actions for demo///////////  
   const getIncomplActions= () => {
     const inCompletActions = actionList.filter( (el) => {
-       return el.actionIsDone == false      
+      console.log('object', currentPlayer.playerActions[0].id )
+       return el.id ==  currentPlayer.playerActions[0].id    
      });
      setFilteredList(inCompletActions) 
     console.log('/////////////////////////', inCompletActions)    
@@ -70,7 +74,6 @@ export default function UsersView({ navigation }) {
       setFilteredList(actionList) 
       // console.log('3333333333333333333333333', filteredList)
       }
-  console.log('getAllActions', filteredList)
   
   const pressHandler = ( id ) => {
 //itemId-1 to begin with 0 rather than 1 and dispaly the right entry in the database
@@ -80,7 +83,7 @@ export default function UsersView({ navigation }) {
   };
     return (
       <ScrollView style={styles.container}>
-      
+      {console.log( currentPlayer.playerActions[0].id + ' &&&&&&&', currentPlayer.playerActions)}
        <Text style={styles.title}>Liste des mes defis</Text> 
        <View style={styles.tabBox}>
           <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
@@ -101,10 +104,7 @@ export default function UsersView({ navigation }) {
         </View> 
        <View style={styles.body}>
           <FlatList style={styles.container} 
-            keyExtractor={ (item) => item.id.toString() }
-            // keyExtractor={ (item) => item.key }
-            // data={ data1.actions }
-            
+            keyExtractor={ (item) => item.key }
             data={ 
               filteredList && filteredList.length > 0? filteredList : actionList  
             }

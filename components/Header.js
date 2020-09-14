@@ -13,7 +13,9 @@ export default function Header({ Profile }) {
     //  style={styles.logo}
 
      />
-
+    <View  >
+      <Text style={styles.title}>Mon Eco-Défi</Text>
+    </View>
       <TouchableOpacity
        onPress={() => navigation.navigate('Profile')}
       >
@@ -44,6 +46,13 @@ const styles = StyleSheet.create({
    color: '#333',
    letterSpacing: 1
  },
+ title:{
+  fontSize: '2em',
+  color: 'grey',
+  fontFamily: "Georgia",
+  fontWeight: 'bold',
+
+}, 
  image: {
   width: 40,
   height: 40

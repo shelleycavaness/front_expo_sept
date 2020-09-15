@@ -37,7 +37,7 @@ export default function UsersView({ navigation }) {
   //   setActionsList( await getActions()) //fetch
   // }, [])
 
-//function for organizing actions filtering actions
+//functions for organizing actions filtering actions
   const filterUP =()=>{
     const sortPointsUP = actionList.slice(0);
     sortPointsUP.sort(function(a,b) {
@@ -55,24 +55,31 @@ export default function UsersView({ navigation }) {
     setActionsList(sortPointsDown)
   }
   const getCompletedActions= () => {
-    // const completedActions = actionList.filter( (el) => {
-    //    return el.actionIsDone == true  
-    //  });
-     setFilteredList(currentPlayer.playerActions) 
-    console.log('///////////getCompletedActions//////////////', currentPlayer.playerActions)    
+   setFilteredList(currentPlayer.playerActions) 
     }
   ////pseudo incomplete actions for demo///////////  
-  const getIncomplActions= () => {
-    const inCompletActions = actionList.filter( (el) => {
-      console.log('object', currentPlayer.playerActions[0].id )
-       return el.id ==  currentPlayer.playerActions[0].id    
-     });
-     setFilteredList(inCompletActions) 
-    console.log('/////////////////////////', inCompletActions)    
+  const getIncomplActions= (actions) => {
+    const completedA = currentPlayer.playerActions
+    let tab =[]
+    completedA.forEach(item => tab.push(item.id) )  
+    console.log("------------------",tab) 
+    let incompleted = actionList.filter( action => tab.indexOf(action.id) <0 )
+    setFilteredList(incompleted) 
+    //return tab
+    console.log('completedA tabbbb', incompleted)
+    // 
+
+    // const inCompletActions = actionList.filter( (el) => {
+    //   // console.log('object', currentPlayer.playerActions[0].id )
+    //    return el.id ==  currentPlayer.playerActions[0].id    
+    //  });
+    //  setFilteredList(inCompletActions) 
+    // console.log('/////////////////////////', inCompletActions)   
+    
+    
     }
   const getAllActions =() => {
       setFilteredList(actionList) 
-      // console.log('3333333333333333333333333', filteredList)
       }
   
   const pressHandler = ( id ) => {
@@ -83,30 +90,30 @@ export default function UsersView({ navigation }) {
   };
     return (
       <ScrollView style={styles.container}>
-      {console.log( currentPlayer.playerActions[0].id + ' &&&&&&&', currentPlayer.playerActions)}
+    
        <Text style={styles.header}>Liste des mes defis</Text> 
        <View style={styles.tabBox}>
           <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
               onPress={()=> getAllActions()}
             >
-              <Text style={styles.tabText}>all actions </Text>
+              <Text style={styles.tabText}>Aujourd'hui</Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
               onPress={()=> getCompletedActions()}
           >
-              <Text style={styles.tabText}>actions done</Text>
+              <Text style={styles.tabText}>Achevés</Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
               onPress={()=> getIncomplActions()}
            >
-              <Text style={styles.tabText}>undone</Text>
+              <Text style={styles.tabText}>Inachevés</Text>
            </TouchableOpacity>
         </View> 
        <View style={styles.body}>
           <FlatList style={styles.container} 
             keyExtractor={ (item) => item.key }
             data={ 
-              filteredList && filteredList.length > 0? filteredList : actionList  
+              filteredList && filteredList.length > 0 ? filteredList : actionList  
             }
 
             renderItem={ ({ item }) =>(
@@ -206,7 +213,7 @@ const styles = StyleSheet.create({
     // marginLeft:10,
   },
   iconContent:{
-    flex: "column",
+    // flex: "column",
     width: 60,
     // height: 60,
     backgroundColor: '#eaeaee',

@@ -18,7 +18,14 @@ export default {
   grey2:'##bebebe	',
   grey3:'#A9A9A9	',
   lightslategrey: '#778899',
+  lightGrey: '#d4d4d4',
+  lightestGrey: '#e5e5e5',
   slateGray: '#708090',
+
+  moss: "#8A9A5B",
+  artichoke: "0#8F9779",
+  greenLaurel: "#A9BA9D",
+  paleGreen: "#e8f7d7",
 
 
   greyLight:'00CED1',

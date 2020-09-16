@@ -90,7 +90,7 @@ export default function HomeScreen({ navigation }) {
           : 
           ( <Text style={styles.defiText}>{"defiTitle"}</Text>  )}
         </View>
-
+        <View style={styles.container2}>
         {
             actionList && actionList.length > 0 ? 
             ( <Text style={styles.description}>
@@ -99,16 +99,17 @@ export default function HomeScreen({ navigation }) {
             : 
             ( <Text style={styles.description}>{"defiDescript"} </Text>)
         }
-         {/* {(action != undefined) && console.log('action-------', action)} */}
-
-        <Text style={styles.description}>points gagnes :</Text>
+       
+        </View>
+        <View style={styles.container3}>
+          <Text style={styles.points}>points gagnes :</Text>
         {
           actionList && actionList.length > 0 ? 
           (  <Text style={styles.points}> {actionList[id].actionPoint}</Text>) 
           :
-         ( <Text style={styles.points}>{"defipoint"} </Text> )
+         ( <Text style={styles.points}>{"defi-point"} </Text> )
         }
-
+        </View>
           <View style={styles.container3}>
             {actionList && actionList.length > 0 ? (
               <Text style={styles.description}>
@@ -116,7 +117,7 @@ export default function HomeScreen({ navigation }) {
                 {" " + actionList[id].actionCo2}
               </Text>
             ) : (
-              <Text style={styles.points}>{"defipoint"} </Text>
+              <Text style={styles.points}>{"co2"} </Text>
             )}
           </View>
 
@@ -134,7 +135,7 @@ export default function HomeScreen({ navigation }) {
               onPress={() => pressHandler(action)}
               style={styles.button}
             >
-              <Text style={styles.buttonText}>Je l'accepte !</Text>
+              <Text style={styles.buttonText}>J'accepte !</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => navigation.navigate("Dommage",  {
@@ -142,7 +143,7 @@ export default function HomeScreen({ navigation }) {
               }  )}
               style={styles.button2}
             >
-              <Text style={styles.buttonText}>Je refuse</Text>
+              <Text style={styles.buttonText}>Je le refuse</Text>
             </TouchableOpacity>
           </View>
       </View>
@@ -159,50 +160,51 @@ HomeScreen.navigationOptions = {
 const styles = StyleSheet.create({
   scrollContainer: {
     flex: 1,
+    backgroundColor: Colors.lightestGrey,
   },
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#e8f7d7",
   },
   titleText: {
-    fontSize: '2em',
+    fontSize: 20,
     fontWeight: "600",
-    color: "#8a888c",
+    color: Colors.slateGray,
     fontFamily: "Roberto",
+    textAlign: "center",
+
   },
   container2: {
-    // backgroundColor: '#FFF',
     borderRadius: 3,
     paddingHorizontal: 4,
-    marginTop: 10,
-    marginBottom: 10,
-    marginLeft: 10,
-    marginRight: 10,
-   textAlign:'center',
-    // borderColor: 'red',
-    // borderWidth: 5,
-    // borderStyle: 'dotted',
+    paddingBottom: 5,
+    marginLeft: 0,
+    marginRight: 0,
+    // alignSelf: "center",
+    
   },
   description: {
-    fontSize: 18,
-    marginTop: 10,
-    color: "#8a888c",
+    fontSize: 15,
     textAlign: "center",
+    // marginTop: 4,
+    color: "#8a888c",
+    // textAlign: "center",
   },
   defiText: {
     fontSize: 18,
     fontWeight: "600",
-    color: "#228B22",
-    marginTop: 10,
-    padding: 30,
+    color: Colors.moss,
+    // marginTop: 10,
+    // padding: 30,
     textAlign: "center",
     borderColor: "black",
     borderWidth: 5,
     borderStyle: "solid",
   },
   container3: {
-    backgroundColor: "#FFF",
+    // flex:1,
+    // flexDirection: "row",
+    // backgroundColor: "#FFF",
     borderRadius: 3,
     paddingHorizontal: 4,
   },
@@ -219,14 +221,15 @@ const styles = StyleSheet.create({
   defiText: {
     fontSize: 18,
     fontWeight: "600",
-    color: "#228B22",
+    color: Colors.moss,
     marginTop: 10,
   },
   points: {
     fontSize: 18,
     fontWeight: "600",
-    color: "#228B22",
-    marginTop: 10,
+    color: Colors.moss,
+    textAlign: "center",
+
   },
 
   buttonContainer: {
@@ -238,7 +241,7 @@ const styles = StyleSheet.create({
     // marginBottom: 20,
   },
   button: {
-    backgroundColor: "#83d499",
+    backgroundColor: Colors.greenLaurel,
     padding: 10,
     margin: 5,
     borderRadius: 5,

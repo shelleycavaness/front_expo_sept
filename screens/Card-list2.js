@@ -26,25 +26,29 @@ export default function MesDefisList({ navigation }) {
     .catch((error) => console.error('error in catch ----------',error))
   }, [])   
   useEffect(()=>{
-  }, [actionList])
+  }, [filteredList])
 
-  const getCompletedActions= () => {
-    const completedActions = actionList.filter( (el) => {
-       return el.actionIsDone == true  
-     });
-     setFilteredList(completedActions) 
-    console.log('/////////////////////////', completedActions)    
+  const getEverydayActions= () => {
+    const everydayAct = actionList.filter( (el) => {
+      return el.actionCat == "everyday"         });
+     setFilteredList(everydayAct) 
+    console.log('/////////////////////////', everydayAct)    
     }
-  const getIncomplActions= () => {
-    const inCompletActions = actionList.filter( (el) => {
-       return el.actionIsDone == false      
+  const getDigitalActions= () => {
+    const digitalAct = actionList.filter( (el) => {
+      console.log('everyday')
+       return el.actionCat == "digital"      
      });
-     setFilteredList(inCompletActions) 
-    console.log('/////////////////////////', inCompletActions)    
+     setFilteredList(digitalAct) 
+    console.log('/////////////////////////', digitalAct)    
     }
   const getTransportActions =() => {
-      setFilteredList(actionList) 
-      // console.log('3333333333333333333333333', filteredList)
+    const transpotAct = actionList.filter( (el) => {
+      console.log('everyday')
+       return el.actionCat == "transport"      
+     });
+      setFilteredList(transpotAct) 
+       console.log('3333333333333333333333333', transpotAct)
       }
 
 
@@ -61,17 +65,17 @@ export default function MesDefisList({ navigation }) {
           <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
               onPress={()=> getTransportActions()}
             >
-              <Text style={styles.tabText}>Tranports </Text>
+              <Text style={styles.tabText}> Tranports </Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
-              onPress={()=> getCompletedActions()}
+              onPress={()=> getEverydayActions()}
           >
-              <Text style={styles.tabText}>Numerique</Text>
+              <Text style={styles.tabText}>Quotidien</Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
-              onPress={()=> getIncomplActions()}
+              onPress={()=> getDigitalActions()}
            >
-              <Text style={styles.tabText}> Quotidien</Text>
+              <Text style={styles.tabText}>Numerique</Text>
            </TouchableOpacity>
         </View> 
        <View style={styles.body}>
@@ -80,8 +84,8 @@ export default function MesDefisList({ navigation }) {
           // keyExtractor={ (item) => item.key }
           // data={ data1.actions }
           
-          data={  actionList && actionList.length > 0 ? 
-            actionList :  console.log('actionList empty :>> ', actionList) 
+          data={ filteredList && filteredList.length > 0? filteredList : actionList  
+
           }
 
           renderItem={ ({ item }) =>(

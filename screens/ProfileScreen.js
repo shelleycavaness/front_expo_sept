@@ -1,148 +1,232 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import { StyleSheet, Text, View, Image  } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+// import { CurrentUserContext } from '../contexts/currentUserContext';
 import data from '../db.json'
+import { allImages } from "../assets/";
+import Colors from '../constants/Colors';
+import * as Svg from 'react-native-svg';
+import { CurrentUserContext } from '../contexts/currentUserContext'
+import waterPNG from '../assets/images/icons/icons8-water-50.png'
+import co2PNG from '../assets/images/icons/icons8-co2-50.png'
+import wattsPNG from '../assets/images/icons/icons8-renewable-energy-50.png'
 
-export default function ProfileScreen(){
-//the random is called at the beginning of the lifecyle, not with the navigation
-  // let id = Math.floor(Math.random() * 4) + 1;
-  // id = id - 1
+export default function ProfileScreen( { navigation }){
   let id = 2
-  // console.log('id player :', id)
-  const score = data.players[id].score
-  const username = data.players[id].username
-  const city = data.players[id].city
-  const email = data.players[id].email
-  // const firstName = data1.id
-  // const lastName = data1.lastName
-
-  const [players, setPlayers] = useState([]);
+  const { currentPlayer } = useContext(CurrentUserContext)
+  // const [playerList, setPlayerList] = useState([]);
   useEffect (() => {
-   console.log('Our component  did mount')  
-  //  fetch('http://localhost:9999/api/v1/players')
-  fetch( "https://docker-nestjs-my-eco-defi.apps.ocp.lab-nxtit.com/api/v1/players")
-   .then((response) => response.json())
-  // .then((responseJson) => console.log('responseJson>>>>>>>>>>>>>>>>>', responseJson))
-   .then((responseJson) => setPlayers(Object.values(responseJson)))
-   .catch((error) => console.error('error in catch ----------',error))
-    }, [])
-   players && players.length > 0 ? console.log('object data finally arrived  ', players[0]) : console.log('oh no Empty') 
+
+    }, [currentPlayer])
 
   return(
-  <View  style={styles.container} >
+
    <ScrollView  style={styles.container} contentContainerStyle={styles.contentContainer} >
-     <View style={styles.header}>
-     <Image style={styles.avatar} source={{uri:  data.players[id].photo}}/>
+    <View style={styles.header}>
+     <View style={styles.headerImgBlock}> 
+       <Image 
+         style={styles.avatar} 
+         source={allImages.userWo}
+         />
+          
+           <Text style={styles.name}> { currentPlayer.lastName } </Text>
+           <Text style={styles.name}> { currentPlayer.firstName } </Text> 
+       
+        </View>  
         <View style={styles.headerContent}> 
-          {
-            players && players.length > 0 ? 
-           <Text style={styles.name}> { players[0].lastName } </Text> :
-           <span>not ready</span>
-          }
-          {
-            players && players.length > 0 ? 
-           <Text style={styles.name}> { players[0].firstName } </Text> :
-           <span>not ready</span>
-          }
+         
+          <View style={styles.headerDetail}>
+            <Text style={styles.title}>Lieu : </Text>
+          
+              <Text style={styles.count}>{ currentPlayer.location }  </Text>
+          </View>
+          <View style={styles.headerDetail}>
+            <Text style={styles.title}>Email : </Text>
+           
+              <Text style={styles.count}>{ currentPlayer.email } </Text> 
+          </View>
         </View>
     </View> 
-    <View style={styles.profileDetail}> 
-      <View style={styles.detailContent}>
-        <Text style={styles.title}>Score</Text>
-        <Text style={styles.count}>{data.players[id].score}</Text>
+    <View  style={styles.sectionWrapper}>
+      <Text style={styles.sectionTitle}>Impact Total </Text>
+        <View style={styles.iconBoxWrapper}> 
+            <View style={styles.iconBox}> 
+              <Image 
+                style={styles.icon}
+                source={ co2PNG }
+                />
+              
+              <Text style={styles.title}>{currentPlayer.playerStats && currentPlayer.playerStats.co2Saved } CO2 </Text> 
+            </View>
+            <View style={styles.iconBox}> 
+              <Image 
+                style={styles.icon}
+                source={ wattsPNG }
+                />
+            {currentPlayer && console.log('currentPlayer', currentPlayer)}
+              <Text style={styles.title}>{ currentPlayer.playerStats && currentPlayer.playerStats.kwSaved } kwatts </Text> 
+            </View>
+            <View style={styles.iconBox}> 
+              <Image 
+                style={styles.icon}
+                source={ waterPNG }
+                />
+              <Text style={styles.title}>{ currentPlayer.playerStats && currentPlayer.playerStats.h2OSaved }litres</Text> 
+            </View>
+       </View>
+       <View style={styles.detailBox}>
+        <View style={styles.detailContent}>
+          <Text style={styles.title}>Player's Score : </Text>
+          <Text style={styles.count}>{ 
+            currentPlayer.playerStats && currentPlayer.playerStats.cumulatedScore
+            }</Text>
+        </View>
+        <View style={styles.detailContent}>
+          <Text style={styles.title}>Total number of actions : </Text >
+          <Text style={styles.count}> {
+            currentPlayer.playerStats && currentPlayer.playerStats.numberOfActionsDone
+            }
+           </Text>
+        </View>
+        <View style={styles.detailContent}>
+          <Text style={styles.title}> Potenial Score:  </Text>
+          <Text style={styles.count}>  { 
+            currentPlayer.playerStats && currentPlayer.playerStats.potentialScore 
+            }  </Text>
+        </View>
       </View>
-      <View style={styles.detailContent}>
-        <Text style={styles.title}>Lieu</Text>
-        {
-          players && players.length > 0 ? 
-          <Text style={styles.count}>{ players[0].location } finally </Text> : 
-          <span>not ready</span>
-        }
-      </View>
-      <View style={styles.detailContent}>
-        <Text style={styles.title}>email</Text>
-        {
-          players && players.length > 0 ? 
-          <Text style={styles.count}>{ players[0].email } finally </Text> : 
-          <span>not ready</span>
-        }
-      </View>
-    </View>
-    <View >
-      <View style={styles.detailContent}>
-        <Text style={styles.title}>Ecological Footprint Indicator</Text>
-        <Text style={styles.count}>{data.players[id].score}</Text>
-      </View>
-      <View style={styles.detailContent}>
-        <Text style={styles.title}>Tonnes de CO2 Compensés</Text>
-      </View>
-    </View>
+   </View>
   </ScrollView>  
- </View>
-
   )  
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-         backgroundColor: '#e3e3e8',     
+        flex: 1,    
     },
     contentContainer: {
-      paddingTop: 30,
-      alignItems: 'center',
         },
-    profileText: {
-      fontSize: 17,
-      color: 'rgba(96,100,109, 1)',
-      lineHeight: 24,
-      textAlign: 'center',
-    },    
+      
     header:{
       flex: 1,
-      alignItems: 'center',  
-    
+      padding: 20,
+      backgroundColor: Colors.Turquoise2,// '#e3e3e8',   
     },
-    headerContent:{
-      padding:30,
-      alignItems: 'center',    
+    headerImgBlock :{
+      flex: 1,
       flexDirection: 'row',
+      alignItems: 'center',
+      // paddingBottom: 10,
     },
+   
     avatar: {
-      width: 130,
-      height: 130,
+      width: 90,
+      height: 90,
       borderRadius: 63,
       borderWidth: 4,
-      borderColor: "white",
+      borderColor: "black",
       // marginBottom:10,
     },
     name:{
       fontSize:22,
       color:"#FFFFFF",
-      fontWeight:'600',
+      fontWeight:'800',
+      fontFamily: "Roboto",
     },
+    headerContent:{
+      padding: 10,
+  
+    },
+    sectionWrapper: {
+          // flexDirection: 'column',
+      // alignItems:'center',    
+      backgroundColor:  '#e3e3e8',  
+      borderTopColor:  Colors.silver,
+      borderTopWidth: 1,
+    },
+    sectionTitle:{
+      paddingLeft: 40,
+      fontSize:18,
+      color: "#FFFFFF",
+      fontFamily: "Roboto",
+    },
+    iconBoxWrapper: {
+     
+      flexDirection: 'row', 
+      justifyContent: 'space-around',
+      padding: 20,
+      paddingLeft: 40,
+      paddingRight:40,
+      
+    },
+    iconBox: {
+      alignItems: 'center', 
+      backgroundColor: 'white',
+      borderColor: Colors.silver,
+      borderWidth: 1,
+      borderStyle: 'solid',
+      paddingTop: 15,
+      borderRadius: 12,
+      width: 80,
+      height:80,
+
+    },
+    icon: {
+      height:50,
+      width: 50,
+      borderRadius: 8,
+    },
+    
+    detailBox:{
+      backgroundColor:  '#e3e3e8',   
+      padding: 20,
+     
+    },
+    
+    headerDetail:{
+      margin:5,
+      flexDirection: 'row',
+      // justifyContent: 'flex-end',
+      alignItems: 'center',
+      
+    },
+    title:{
+      fontSize:13,
+      color: "grey",
+      fontFamily: "Roboto",
+    },
+    count:{
+      fontSize:18,
+      color: "white",
+      fontFamily: "Roboto",
+      fontWeight:'500',
+    },
+    profileText: {
+      fontSize: 17,
+      color: 'rgba(96,100,109, 1)',
+      lineHeight: 24,
+      // textAlign: 'center',
+    },  
+   
+    detailContent:{
+      margin:5,
+      flexDirection: 'row',
+      // justifyContent: 'flex-end',
+      alignItems: 'center',
+      borderBottomColor:  Colors.silver,
+      borderBottomWidth: 1,
+      paddingBottom: 20,
+      paddingTop: 10,
+      // borderStyle: 'solid',   
+    },
+
+
     profileDetail:{
       // alignSelf: 'center',
       // marginTop:100,
       alignItems: 'center',
-      // flexDirection: 'row',
-      // position:'absolute',
       paddingLeft: 40,
       paddingRight:40,
-      // borderColor: 'red',
-      // borderWidth: 5,
-      // borderStyle: 'dotted',
-    },
-    detailContent:{
-      margin:5,
-      alignItems: 'center'
-    },
-    title:{
-      fontSize:20,
-      color: "#00CED1"
-    },
-    count:{
-      fontSize:18,
     },
     bodyContent: {
       flex: 1,

@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,68 +7,146 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-  ListView
+  FlatList,
+  TouchableHighlight
 } from 'react-native';
-// import ListView from 'deprecated-react-native-listview'
-import { abeille, vinegar, velo, reparer,veggie, paille, stopPub, douche, ampule, fillet } from "../assets/index";
-import data from '../db.json'
 
-export default class UsersView extends Component {
-  constructor(props) {
-    super(props);
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    this.state = {
-      dataSource: ds.cloneWithRows([
-            // data.actions  //take off the array brackets ;-)
-         {image: vinegar, title:"johndoe1"},
-         {image: velo, title:"johndoe2"},
-         {image: fillet, title:"johndoe3"},
-         {image: ampule , title:"johndoe4"},
-         {image: stopPub, title:"johndoe5"},
-         {image: douche, title:"johndoe6"},
-         {image: paille, title:"johndoe7"},
-         {image: veggie, title:"johndoe8"},
-         {image: abeille, title:"johndoe2"},
-      ]),
-    };   console.log('data//////////////', data.actions[0].image)
-  }
+import { allImages } from "../assets/index";
+import Colors from '../constants/Colors';
+import CardItem from './CardItem'
 
-  render() {
+export default function MesDefisList({ navigation }) {
+  const [actionList, setActionsList] = useState([] );
+  const [filteredList, setFilteredList] = useState([])
+  useEffect(()=>{
+    // fetch( "https://docker-nestjs-my-eco-defi.apps.ocp.lab-nxtit.com/api/v1/actions")
+       fetch('http://localhost:9999/api/v1/actions/')
+    .then((response) => response.json())
+    .then((responseJson) => setActionsList(Object.values(responseJson)))
+    .catch((error) => console.error('error in catch ----------',error))
+  }, [])   
+  useEffect(()=>{
+  }, [filteredList])
+
+  const getEverydayActions= () => {
+    const everydayAct = actionList.filter( (el) => {
+      return el.actionCat == "everyday"         });
+     setFilteredList(everydayAct) 
+    console.log('/////////////////////////', everydayAct)    
+    }
+  const getDigitalActions= () => {
+    const digitalAct = actionList.filter( (el) => {
+      console.log('everyday')
+       return el.actionCat == "digital"      
+     });
+     setFilteredList(digitalAct) 
+    console.log('/////////////////////////', digitalAct)    
+    }
+  const getTransportActions =() => {
+    const transpotAct = actionList.filter( (el) => {
+      console.log('everyday')
+       return el.actionCat == "transport"      
+     });
+      setFilteredList(transpotAct) 
+       console.log('3333333333333333333333333', transpotAct)
+      }
+
+
+  const pressHandler = ( id ) => {
+//itemId-1 to begin with 0 rather than 1 and dispaly the right entry in the database
+    navigation.navigate('Detail', {
+      itemId: actionList[id]
+    })
+  };
     return (
       <ScrollView style={styles.container}>
-          <View style={styles.body}>
-            <ListView style={styles.container} enableEmptySections={true}
-              dataSource={this.state.dataSource}
-              renderRow={(user) => {
-                // {console.log('user======', user)}
-                return (
-                  <TouchableOpacity>
-                    <View style={styles.box}>
-                      <Image style={styles.image} source={user.image}/> 
-                    {/* <Image style={styles.image} source={{(`"${user.image}"`)}}/> */}
-                      {/* <Image style={styles.image} source={{image: user.image}}/> */}
-                      <Text style={styles.title}>{user.title}</Text>
-                      <View style={styles.iconContent}>
-                        <Image style={styles.icon} source={{uri: "https://img.icons8.com/material-two-tone/24/000000/plus.png"}}/>
-                      </View>
-                    </View>
-                  </TouchableOpacity>
-                )
-            }}/>
-          </View>
+      <Text style={styles.title}>Mes defis par catagorie</Text> 
+      <View style={styles.tabBox}>
+          <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
+              onPress={()=> getTransportActions()}
+            >
+              <Text style={styles.tabText}> Tranports </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
+              onPress={()=> getEverydayActions()}
+          >
+              <Text style={styles.tabText}>Quotidien</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
+              onPress={()=> getDigitalActions()}
+           >
+              <Text style={styles.tabText}>Numerique</Text>
+           </TouchableOpacity>
+        </View> 
+       <View style={styles.body}>
+        <FlatList style={styles.container} 
+          keyExtractor={ (item) => item.id.toString() }
+          // keyExtractor={ (item) => item.key }
+          // data={ data1.actions }
+          
+          data={ filteredList && filteredList.length > 0? filteredList : actionList  
+
+          }
+
+          renderItem={ ({ item }) =>(
+
+              <CardItem  item={item}/>
+        
+          )}
+         />    
+       </View>
       </ScrollView>
     );
-  }
+  
+
 }
 
 const styles = StyleSheet.create({
+  tabBox:{
+    flex: 1,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    // borderColor: Colors.silver,    
+    // borderColor: 'yellow',
+    flexDirection: 'row',
+    
+    // borderWidth: 2,
+    // borderStyle: 'solid',
+
+  },
+  buttonContainer: {
+    height:25,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom:10,
+    width:100,
+    borderRadius:30,
+    borderColor: Colors.grey1, 
+    borderWidth: 2,
+    flexDirection: 'row',
+    borderStyle: 'solid',
+
+  },
+  tabButton: {
+    backgroundColor:Colors.platinum,
+    borderWidth: 2,
+    borderStyle: 'solid',
+    borderRadius: 5,
+    borderBottomColor: Colors.slateGray,
+  },
+  tabText:{
+    color: "black",
+    fontFamily: "Roboto",
+  },
   image:{
     width: 60,
-    height: 60,
+    // height: 60,
+    borderRadius: 3,
   },
   body: {
-    padding:30,
-    backgroundColor :"#E6E6FA",
+    padding:10,
+    backgroundColor :Colors.silver,
   },
   box: {
     marginTop:5,
@@ -84,17 +162,18 @@ const styles = StyleSheet.create({
     elevation:2
   },
   title:{
-    color: "#20B2AA",
+    color: "darkgrey",
     fontSize:18,
     alignSelf:'center',
     marginLeft:10
   },
   iconContent:{
     width: 60,
-    height: 60,
-    backgroundColor: '#40E0D0',
+    // height: 60,
+    backgroundColor: '#eaeaee',
     marginLeft: 'auto',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingTop: 10,
   },
   icon:{
     width: 40,

@@ -1,0 +1,144 @@
+
+*Catagories des defis
+numerique responsable
+tranport
+alimentation
+vie courrante -menage
+
+*3 mesures
+imapact -co2
+impact kilo watt heure
+impact litre H2O
+
+
+defi du jour et je releve les defi (je chossis)
+
+Profil screen
+score
+total imapact -co2
+total impact kilo watt heure
+total impact litre H2O
+
+
+Greg Gibier dans l'equipe
+
+
+
+///////////////////////////////////////////////////////////
+Points:
+when I accept the challenge offered I earn more points;
+than when I choose one.
+when I redo a challenge I get less points.
+
+
+i accept or i have done impact
+one click or do we have a second to make sure they don't go crazy clicking
+LImit the number of challenges per day?
+
+
+when I refuse
+I navigate to a new challenge or the list
+
+
+apps// look for awards
+we act for good
+duolingo
+
+
+////////////////////////
+{
+        "id": 0,
+        "actionName": "Faire tourner la machine à laver le linge pleine",
+        "actionDescription": "Le fait de remplir votre lave-linge, vous permet donc de faire des économies d'énergie, aussi bien sur l'eau que sur l'électricité, car vous faites moins de machines. En toute logique, il est plus rentable de faire tourner une machine pleine que deux demi-machines.",
+        "actionIsDone": true,
+        "actionIsRefused": false,
+        "actionImg": "vinegar",
+        "actionPoint": 130,
+        "actionCo2": 30,
+        "actionKw": 30,
+        "actionH2O": 30
+    },
+    {
+        "id": 1,
+        "actionName": "Je refuse les publicités papiers dans ma boîte aux lettres",
+        "actionDescription": "Je refuse les publicités papiers dans ma boîte aux lettres en plaçant un message \"Stop Pub\". Précédemment, on disait bye-bye aux courriers non sollicités. Nous avons poursuivi avec les dépliants.",
+        "actionIsDone": true,
+        "actionIsRefused": false,
+        "actionImg": "stopPub",
+        "actionPoint": 30,
+        "actionCo2": 30,
+        "actionKw": 30,
+        "actionH2O": 30
+    },
+    {
+        "id": 2,
+        "actionName": "Arrêter d’utiliser assiettes, gobelets et couverts jetables",
+        "actionDescription": "utiliser de la vaisselle solides et non jetables, emmener des serviettes en tissus, préparer des plats simples et facile à manger.",
+        "actionIsDone": true,
+        "actionIsRefused": false,
+        "actionImg": "plasticCup",
+        "actionPoint": 80,
+        "actionCo2": 30,
+        "actionKw": 30,
+        "actionH2O": 30
+    },
+    {
+        "id": 3,
+        "actionName": "Arrêter l’eau quand on se lave les mains",
+        "actionDescription": "Cette méthode permet d'économiser 15 litres d'eau potable à chaque fois que vous vous lavez les mains. Moi, je me lave les mains plus de 5 fois par jour. Donc cela fait déjà 75 litres par jour.",
+        "actionIsDone": true,
+        "actionIsRefused": false,
+        "actionImg": "douche",
+        "actionPoint": 90,
+        "actionCo2": 30,
+        "actionKw": 30,
+        "actionH2O": 30
+    },
+    {
+        "id": 4,
+        "actionName": "Acheter des fruits et légumes de saison",
+        "actionDescription": "Consommer en suivant le calendrier des saisons permet d’économiser de l’argent. En effet, les fruits et légumes de saison sont bien moins chers que ceux cultivés en serre ou importés.",
+        "actionIsDone": true,
+        "actionIsRefused": false,
+        "actionImg": "veggieBag",
+        "actionPoint": 50,
+        "actionCo2": 30,
+        "actionKw": 30,
+        "actionH2O": 30
+    },
+    {
+        "id": 5,
+        "actionName": "On dit « Non aux échantillons » ",
+        "actionDescription": "Refuser les échantillons gratuits.",
+        "actionIsDone": true,
+        "actionIsRefused": false,
+        "actionImg": "abeille",
+        "actionPoint": 50,
+        "actionCo2": 30,
+        "actionKw": 30,
+        "actionH2O": 30
+    },
+    {
+        "id": 6,
+        "actionName": "Installer un mousseur sur les robinets",
+        "actionDescription": "L'eau est un poste de dépense important pour votre foyer d’autant que son prix ne cesse d’augmenter. Selon l’Ademe, équiper tous vos robinets d'éco-mousseurs peut vous aider à réduire considérablement votre consommation d’eau, sachant que le débit courant d’un robinet est de 12 litres par minute. En effet, il est possible de consommer jusqu’à 50% d’eau en moins et donc de réaliser des économies importantes.",
+        "actionIsDone": true,
+        "actionIsRefused": false,
+        "actionImg": "ampule",
+        "actionPoint": 50,
+        "actionCo2": 30,
+        "actionKw": 30,
+        "actionH2O": 30
+    },
+    {
+        "id": 7,
+        "actionName": "Planifier ses menus pour éviter le gaspillage",
+        "actionDescription": "Faire ses plannings de repas équilibrés et éviter le gaspillage alimentaire. Le concept de Menu to Shop se base sur un constat très simple, planifier ses repas permet de manger plus équilibré, plus diversifié tout en gaspillant moins.",
+        "actionIsDone": true,
+        "actionIsRefused": false,
+        "actionImg": "fillet",
+        "actionPoint": 50,
+        "actionCo2": 30,
+        "actionKw": 30,
+        "actionH2O": 30
+    }

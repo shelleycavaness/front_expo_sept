@@ -3,7 +3,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen'
+// import ProfileScreen from '../screens/Card-list2'
+import MesDefisListScreen from '../screens/Card-list2'
 import CardlistScreen from '../screens/Card-list'
+
 import Header from "../components/Header"
 
 const BottomTab = createBottomTabNavigator();
@@ -29,16 +32,16 @@ export default function BottomTabNavigator({ navigation, route }) {
         name="Actions"
         component={CardlistScreen}
         options={{
-          title: 'Actions',
+          title: 'Mes défis',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-menu" />,
         }}
       />
       <BottomTab.Screen
-        name="Profile"
-        component={ProfileScreen}
+        name="MesDefisListScreen"
+        component={MesDefisListScreen}
         options={{
-          title: 'Profile',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-person" />,
+          title: 'défis dispos',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-menu" />,
         }}
       />
       
@@ -48,14 +51,13 @@ export default function BottomTabNavigator({ navigation, route }) {
 
 function getHeaderTitle(route) {
   const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
-
   switch (routeName) {
     case 'Home':
       return ()=> <Header/>
     case 'Actions':
-      return 'Call to Eco Actions';
-    case 'Profile':
-      return 'Player Profile'; 
+      return ()=> <Header/>
+    case 'MesDefisListScreen':
+      return ()=> <Header/>
 
   }
 }

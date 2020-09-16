@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useEffect} from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { SplashScreen } from 'expo';
 import * as Font from 'expo-font';
@@ -16,53 +16,47 @@ import ProfileScreen from './screens/ProfileScreen';
 import ActionListProvider from './contexts/actionListContext'
 import CurrentUserProvider, { CurrentUserContext } from './contexts/currentUserContext'
 import getCurrentUser from './services/currentUser'
-import MonEcoDefiStack from './monEcoDefiStack';
 
 const Stack = createStackNavigator();
-
-export default function App(props) {
+export default function MonEcoDefiStack(props) {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
   const [initialNavigationState, setInitialNavigationState] = React.useState();
   const containerRef = React.useRef();
   const { getInitialState } = useLinking(containerRef);
-  // Load any resources or data that we need prior to rendering the app
-  React.useEffect(() => {
-    async function loadResourcesAndDataAsync() {
-      try {
-        SplashScreen.preventAutoHide();
-
-        // Load our initial navigation state
-        setInitialNavigationState(await getInitialState());
-
-        // Load fonts
-        await Font.loadAsync({
-          ...Ionicons.font,
-          'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
-        });
-      } catch (e) {
-        // We might want to provide this error information to an error reporting service
-        console.warn(e);
-      } finally {
-        setLoadingComplete(true);
-        SplashScreen.hide();
+  const {currentPlayer, setCurrentPlayer}  = React.useContext(CurrentUserContext)
+  
+  useEffect(() => {
+    async function fetchCurrentUser(){
+        try{
+          setCurrentPlayer(await getCurrentUser()) 
+        } catch(err){
+          console.log('err in fetchCurrentUser:>> ', err);
+        }  
       }
-    }
+      fetchCurrentUser()  
+  }, [])
+  
+  useEffect(()=>{
+    // console.log('currentPlayer0000000000000000000000000000000000000000', currentPlayer)
 
-    loadResourcesAndDataAsync();
+  }, [currentPlayer])  
 
-  }, []);
 
-  if (!isLoadingComplete && !props.skipLoadingScreen) {
-    return null;
-  } else {
-    return (
-      <CurrentUserProvider>
-        <ActionListProvider>
-          <MonEcoDefiStack />
-        </ActionListProvider>
-      </CurrentUserProvider>
-    );
-  }
+  return(
+    <View style={styles.container}>
+            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
+              <Stack.Navigator>
+                <Stack.Screen name="Root" component={BottomTabNavigator} />
+                <Stack.Screen name="Felicitation" component={FeliciationScreen} />
+                <Stack.Screen name="Dommage" component={DommageScreen} />
+                <Stack.Screen name="Detail" component={DetailScreen} />
+                <Stack.Screen name="Profile" component={ProfileScreen} />
+              </Stack.Navigator>
+            </NavigationContainer>
+          </View>
+  )
+
 }
 
 const styles = StyleSheet.create({

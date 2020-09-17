@@ -8,7 +8,8 @@ import {
   ScrollView,
   TouchableOpacity,
   FlatList,
-  TouchableHighlight
+  TouchableHighlight,
+  ImageBackground
 } from 'react-native';
 import { CurrentUserContext } from '../contexts/currentUserContext'
 import Colors from '../constants/Colors';
@@ -65,18 +66,6 @@ export default function UsersView({ navigation }) {
     console.log("------------------",tab) 
     let incompleted = actionList.filter( action => tab.indexOf(action.id) <0 )
     setFilteredList(incompleted) 
-    //return tab
-    console.log('completedA tabbbb', incompleted)
-    // 
-
-    // const inCompletActions = actionList.filter( (el) => {
-    //   // console.log('object', currentPlayer.playerActions[0].id )
-    //    return el.id ==  currentPlayer.playerActions[0].id    
-    //  });
-    //  setFilteredList(inCompletActions) 
-    // console.log('/////////////////////////', inCompletActions)   
-    
-    
     }
   const getAllActions =() => {
       setFilteredList(actionList) 
@@ -90,25 +79,26 @@ export default function UsersView({ navigation }) {
   };
     return (
       <ScrollView style={styles.container}>
-    
-       <Text style={styles.header}>Liste des mes defis</Text> 
-       <View style={styles.tabBox}>
-          <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
-              onPress={()=> getAllActions()}
-            >
-              <Text style={styles.tabText}>Aujourd'hui</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
-              onPress={()=> getCompletedActions()}
-          >
-              <Text style={styles.tabText}>Achevés</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
-              onPress={()=> getIncomplActions()}
-           >
-              <Text style={styles.tabText}>Inachevés</Text>
-           </TouchableOpacity>
-        </View> 
+       <View style={styles.header}>
+          <Text style={styles.headerText}>Liste des mes defis</Text> 
+          <View style={styles.tabBox}>
+              <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
+                  onPress={()=> getAllActions()}
+                >
+                  <Text style={styles.tabText}>Aujourd'hui</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
+                  onPress={()=> getCompletedActions()}
+              >
+                  <Text style={styles.tabText}>Achevés</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
+                  onPress={()=> getIncomplActions()}
+              >
+                  <Text style={styles.tabText}>Inachevés</Text>
+              </TouchableOpacity>
+            </View> 
+        </View>    
        <View style={styles.body}>
           <FlatList style={styles.container} 
             keyExtractor={ (item) => item.key }
@@ -119,18 +109,37 @@ export default function UsersView({ navigation }) {
             renderItem={ ({ item }) =>(
               <TouchableHighlight 
               onPress={ () => pressHandler(item.id) }>     
-                <View style={styles.box}>
-                  <Image style={styles.image} 
-                  source={allImages[item.actionImg]} 
-                  /> 
-                  <Text style={styles.title}>{ item.actionName }</Text> 
-                  <View style={styles.iconContent} >
-                    <Image style={styles.icon} 
-                    //  source={allImages.plus }  
-                    source={plusIcon }  
-                    />
-                  </View> 
+                <View style={styles.card}>
+                  <ImageBackground style={styles.cardImage} 
+                    source={allImages[item.actionImg]} >
+                       <Text style={styles.title}>{item.actionName }</Text>
+                    </ImageBackground>
+                <View style={styles.cardHeader}>
+                 
                 </View>
+                <View style={styles.cardFooter}>
+                    <View style={styles.socialBarContainer}>
+                        <View style={styles.socialBarSection}>
+                                  <TouchableOpacity style={styles.socialBarButton}>
+                                    <Image style={styles.icon} source={{uri: allImages.watts}}/>
+                                    <Text style={styles.socialBarLabel}>{item.actionPoint}</Text>
+                                  </TouchableOpacity>
+                        </View>
+                        <View style={styles.socialBarSection}>
+                                  <TouchableOpacity style={styles.socialBarButton}>
+                                    <Image style={styles.icon} source={{uri: allImages.waterDrop}}/>
+                                    <Text style={styles.socialBarLabel}>{item.actionPoint}</Text>
+                                  </TouchableOpacity>
+                        </View>
+                        <View style={styles.socialBarSection}>
+                                  <TouchableOpacity style={styles.socialBarButton}>
+                                    <Image style={styles.icon} source={{uri:allImages.renewable }}/>
+                                    <Text style={styles.socialBarLabel}>{item.actionCo2}</Text>
+                                  </TouchableOpacity>
+                        </View>
+                  </View>
+                </View>
+            </View>
               </TouchableHighlight>
             )}
           />    
@@ -143,22 +152,23 @@ export default function UsersView({ navigation }) {
 
 const styles = StyleSheet.create({
   header:{
-   color: Colors.grey2,
-   fontFamily: "Georgia",
-  fontSize: '1em',
+ 
+
+  },
+  headerText:{
+    color: Colors.grey2,
+    fontFamily: "Georgia",
+    fontSize: '1em',
     textAlign: "center",
     paddingBottom:5,
   },
-  image:{
-    width: 60,
-    height: 60,
-    borderRadius: 3,
-  },
+
   tabBox:{
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
     flexDirection: 'row',
+   
   },
   buttonContainer: {
     height:25,
@@ -172,7 +182,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     flexDirection: 'row',
     borderStyle: 'solid',
-
   },
   tabButton: {
     backgroundColor:Colors.platinum,
@@ -186,47 +195,114 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto",
   },
   body: {
-    padding:30,
+    paddingHorizontal:30,
     // backgroundColor :"#E6EEEA",
     backgroundColor: Colors.tintColor,
   },
-  box: {
-    padding: 10,
-    marginTop:5,
-    marginBottom:5,
-    backgroundColor: '#FFFFFF',
-    flexDirection: 'row',
-    justifyContent: "space-between",
-    shadowColor: 'black',
-    shadowOpacity: .2,
-    shadowOffset: {
-      height:1,
-      width:-2
-    },
-    // elevation:2,
-    borderRadius: 5,
-  },
-  title:{
-    color: "darkgrey",
-    fontSize:16,
-    // alignText:'right',
-    // marginLeft:10,
-  },
-  iconContent:{
-    // flex: "column",
-    width: 60,
-    // height: 60,
-    backgroundColor: '#eaeaee',
-    marginLeft: 'auto',
-    alignItems: 'center',
-    paddingTop: 10,
 
+/******** card **************/
+card:{
+  shadowColor: '#00000021',
+  shadowOffset: {
+    width: 2
   },
-  icon:{
-    width: 40,
-    height: 40,
-  },
-
+  shadowOpacity: 0.5,
+  shadowRadius: 4,
+  marginVertical: 8,
+  backgroundColor:"white",
+  borderRadius: 5,
+},
+cardHeader: {
+  paddingVertical: 5,
+  paddingHorizontal: 15,
+  borderTopLeftRadius: 1,
+  borderTopRightRadius: 1,
+  flexDirection: 'column',
+},
+cardContent: {
+  paddingVertical: 5,
+  paddingHorizontal: 16,
+  justifyContent: 'space-between',
+},
+cardFooter:{
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  paddingTop: 5,
+  paddingBottom: 5,
+  paddingHorizontal: 16,
+  borderBottomLeftRadius: 1,
+  borderBottomRightRadius: 1,
+  backgroundColor:"#EEEEEE",
+},
+cardImage:{
+  flex: 1,
+  borderRadius: 5,
+  minHeight:80,
+  // width: null,
+  opacity: 0.5,
+},
+/******** card components **************/
+title:{
+  fontSize:14,
+  // flex:1,
+  color:  "black",
+  // color: "white",
+  fontWeight: 800,
+  
+}, 
+description:{
+  fontSize:15,
+  color:"#888",
+  flex:1,
+  marginTop:5,
+  marginBottom:5,
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+},
+time:{
+  fontSize:13,
+  color: "#808080",
+  marginTop: 5
+},
+icon: {
+  width:25,
+  height:25,
+  borderRadius: 5,
+  borderColor: 'white',
+  borderWidth: 2,
+},
+iconData:{
+  width:15,
+  height:15,
+  marginTop:5,
+  marginRight:5
+},
+timeContainer:{
+  flexDirection:'row'
+},
+/******** social card bar ******************/
+socialBarContainer: {
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexDirection: 'row',
+  flex: 1
+},
+socialBarSection: {
+  justifyContent: 'center',
+  flexDirection: 'row',
+  flex: 1,
+},
+socialBarlabel: {
+  marginLeft: 8,
+  alignSelf: 'flex-end',
+  justifyContent: 'center',
+},
+socialBarButton:{
+  flexDirection: 'row',
+  justifyContent: 'center',
+  alignItems: 'center',
+}
 
 });
  

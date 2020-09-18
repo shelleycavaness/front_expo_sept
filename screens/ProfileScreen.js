@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
       fontSize:22,
       color:"#FFFFFF",
       fontWeight:'800',
-      fontFamily: "Roboto",
+      fontFamily: "montserrat",
     },
     headerContent:{
       padding: 10,
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
       paddingLeft: 40,
       fontSize:18,
       color: "#FFFFFF",
-      fontFamily: "Roboto",
+      fontFamily: "montserrat",
     },
     iconBoxWrapper: {
      
@@ -193,12 +193,12 @@ const styles = StyleSheet.create({
     title:{
       fontSize:13,
       color: "grey",
-      fontFamily: "Roboto",
+      fontFamily: "montserrat",
     },
     count:{
       fontSize:18,
       color: "white",
-      fontFamily: "Roboto",
+      fontFamily: "montserrat",
       fontWeight:'500',
     },
     profileText: {

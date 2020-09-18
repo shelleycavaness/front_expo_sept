@@ -14,7 +14,6 @@ import {
 import { CurrentUserContext } from '../contexts/currentUserContext'
 import Colors from '../constants/Colors';
 import { allImages } from "../assets/index";
-import plusIcon from '../assets/images/icons/iconfinder_plus_325963.png'
 
 export default function UsersView({ navigation }) {
   const [actionList, setActionsList] = useState([]);
@@ -58,7 +57,7 @@ export default function UsersView({ navigation }) {
   const getCompletedActions= () => {
    setFilteredList(currentPlayer.playerActions) 
     }
-  ////pseudo incomplete actions for demo///////////  
+  
   const getIncomplActions= (actions) => {
     const completedA = currentPlayer.playerActions
     let tab =[]
@@ -81,21 +80,21 @@ export default function UsersView({ navigation }) {
       <ScrollView style={styles.container}>
        <View style={styles.header}>
           <Text style={styles.headerText}>Liste des mes defis</Text> 
-          <View style={styles.tabBox}>
-              <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
+          <View style={styles.headerBox}>
+              <TouchableOpacity style={[styles.headerButtonContainer, styles.tabButton]}
                   onPress={()=> getAllActions()}
                 >
-                  <Text style={styles.tabText}>Aujourd'hui</Text>
+                  <Text style={styles.headerButtonText}>Aujourd'hui</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
+              <TouchableOpacity style={[styles.headerButtonContainer, styles.tabButton]}
                   onPress={()=> getCompletedActions()}
               >
-                  <Text style={styles.tabText}>Achevés</Text>
+                  <Text style={styles.headerButtonText}>Achevés</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={[styles.buttonContainer, styles.tabButton]}
+              <TouchableOpacity style={[styles.headerButtonContainer, styles.tabButton]}
                   onPress={()=> getIncomplActions()}
               >
-                  <Text style={styles.tabText}>Inachevés</Text>
+                  <Text style={styles.headerButtonText}>Inachevés</Text>
               </TouchableOpacity>
             </View> 
         </View>    
@@ -110,31 +109,33 @@ export default function UsersView({ navigation }) {
               <TouchableHighlight 
               onPress={ () => pressHandler(item.id) }>     
                 <View style={styles.card}>
-                  <ImageBackground style={styles.cardImage} 
-                    source={allImages[item.actionImg]} >
-                       <Text style={styles.title}>{item.actionName }</Text>
+                  <View style={styles.cardImageContainer}>
+                    <ImageBackground style={styles.cardImage}  imageStyle={{ opacity: 0.6}}
+                      source={allImages[item.actionImg]} >
+                        <Text style={styles.cardTitle}>{item.actionName }</Text>
                     </ImageBackground>
-                <View style={styles.cardHeader}>
+                    
+                  </View>
                  
-                </View>
-                <View style={styles.cardFooter}>
-                    <View style={styles.socialBarContainer}>
-                        <View style={styles.socialBarSection}>
-                                  <TouchableOpacity style={styles.socialBarButton}>
-                                    <Image style={styles.icon} source={{uri: allImages.watts}}/>
-                                    <Text style={styles.socialBarLabel}>{item.actionPoint}</Text>
+               
+                  <View style={styles.cardFooter}>
+                    <View style={styles.footerBarContainer}>
+                        <View style={styles.footerBarSection}>
+                                  <TouchableOpacity style={styles.footerBarButton}>
+                                    <Image style={styles.footerIcon} source={{uri: allImages.watts}}/>
+                                    <Text style={styles.footerIconLabel}>{item.actionPoint}</Text>
                                   </TouchableOpacity>
                         </View>
-                        <View style={styles.socialBarSection}>
-                                  <TouchableOpacity style={styles.socialBarButton}>
-                                    <Image style={styles.icon} source={{uri: allImages.waterDrop}}/>
-                                    <Text style={styles.socialBarLabel}>{item.actionPoint}</Text>
+                        <View style={styles.footerBarSection}>
+                                  <TouchableOpacity style={styles.footerBarButton}>
+                                    <Image style={styles.footerIcon} source={{uri: allImages.waterDrop}}/>
+                                    <Text style={styles.footerIconLabel}>{item.actionPoint}</Text>
                                   </TouchableOpacity>
                         </View>
-                        <View style={styles.socialBarSection}>
-                                  <TouchableOpacity style={styles.socialBarButton}>
-                                    <Image style={styles.icon} source={{uri:allImages.renewable }}/>
-                                    <Text style={styles.socialBarLabel}>{item.actionCo2}</Text>
+                        <View style={styles.footerBarSection}>
+                                  <TouchableOpacity style={styles.footerBarButton}>
+                                    <Image style={styles.footerIcon} source={{uri:allImages.renewable }}/>
+                                    <Text style={styles.footerIconLabel}>{item.actionCo2}</Text>
                                   </TouchableOpacity>
                         </View>
                   </View>
@@ -152,25 +153,23 @@ export default function UsersView({ navigation }) {
 
 const styles = StyleSheet.create({
   header:{
- 
-
   },
   headerText:{
     color: Colors.grey2,
-    fontFamily: "Georgia",
+    fontFamily:  "montserrat"
+    ,
     fontSize: '1em',
     textAlign: "center",
     paddingBottom:5,
   },
-
-  tabBox:{
+  headerBox:{
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
     flexDirection: 'row',
    
   },
-  buttonContainer: {
+  headerButtonContainer: {
     height:25,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -190,9 +189,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderBottomColor: Colors.slateGray,
   },
-  tabText:{
+  headerButtonText:{
     color: Colors.Turquoise2,
-    fontFamily: "Roboto",
+    fontFamily: "montserrat",
   },
   body: {
     paddingHorizontal:30,
@@ -200,7 +199,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.tintColor,
   },
 
-/******** card **************/
+/******** card flatlist**************/
 card:{
   shadowColor: '#00000021',
   shadowOffset: {
@@ -212,18 +211,29 @@ card:{
   backgroundColor:"white",
   borderRadius: 5,
 },
-cardHeader: {
-  paddingVertical: 5,
-  paddingHorizontal: 15,
-  borderTopLeftRadius: 1,
-  borderTopRightRadius: 1,
-  flexDirection: 'column',
+cardImageContainer:{
+  // flex: 1,
+  // alignItems:"center",
+  // minHeight:80,
 },
-cardContent: {
-  paddingVertical: 5,
-  paddingHorizontal: 16,
-  justifyContent: 'space-between',
+cardImage:{
+  flex: 1,
+  borderRadius: 5,
+  minHeight:80,
+  // alignContent:"center",
+  alignItems:"center",
 },
+cardTitle:{
+  fontSize:18,
+  paddingTop:10,
+  color:  Colors.grey3,
+  // color: Colors.tintColor,
+  fontWeight: 500,
+  paddingLeft: 10,
+  fontFamily: "montserrat"
+},
+/******** card footer **************/
+
 cardFooter:{
   flexDirection: 'row',
   justifyContent: 'space-between',
@@ -234,75 +244,37 @@ cardFooter:{
   borderBottomRightRadius: 1,
   backgroundColor:"#EEEEEE",
 },
-cardImage:{
+footerBarContainer: {
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexDirection: 'row',
+  flex: 1
+},
+
+footerBarSection: {
+  justifyContent: 'center',
+  flexDirection: 'row',
   flex: 1,
-  borderRadius: 5,
-  minHeight:80,
-  // width: null,
-  opacity: 0.5,
 },
-/******** card components **************/
-title:{
-  fontSize:14,
-  // flex:1,
-  color:  "black",
-  // color: "white",
-  fontWeight: 800,
-  
-}, 
-description:{
-  fontSize:15,
-  color:"#888",
-  flex:1,
-  marginTop:5,
-  marginBottom:5,
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap',
-  overflow: 'hidden',
+footerBarButton:{
+  flexDirection: 'row',
+  justifyContent: 'center',
+  alignItems: 'center',
 },
-time:{
-  fontSize:13,
-  color: "#808080",
-  marginTop: 5
-},
-icon: {
+footerIcon: {
   width:25,
   height:25,
   borderRadius: 5,
   borderColor: 'white',
   borderWidth: 2,
 },
-iconData:{
-  width:15,
-  height:15,
-  marginTop:5,
-  marginRight:5
-},
-timeContainer:{
-  flexDirection:'row'
-},
-/******** social card bar ******************/
-socialBarContainer: {
-  justifyContent: 'center',
-  alignItems: 'center',
-  flexDirection: 'row',
-  flex: 1
-},
-socialBarSection: {
-  justifyContent: 'center',
-  flexDirection: 'row',
-  flex: 1,
-},
-socialBarlabel: {
+footerIconLabel: {
   marginLeft: 8,
   alignSelf: 'flex-end',
   justifyContent: 'center',
 },
-socialBarButton:{
-  flexDirection: 'row',
-  justifyContent: 'center',
-  alignItems: 'center',
-}
+
+
 
 });
  

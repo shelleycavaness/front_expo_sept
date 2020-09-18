@@ -170,41 +170,32 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "600",
     color: Colors.slateGray,
-    fontFamily: "Roberto",
+    fontFamily: "montserrat",
     textAlign: "center",
-
   },
   container2: {
     borderRadius: 3,
     paddingHorizontal: 4,
     paddingBottom: 5,
-    marginLeft: 0,
-    marginRight: 0,
-    // alignSelf: "center",
-    
+    marginLeft: 10,
+    marginRight: 0, 
   },
   description: {
     fontSize: 15,
     textAlign: "center",
-    // marginTop: 4,
     color: "#8a888c",
-    // textAlign: "center",
   },
   defiText: {
     fontSize: 18,
     fontWeight: "600",
     color: Colors.moss,
-    // marginTop: 10,
-    // padding: 30,
     textAlign: "center",
     borderColor: "black",
     borderWidth: 5,
     borderStyle: "solid",
+    textAlign: "center"
   },
   container3: {
-    // flex:1,
-    // flexDirection: "row",
-    // backgroundColor: "#FFF",
     borderRadius: 3,
     paddingHorizontal: 4,
   },
@@ -229,7 +220,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: Colors.moss,
     textAlign: "center",
-
   },
 
   buttonContainer: {
@@ -237,8 +227,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    // marginTop: 30,
-    // marginBottom: 20,
   },
   button: {
     backgroundColor: Colors.greenLaurel,

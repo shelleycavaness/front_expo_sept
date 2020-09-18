@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
   },
   tabText:{
     color: "black",
-    fontFamily: "Roboto",
+    fontFamily: "montserrat",
   },
   image:{
     width: 60,

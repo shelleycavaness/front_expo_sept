@@ -19,7 +19,7 @@ export default {
   grey3:'#A9A9A9	',
   lightslategrey: '#778899',
   lightGrey: '#d4d4d4',
-  lightestGrey: '#e5e5e5',
+  lightestGrey: '#e9e9e9',
   slateGray: '#708090',
 
   moss: "#8A9A5B",

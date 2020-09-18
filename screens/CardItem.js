@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  StyleSheet,Text,View,TouchableOpacity,Image, TouchableHighlight} from 'react-native';
+  StyleSheet,Text,View,TouchableOpacity,Image, TouchableHighlight, } from 'react-native';
 import { allImages } from "../assets/index";  
 import { useNavigation  } from '@react-navigation/native';
 
@@ -27,11 +27,6 @@ export default function CardItem({item}) {
         <View style={styles.cardHeader}>
             <View>
                    <Text style={styles.title}>{item.actionName }</Text>
-                     {/* <Text style={styles.description}>{item.actionDescription}</Text>
-                      <View style={styles.timeContainer}>
-                            <Image style={styles.iconData} source={{uri: allImages.readMore}}/>
-                            <Text style={styles.time}>read more</Text>
-                      </View> */}
               </View>
           </View>
           <View style={styles.cardFooter}>

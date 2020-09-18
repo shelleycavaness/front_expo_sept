@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
  title:{
   fontSize: '2em',
   color: 'grey',
-  fontFamily: "Georgia",
+  fontFamily: "montserrat",
   fontWeight: 'bold',
 
 }, 

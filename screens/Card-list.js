@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     color: Colors.grey2,
     fontFamily:  "montserrat"
     ,
-    fontSize: '1em',
+    fontSize: 18,
     textAlign: "center",
     paddingBottom:5,
   },
@@ -228,7 +228,7 @@ cardTitle:{
   paddingTop:10,
   color:  Colors.grey3,
   // color: Colors.tintColor,
-  fontWeight: 500,
+  fontWeight: '500',
   paddingLeft: 10,
   fontFamily: "montserrat"
 },

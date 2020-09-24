@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     borderTopLeftRadius: 1,
     borderTopRightRadius: 1,
-    flexDirection: 'collumn',
+    flexDirection: 'column',
   },
   cardContent: {
     paddingVertical: 5,
@@ -126,8 +126,8 @@ const styles = StyleSheet.create({
     flex:1,
     marginTop:5,
     marginBottom:5,
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
+    // textOverflow: 'ellipsis',
+    // whiteSpace: 'nowrap',
     overflow: 'hidden',
   },
   time:{

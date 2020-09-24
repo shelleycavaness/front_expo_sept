@@ -1,5 +1,5 @@
-import abeilleJPG from "./images/abeille.jpeg";
-import vinegarJPG from "./images/vinegar.jpg";
+import abeilleJPG from './images/abeille.jpeg';
+import vinegarJPG from './images/vinegar.jpg';
 import tigerJPG from './images/tigre_heureux.jpg'
 import pailleJPG from './images/paille.jpeg'
 import reparerJPG from './images/reparer.jpeg'

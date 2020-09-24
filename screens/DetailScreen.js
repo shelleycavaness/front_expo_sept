@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 1,
     borderTopRightRadius: 1,
     flex: 1,
-    flexDirection: 'collumn',
+    flexDirection: 'column',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
   },

@@ -160,7 +160,7 @@ HomeScreen.navigationOptions = {
 const styles = StyleSheet.create({
   scrollContainer: {
     flex: 1,
-    backgroundColor: Colors.lightestGrey,
+    backgroundColor: "white",
   },
   container: {
     flex: 1,

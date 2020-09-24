@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
    letterSpacing: 1
  },
  title:{
-  fontSize: '2em',
+  fontSize: 18,
   color: 'grey',
   fontFamily: "montserrat",
   fontWeight: 'bold',
